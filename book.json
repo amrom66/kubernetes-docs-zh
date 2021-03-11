@@ -1,0 +1,19 @@
+{
+    "title": "k8s中文翻译",
+    "description": "k8s中文翻译",
+    "author": "linjinbao",
+    "output.name": "site",
+    "language": "zh-hans",
+    "root": ".",
+    "structure": {
+        "readme": "README.md"
+    },
+    "links": {
+        "sidebar": {
+            "Home": "https://linjinbao66.github.io"
+        }
+    },
+    "plugins": [
+        
+    ]
+}
