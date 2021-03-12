@@ -1,2 +1,4 @@
-# 概念
+# 内容详解
+
+本章节帮助你了解Kubernetes系统的各个部分以及Kubernetes用于表示集群的抽象，并有助于您更深入地了解Kubernetes的工作原理。
 
