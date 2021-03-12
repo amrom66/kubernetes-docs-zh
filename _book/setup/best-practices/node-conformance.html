@@ -733,6 +733,71 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x6821;&#x9A8C;&#x8282;&#x70B9;&#x90E8;&#x7F72;">&#x6821;&#x9A8C;&#x8282;&#x70B9;&#x90E8;&#x7F72;</h1>
+<h2 id="&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;">&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;</h2>
+<p>&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#x662F;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x5316;&#x7684;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;&#xFF0C;&#x53EF;&#x4E3A;&#x8282;&#x70B9;&#x63D0;&#x4F9B;&#x7CFB;&#x7EDF;&#x9A8C;&#x8BC1;&#x548C;&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x3002; &#x8BE5;&#x6D4B;&#x8BD5;&#x5C06;&#x9A8C;&#x8BC1;&#x8BE5;&#x8282;&#x70B9;&#x662F;&#x5426;&#x6EE1;&#x8DB3;Kubernetes&#x7684;&#x6700;&#x4F4E;&#x8981;&#x6C42;&#xFF1B; &#x901A;&#x8FC7;&#x6D4B;&#x8BD5;&#x7684;&#x8282;&#x70B9;&#x6709;&#x8D44;&#x683C;&#x52A0;&#x5165;Kubernetes&#x96C6;&#x7FA4;&#x3002;</p>
+<h2 id="&#x8282;&#x70B9;&#x5148;&#x89C9;&#x6761;&#x4EF6;">&#x8282;&#x70B9;&#x5148;&#x89C9;&#x6761;&#x4EF6;</h2>
+<p>&#x8981;&#x60F3;&#x8FD0;&#x884C;&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#xFF0C;&#x8282;&#x70B9;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x4E8E;&#x6807;&#x51C6;&#x5316;k8s&#x8282;&#x70B9;&#x76F8;&#x540C;&#x7684;&#x5148;&#x51B3;&#x6761;&#x4EF6;&#x3002;&#x81F3;&#x5C11;&#xFF0C;&#x8BE5;&#x8282;&#x70B9;&#x9700;&#x8981;&#x8FD0;&#x884C;&#x4EE5;&#x4E0B;&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#xFF1A;</p>
+<ul>
+<li>Container Runtime</li>
+<li>Kubelet</li>
+</ul>
+<h2 id="&#x8FD0;&#x884C;&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;">&#x8FD0;&#x884C;&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;</h2>
+<p>&#x8FD0;&#x884C;&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#xFF0C;&#x8BF7;&#x6309;&#x7167;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<ol>
+<li>&#x786E;&#x8BA4;kubelet&#x7684;<code>--kubeconfig</code>&#x503C;&#xFF1B;&#x6BD4;&#x5982;&#xFF0C;&#x6307;&#x5B9A;<code>--kubeconfig=/var/lib/kubelet/config.yaml</code>&#x3002;&#x539F;&#x56E0;&#x5728;&#x4E8E;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;&#x4F7F;&#x7528;&#x672C;&#x5730;&#x63A7;&#x5236;&#x5E73;&#x9762;&#x6765;&#x6D4B;&#x8BD5;kubelet&#xFF0C;&#x4F7F;&#x7528;<code>http://localhost:8080</code>&#x4F5C;&#x4E3A;APIServer&#x7684;&#x5730;&#x5740;&#x3002;&#x5176;&#x4ED6;&#x53EF;&#x80FD;&#x7528;&#x5230;&#x7684;kubelet&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</li>
+<li><code>--pod-cidr</code>: &#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E86;<code>kubenet</code>&#xFF0C;&#x9700;&#x8981;&#x4E3A;kubelet&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x7684;CIDR&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<code>--pod-cidr=10.180.0.0/24</code>&#x3002;</li>
+<li><code>--cloud-provider</code>&#xFF1A;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E86;&#x53C2;&#x6570;<code>--cloud-provider=gce</code>&#xFF0C;&#x8FD0;&#x884C;&#x524D;&#x9700;&#x8981;&#x79FB;&#x9664;&#x8BE5;&#x53C2;&#x6570;&#x3002;</li>
+<li>&#x8FD0;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF1A;</li>
+</ol>
+<pre><code class="lang-code"># $CONFIG_DIR is the pod manifest path of your Kubelet.
+# $LOG_DIR is the test output path.
+sudo docker run -it --rm --privileged --net=host \
+  -v /:/rootfs -v $CONFIG_DIR:$CONFIG_DIR -v $LOG_DIR:/var/result \
+  k8s.gcr.io/node-test:0.2
+</code></pre>
+<h2 id="&#x5176;&#x4ED6;&#x67B6;&#x6784;&#x4E0B;&#x7684;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;">&#x5176;&#x4ED6;&#x67B6;&#x6784;&#x4E0B;&#x7684;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;</h2>
+<p>k8s&#x4E3A;&#x5176;&#x4ED6;&#x67B6;&#x6784;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;docker&#x955C;&#x50CF;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>arch</th>
+<th>image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>amd64</td>
+<td>node-test-amd64</td>
+</tr>
+<tr>
+<td>arm</td>
+<td>node-test-arm</td>
+</tr>
+<tr>
+<td>arm64</td>
+<td>node-test-arm64</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x8FD0;&#x884C;&#x90E8;&#x5206;&#x6D4B;&#x8BD5;">&#x8FD0;&#x884C;&#x90E8;&#x5206;&#x6D4B;&#x8BD5;</h2>
+<p>&#x8981;&#x8FD0;&#x884C;&#x7279;&#x5B9A;&#x7684;&#x6D4B;&#x8BD5;&#xFF0C;&#x8BF7;&#x7528;&#x8981;&#x8FD0;&#x884C;&#x7684;&#x6D4B;&#x8BD5;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x8986;&#x76D6;&#x73AF;&#x5883;&#x53D8;&#x91CF;<code>FOCUS</code>:</p>
+<pre><code class="lang-code">sudo docker run -it --rm --privileged --net=host \
+  -v /:/rootfs:ro -v $CONFIG_DIR:$CONFIG_DIR -v $LOG_DIR:/var/result \
+  -e FOCUS=MirrorPod \ # Only run MirrorPod test
+  k8s.gcr.io/node-test:0.2
+</code></pre>
+<p>&#x8981;&#x8DF3;&#x8FC7;&#x7279;&#x5B9A;&#x7684;&#x6D4B;&#x8BD5;&#xFF0C;&#x8BF7;&#x7528;&#x8981;&#x8DF3;&#x8FC7;&#x7684;&#x6D4B;&#x8BD5;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x8986;&#x76D6;&#x73AF;&#x5883;&#x53D8;&#x91CF;<code>SKIP</code>:</p>
+<pre><code class="lang-code">sudo docker run -it --rm --privileged --net=host \
+  -v /:/rootfs:ro -v $CONFIG_DIR:$CONFIG_DIR -v $LOG_DIR:/var/result \
+  -e SKIP=MirrorPod \ # Run all conformance tests but skip MirrorPod test
+  k8s.gcr.io/node-test:0.2
+</code></pre>
+<p>&#x8282;&#x70B9;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#x662F;&#x8282;&#x70B9;e2e&#x6D4B;&#x8BD5;&#x7684;&#x5BB9;&#x5668;&#x5316;&#x7248;&#x672C;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B83;&#x5C06;&#x8FD0;&#x884C;&#x6240;&#x6709;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#x3002;&#x4ECE;&#x7406;&#x8BBA;&#x4E0A;&#x8BB2;&#xFF0C;&#x5982;&#x679C;&#x60A8;&#x914D;&#x7F6E;&#x4E86;&#x5BB9;&#x5668;&#x5E76;&#x6B63;&#x786E;&#x5B89;&#x88C5;&#x4E86;&#x6240;&#x9700;&#x7684;&#x5377;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x4EFB;&#x4F55;&#x8282;&#x70B9;e2e&#x6D4B;&#x8BD5;&#x3002; &#x4F46;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x4EC5;&#x8FD0;&#x884C;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x9700;&#x8981;&#x66F4;&#x590D;&#x6742;&#x7684;&#x914D;&#x7F6E;&#x624D;&#x80FD;&#x8FD0;&#x884C;&#x4E0D;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#x3002;</p>
+<h2 id="&#x6CE8;&#x610F;&#x4E8B;&#x9879;">&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h2>
+<ul>
+<li>&#x8BE5;&#x9879;&#x6D4B;&#x8BD5;&#x4F1A;&#x5728;&#x8282;&#x70B9;&#x4E0A;&#x7559;&#x4E0B;docker&#x955C;&#x50CF;&#xFF0C;&#x5305;&#x542B;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#x955C;&#x50CF;&#x548C;&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x7684;&#x5BB9;&#x5668;</li>
+<li>&#x6D4B;&#x8BD5;&#x4F1A;&#x5728;&#x8282;&#x70B9;&#x4E0A;&#x7559;&#x4E0B;&#x505C;&#x6B62;&#x8FD0;&#x884C;&#x7684;&#x5BB9;&#x5668;&#xFF0C;&#x8FD9;&#x4E9B;&#x5BB9;&#x5668;&#x5728;&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x521B;&#x5EFA;&#x3002;</li>
+</ul>
 
                                 
                                 </section>
@@ -792,7 +857,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"校验节点部署","level":"1.2.4.3","depth":3,"next":{"title":"PKI证书问题","level":"1.2.4.4","depth":3,"path":"setup/best-practices/certificates.md","ref":"setup/best-practices/certificates.md","articles":[]},"previous":{"title":"多域环境运行","level":"1.2.4.2","depth":3,"path":"setup/best-practices/multiple-zones.md","ref":"setup/best-practices/multiple-zones.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","-lunr","search-pro","chapter-fold","github"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/linjinbao66"},"search-pro":{},"search":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"setup/best-practices/node-conformance.md","mtime":"2021-03-11T07:17:27.066Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-12T01:54:10.831Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"校验节点部署","level":"1.2.4.3","depth":3,"next":{"title":"PKI证书问题","level":"1.2.4.4","depth":3,"path":"setup/best-practices/certificates.md","ref":"setup/best-practices/certificates.md","articles":[]},"previous":{"title":"多域环境运行","level":"1.2.4.2","depth":3,"path":"setup/best-practices/multiple-zones.md","ref":"setup/best-practices/multiple-zones.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","-lunr","search-pro","chapter-fold","github","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/linjinbao66"},"livereload":{},"search-pro":{},"search":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"setup/best-practices/node-conformance.md","mtime":"2021-03-12T06:49:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-12T06:35:37.662Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -819,6 +884,10 @@
     
         
         <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
