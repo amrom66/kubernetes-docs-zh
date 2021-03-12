@@ -11,5 +11,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Gitbook Action          
       uses: ZanderZhao/gitbook-action@v1.2.4 
-      with:                                  
+      with:
+        source_branch: main                                 
         token: ${{ secrets.PERSONAL_TOKEN }}  
