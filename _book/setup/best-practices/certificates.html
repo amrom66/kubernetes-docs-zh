@@ -733,6 +733,380 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="pki&#x8BC1;&#x4E66;&#x95EE;&#x9898;">PKI&#x8BC1;&#x4E66;&#x95EE;&#x9898;</h1>
+<p>k8s&#x9700;&#x8981;&#x57FA;&#x4E8E;TLS&#x7684;PKI&#x8BC1;&#x4E66;&#x6388;&#x6743;&#x3002;&#x5982;&#x679C;&#x60A8;&#x4F7F;&#x7528;&#x4E86;kubeadm&#x90E8;&#x7F72;&#x7684;k8s&#xFF0C;&#x96C6;&#x7FA4;&#x4F1A;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x9700;&#x8981;&#x7684;&#x8BC1;&#x4E66;&#x3002;&#x5F53;&#x7136;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x624B;&#x52A8;&#x521B;&#x5EFA;&#x8BC1;&#x4E66;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x79C1;&#x6709;&#x8BC1;&#x4E66;&#x66F4;&#x52A0;&#x5B89;&#x5168;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x4E0D;&#x5B58;&#x653E;&#x5728;API Server&#x4E2D;&#x3002;&#x672C;&#x6587;&#x8BB2;&#x89E3;&#x96C6;&#x7FA4;&#x9700;&#x8981;&#x7684;&#x8BC1;&#x4E66;&#x3002;</p>
+<h2 id="&#x96C6;&#x7FA4;&#x662F;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x8BC1;&#x4E66;&#x7684;">&#x96C6;&#x7FA4;&#x662F;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x8BC1;&#x4E66;&#x7684;</h2>
+<p>k8s&#x5728;&#x4EE5;&#x4E0B;&#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#x9700;&#x8981;&#x7528;&#x5230;PKI&#x8BA4;&#x8BC1;&#xFF1A;</p>
+<ul>
+<li>kubelet&#x8BBF;&#x95EE;API Server&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;</li>
+<li>APIserver &#x7AEF;&#x70B9;&#x9700;&#x8981;&#x670D;&#x52A1;&#x7AEF;&#x8BC1;&#x4E66;</li>
+<li>&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x5458;&#x8BA4;&#x8BC1;API server&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;</li>
+<li>API server&#x4E0E;kubelet&#x901A;&#x4FE1;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;</li>
+<li>API server&#x4E0E;etcd&#x901A;&#x4FE1;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;</li>
+<li>controller manager&#x4E0E;API server&#x901A;&#x4FE1;&#x65F6;&#x5019;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x548C;kubeconfig</li>
+<li>scheduler&#x4E0E;API server&#x901A;&#x4FE1;&#x65F6;&#x5019;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x548C;kubeconfig</li>
+<li>&#x524D;&#x7F6E;&#x4EE3;&#x7406;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x7AEF;&#x8BC1;&#x4E66;</li>
+</ul>
+<p><strong>&#x6CE8;&#x610F;</strong> 
+&#x524D;&#x7F6E;&#x4EE3;&#x7406;&#x9700;&#x8981;&#x8BC1;&#x4E66;&#x7684;&#x573A;&#x666F;&#x4EC5;&#x5B58;&#x5728;&#x4E8E;&#x8FD0;&#x884C;kube-proxy&#x652F;&#x6491;APIserver&#x6269;&#x5C55;&#x7684;&#x65F6;&#x5019;&#x3002;</p>
+<p>etcd&#x5728;&#x6388;&#x6743;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x8282;&#x70B9;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x822C;&#x7684;TLS&#x8BA4;&#x8BC1;</p>
+<h2 id="&#x8BC1;&#x4E66;&#x7684;&#x5B58;&#x653E;&#x4F4D;&#x7F6E;">&#x8BC1;&#x4E66;&#x7684;&#x5B58;&#x653E;&#x4F4D;&#x7F6E;</h2>
+<p>&#x4F7F;&#x7528;kubeadm&#x5B89;&#x88C5;k8s&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BC1;&#x4E66;&#x5B58;&#x653E;&#x5728;<code>/etc/kubernetes/pki</code>&#xFF0C;&#x672C;&#x6587;&#x4E2D;&#x63D0;&#x5230;&#x7684;&#x6240;&#x6709;&#x8DEF;&#x5F84;&#x90FD;&#x662F;&#x76F8;&#x5BF9;&#x4E8E;&#x8BE5;&#x76EE;&#x5F55;&#x3002;</p>
+<h2 id="&#x624B;&#x52A8;&#x914D;&#x7F6E;&#x8BC1;&#x4E66;">&#x624B;&#x52A8;&#x914D;&#x7F6E;&#x8BC1;&#x4E66;</h2>
+<p>&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x60F3;kubeadm&#x81EA;&#x52A8;&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x7684;&#x8BDD;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#xFF1A;</p>
+<h3 id="&#x5355;&#x72EC;&#x6839;ca&#x8BC1;&#x4E66;">&#x5355;&#x72EC;&#x6839;CA&#x8BC1;&#x4E66;</h3>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7BA1;&#x7406;&#x5458;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6839;&#x8BC1;&#x4E66;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x8BE5;&#x6839;CA&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x591A;&#x4E2A;&#x4E2D;&#x95F4;CA&#xFF0C;&#x5E76;&#x5C06;&#x6240;&#x6709;&#x8FDB;&#x4E00;&#x6B65;&#x7684;&#x521B;&#x5EFA;&#x59D4;&#x6258;&#x7ED9;Kubernetes&#x672C;&#x8EAB;&#x3002;
+&#x9700;&#x8981;&#x7684;CA&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x8DEF;&#x5F84;</th>
+<th>&#x9ED8;&#x8BA4;cn</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ca.crt,key</td>
+<td>kubernetes-ca</td>
+<td>Kubernetes general CA</td>
+</tr>
+<tr>
+<td>etcd/ca.crt,key</td>
+<td>etcd-ca</td>
+<td>For all etcd-related functions</td>
+</tr>
+<tr>
+<td>front-proxy-ca.crt,key</td>
+<td>kubernetes-front-proxy-ca</td>
+<td>For the front-end proxy</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5728;&#x4E0A;&#x8FF0;CA&#x4E4B;&#x4E0A;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x7528;&#x4E8E;&#x670D;&#x52A1;&#x5E10;&#x6237;&#x7BA1;&#x7406;&#x7684;&#x516C;&#x5171;/&#x79C1;&#x6709;&#x5BC6;&#x94A5;&#x5BF9;sa.key&#x548C;sa.pub&#x3002;</p>
+<h3 id="&#x6240;&#x6709;&#x8BC1;&#x4E66;">&#x6240;&#x6709;&#x8BC1;&#x4E66;</h3>
+<p>&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x60F3;&#x590D;&#x5236;&#x8FD9;&#x4E9B;&#x8BC1;&#x4E66;&#x5230;&#x4F60;&#x7684;&#x96C6;&#x7FA4;&#x4E2D;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x751F;&#x6210;&#x8FD9;&#x4E9B;&#x8BC1;&#x4E66;&#x3002;</p>
+<p>&#x9700;&#x8981;&#x7684;&#x8BC1;&#x4E66;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x9ED8;&#x8BA4;CN</th>
+<th>&#x7236;&#x8BC1;&#x4E66;</th>
+<th>O</th>
+<th>&#x7C7B;&#x578B;</th>
+<th>hosts </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kube-etcd</td>
+<td>etcd-ca</td>
+<td></td>
+<td>server, client</td>
+<td>localhost, 127.0.0.1</td>
+</tr>
+<tr>
+<td>kube-etcd-peer</td>
+<td>etcd-ca</td>
+<td></td>
+<td>server, client</td>
+<td>hostname, Host_IP, localhost, 127.0.0.1</td>
+</tr>
+<tr>
+<td>kube-etcd-healthcheck-client</td>
+<td>etcd-ca</td>
+<td></td>
+<td>client</td>
+<td></td>
+</tr>
+<tr>
+<td>kube-apiserver-etcd-client</td>
+<td>etcd-ca</td>
+<td>system:masters</td>
+<td>client</td>
+<td></td>
+</tr>
+<tr>
+<td>kube-apiserver</td>
+<td>kubernetes-ca</td>
+<td></td>
+<td>server</td>
+<td>hostname, Host_IP, advertise_IP, [1]    </td>
+</tr>
+<tr>
+<td>kube-apiserver-kubelet-client</td>
+<td>kubernetes-ca</td>
+<td>system:masters</td>
+<td>client</td>
+<td></td>
+</tr>
+<tr>
+<td>front-proxy-client</td>
+<td>kubernetes-front-proxy-ca</td>
+<td></td>
+<td>client</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>[1]&#xFF1A; &#x8868;&#x793A;&#x8BBF;&#x95EE;&#x96C6;&#x7FA4;&#x7684;&#x5176;&#x4ED6;&#x4EFB;&#x4F55;IP&#x6216;&#x8005;DNS&#x540D;&#x79F0;&#xFF0C;&#x5176;&#x4E2D;kind&#x6620;&#x5C04;&#x5230;&#x4E00;&#x79CD;&#x6216;&#x591A;&#x79CD;x509&#x5BC6;&#x94A5;&#x7528;&#x6CD5;&#x7C7B;&#x578B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>kind</th>
+<th>&#x5BC6;&#x94A5;&#x7528;&#x6CD5;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server</td>
+<td>digital signature, key encipherment, server auth</td>
+</tr>
+<tr>
+<td>client</td>
+<td>digital signature, key encipherment, client auth</td>
+</tr>
+</tbody>
+</table>
+<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;&#x4E0A;&#x9762;&#x5217;&#x51FA;&#x7684;&#x4E3B;&#x673A;/SAN&#x662F;&#x83B7;&#x5F97;&#x5DE5;&#x4F5C;&#x7FA4;&#x96C6;&#x7684;&#x63A8;&#x8350;&#x4E3B;&#x673A;&#xFF1B; &#x5982;&#x679C;&#x7279;&#x5B9A;&#x8BBE;&#x7F6E;&#x9700;&#x8981;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5728;&#x6240;&#x6709;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x4E0A;&#x6DFB;&#x52A0;&#x5176;&#x4ED6;SAN&#x3002; 
+<strong>&#x6CE8;&#x610F;</strong>&#xFF1A;&#x5BF9;&#x4E8E;kubeadm&#x7528;&#x6237;&#x800C;&#x8A00;&#x53EA;&#x9700;&#x8981;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x5728;&#x4E0D;&#x4F7F;&#x7528;&#x79C1;&#x94A5;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x590D;&#x5236;&#x5230;&#x7FA4;&#x96C6;CA&#x8BC1;&#x4E66;&#x7684;&#x65B9;&#x6848;&#x5728;kubeadm&#x6587;&#x6863;&#x4E2D;&#x79F0;&#x4E3A;&#x5916;&#x90E8;CA&#x3002;</li>
+<li>&#x5982;&#x679C;&#x5C06;&#x4E0A;&#x9762;&#x7684;&#x5217;&#x8868;&#x4E0E;kubeadm&#x751F;&#x6210;&#x7684;PKI&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x5916;&#x90E8;etcd&#xFF0C;&#x5219;&#x4E0D;&#x4F1A;&#x751F;&#x6210;kube-etcd&#xFF0C;kube-etcd-peer&#x548C;kube-etcd-healthcheck-client&#x8BC1;&#x4E66;&#x3002;</li>
+</ul>
+<h3 id="&#x8BC1;&#x4E66;&#x8DEF;&#x5F84;">&#x8BC1;&#x4E66;&#x8DEF;&#x5F84;</h3>
+<p>&#x8BC1;&#x4E66;&#x5E94;&#x5F53;&#x5B58;&#x653E;&#x5728;&#x63A8;&#x8350;&#x7684;&#x8DEF;&#x5F84;&#x4E0B;&#xFF0C;&#x8DEF;&#x5F84;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x7279;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x800C;&#x4E0D;&#x662F;&#x8DEF;&#x5F84;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>Default CN</th>
+<th>recommended key path</th>
+<th>recommended cert path</th>
+<th>command</th>
+<th>key argument</th>
+<th>cert argument</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd-ca</td>
+<td>etcd/ca.key</td>
+<td>etcd/ca.crt</td>
+<td>kube-apiserver</td>
+<td></td>
+<td>--etcd-cafile</td>
+</tr>
+<tr>
+<td>kube-apiserver-etcd-client</td>
+<td>apiserver-etcd-client.key</td>
+<td>apiserver-etcd-client.crt</td>
+<td>kube-apiserver</td>
+<td>--etcd-keyfile</td>
+<td>--etcd-certfile</td>
+</tr>
+<tr>
+<td>kubernetes-ca</td>
+<td>ca.key</td>
+<td>ca.crt</td>
+<td>kube-apiserver</td>
+<td></td>
+<td>--client-ca-file</td>
+</tr>
+<tr>
+<td>kubernetes-ca</td>
+<td>ca.key</td>
+<td>ca.crt</td>
+<td>kube-controller-manager</td>
+<td>--cluster-signing-key-file</td>
+<td>--client-ca-file, --root-ca-file, --cluster-signing-cert-file</td>
+</tr>
+<tr>
+<td>kube-apiserver</td>
+<td>apiserver.key</td>
+<td>apiserver.crt</td>
+<td>kube-apiserver</td>
+<td>--tls-private-key-file</td>
+<td>--tls-cert-file</td>
+</tr>
+<tr>
+<td>kube-apiserver-kubelet-client</td>
+<td>apiserver-kubelet-client.key</td>
+<td>apiserver-kubelet-client.crt</td>
+<td>kube-apiserver</td>
+<td>--kubelet-client-key</td>
+<td>--kubelet-client-certificate</td>
+</tr>
+<tr>
+<td>front-proxy-ca</td>
+<td>front-proxy-ca.key</td>
+<td>front-proxy-ca.crt</td>
+<td>kube-apiserver</td>
+<td></td>
+<td>--requestheader-client-ca-file</td>
+</tr>
+<tr>
+<td>front-proxy-ca</td>
+<td>front-proxy-ca.key</td>
+<td>front-proxy-ca.crt</td>
+<td>kube-controller-manager</td>
+<td></td>
+<td>--requestheader-client-ca-file</td>
+</tr>
+<tr>
+<td>front-proxy-client</td>
+<td>front-proxy-client.key</td>
+<td>front-proxy-client.crt</td>
+<td>kube-apiserver</td>
+<td>--proxy-client-key-file</td>
+<td>--proxy-client-cert-file</td>
+</tr>
+<tr>
+<td>etcd-ca</td>
+<td>etcd/ca.key</td>
+<td>etcd/ca.crt</td>
+<td>etcd</td>
+<td></td>
+<td>--trusted-ca-file, --peer-trusted-ca-file</td>
+</tr>
+<tr>
+<td>kube-etcd</td>
+<td>etcd/server.key</td>
+<td>etcd/server.crt</td>
+<td>etcd</td>
+<td>--key-file</td>
+<td>--cert-file</td>
+</tr>
+<tr>
+<td>kube-etcd-peer</td>
+<td>etcd/peer.key</td>
+<td>etcd/peer.crt</td>
+<td>etcd</td>
+<td>--peer-key-file</td>
+<td>--peer-cert-file</td>
+</tr>
+<tr>
+<td>etcd-ca</td>
+<td></td>
+<td>etcd/ca.crt</td>
+<td>etcdctl</td>
+<td></td>
+<td>--cacert</td>
+</tr>
+<tr>
+<td>kube-etcd-healthcheck-client</td>
+<td>etcd/healthcheck-client.key</td>
+<td>etcd/healthcheck-client.crt</td>
+<td>etcdctl</td>
+<td>--key</td>
+<td>--cert</td>
+</tr>
+</tbody>
+</table>
+<p>&#x76F8;&#x540C;&#x7684;&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#x9002;&#x7528;&#x4E8E;&#x670D;&#x52A1;&#x5E10;&#x6237;&#x5BC6;&#x94A5;&#x5BF9;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>private key path</th>
+<th>public key path</th>
+<th>command</th>
+<th>argument</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sa.key</td>
+<td></td>
+<td>kube-controller-manager</td>
+<td>--service-account-private-key-file</td>
+</tr>
+<tr>
+<td></td>
+<td>sa.pub</td>
+<td>kube-apiserver</td>
+<td>--service-account-key-file</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x7528;&#x6237;&#x8D26;&#x6237;&#x7684;&#x8BC1;&#x4E66;&#x914D;&#x7F6E;">&#x7528;&#x6237;&#x8D26;&#x6237;&#x7684;&#x8BC1;&#x4E66;&#x914D;&#x7F6E;</h2>
+<p>&#x4F60;&#x5FC5;&#x987B;&#x8981;&#x914D;&#x7F6E;&#x8FD9;&#x4E9B;&#x7BA1;&#x7406;&#x5458;&#x8D26;&#x6237;&#x548C;&#x670D;&#x52A1;&#x8D26;&#x6237;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>filename</th>
+<th>credential name</th>
+<th>Default CN</th>
+<th>O (in Subject)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>admin.conf</td>
+<td>default-admin</td>
+<td>kubernetes-admin</td>
+<td>system:masters</td>
+</tr>
+<tr>
+<td>kubelet.conf</td>
+<td>default-auth</td>
+<td>system:node:<code>&lt;nodeName&gt;</code> (see note)</td>
+<td>system:nodes</td>
+</tr>
+<tr>
+<td>controller-manager.conf</td>
+<td>default-controller-manager</td>
+<td>system:kube-controller-manager</td>
+<td></td>
+</tr>
+<tr>
+<td>scheduler.conf</td>
+<td>default-scheduler</td>
+<td>system:kube-scheduler</td>
+</tr>
+</tbody>
+</table>
+<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;kubelet.conf&#x7684;<nodename>&#x7684;&#x503C;&#x5FC5;&#x987B;&#x4E0E;kubelet&#x5411;apiserver&#x6CE8;&#x518C;&#x65F6;&#x63D0;&#x4F9B;&#x7684;&#x8282;&#x70B9;&#x540D;&#x79F0;&#x7684;&#x503C;&#x5B8C;&#x5168;&#x5339;&#x914D;&#x3002; &#x6709;&#x5173;&#x66F4;&#x591A;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x9605;&#x8BFB;&#x8282;&#x70B9;&#x6388;&#x6743;&#x3002;</nodename></p>
+<ol>
+<li><p>&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x914D;&#x7F6E;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;CN&#x548C;O&#x751F;&#x6210;&#x4E00;&#x4E2A;x509&#x8BC1;&#x4E66;/&#x5BC6;&#x94A5;&#x5BF9;&#x3002;</p>
+</li>
+<li><p>&#x5BF9;&#x6BCF;&#x4E2A;&#x914D;&#x7F6E;&#x8FD0;&#x884C;kubectl&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<pre><code class="lang-code">KUBECONFIG=&lt;filename&gt; kubectl config set-cluster default-cluster --server=https://&lt;host ip&gt;:6443 --certificate-authority &lt;path-to-kubernetes-ca&gt; --embed-certs
+KUBECONFIG=&lt;filename&gt; kubectl config set-credentials &lt;credential-name&gt; --client-key &lt;path-to-key&gt;.pem --client-certificate &lt;path-to-cert&gt;.pem --embed-certs
+KUBECONFIG=&lt;filename&gt; kubectl config set-context default-system --cluster default-cluster --user &lt;credential-name&gt;
+KUBECONFIG=&lt;filename&gt; kubectl config use-context default-system
+</code></pre>
+</li>
+</ol>
+<p>&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x7684;&#x7528;&#x9014;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>filename</th>
+<th>command</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>admin.conf</td>
+<td>kubectl</td>
+<td>Configures administrator user for the cluster</td>
+</tr>
+<tr>
+<td>kubelet.conf</td>
+<td>kubelet</td>
+<td>One required for each node in the cluster.</td>
+</tr>
+<tr>
+<td>controller-manager.conf</td>
+<td>kube-controller-manager</td>
+<td>Must be added to manifest in <code>manifests/kube-controller-manager.yaml</code></td>
+</tr>
+<tr>
+<td>scheduler.conf</td>
+<td>kube-scheduler</td>
+<td>Must be added to manifest in <code>manifests/kube-scheduler.yaml</code></td>
+</tr>
+</tbody>
+</table>
 
                                 
                                 </section>
@@ -792,7 +1166,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"PKI证书问题","level":"1.2.4.4","depth":3,"next":{"title":"内容详解","level":"1.3","depth":1,"path":"concepts/README.md","ref":"concepts/README.md","articles":[{"title":"集群概览","level":"1.3.1","depth":2,"path":"concepts/overview.md","ref":"concepts/overview.md","articles":[]},{"title":"集群架构","level":"1.3.2","depth":2,"path":"concepts/architecture.md","ref":"concepts/architecture.md","articles":[]},{"title":"容器详解","level":"1.3.3","depth":2,"path":"concepts/containers.md","ref":"concepts/containers.md","articles":[]},{"title":"工作负载","level":"1.3.4","depth":2,"path":"concepts/workloads.md","ref":"concepts/workloads.md","articles":[]},{"title":"代理、负载均衡与网络","level":"1.3.5","depth":2,"path":"concepts/services-networking.md","ref":"concepts/services-networking.md","articles":[]},{"title":"后端存储","level":"1.3.6","depth":2,"path":"concepts/storage.md","ref":"concepts/storage.md","articles":[]},{"title":"配置定义","level":"1.3.7","depth":2,"path":"concepts/configuration.md","ref":"concepts/configuration.md","articles":[]},{"title":"安全策略","level":"1.3.8","depth":2,"path":"concepts/security.md","ref":"concepts/security.md","articles":[]},{"title":"资源策略","level":"1.3.9","depth":2,"path":"concepts/policy.md","ref":"concepts/policy.md","articles":[]},{"title":"调度驱逐","level":"1.3.10","depth":2,"path":"concepts/scheduling-eviction.md","ref":"concepts/scheduling-eviction.md","articles":[]},{"title":"集群管理","level":"1.3.11","depth":2,"path":"concepts/cluster-administration.md","ref":"concepts/cluster-administration.md","articles":[]},{"title":"功能扩展","level":"1.3.12","depth":2,"path":"concepts/extend-kubernetes.md","ref":"concepts/extend-kubernetes.md","articles":[]}]},"previous":{"title":"校验节点部署","level":"1.2.4.3","depth":3,"path":"setup/best-practices/node-conformance.md","ref":"setup/best-practices/node-conformance.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","-lunr","search-pro","chapter-fold","github","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/linjinbao66"},"livereload":{},"search-pro":{},"search":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"setup/best-practices/certificates.md","mtime":"2021-03-11T03:46:35.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-12T06:35:37.662Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"PKI证书问题","level":"1.2.4.4","depth":3,"next":{"title":"内容详解","level":"1.3","depth":1,"path":"concepts/README.md","ref":"concepts/README.md","articles":[{"title":"集群概览","level":"1.3.1","depth":2,"path":"concepts/overview.md","ref":"concepts/overview.md","articles":[]},{"title":"集群架构","level":"1.3.2","depth":2,"path":"concepts/architecture.md","ref":"concepts/architecture.md","articles":[]},{"title":"容器详解","level":"1.3.3","depth":2,"path":"concepts/containers.md","ref":"concepts/containers.md","articles":[]},{"title":"工作负载","level":"1.3.4","depth":2,"path":"concepts/workloads.md","ref":"concepts/workloads.md","articles":[]},{"title":"代理、负载均衡与网络","level":"1.3.5","depth":2,"path":"concepts/services-networking.md","ref":"concepts/services-networking.md","articles":[]},{"title":"后端存储","level":"1.3.6","depth":2,"path":"concepts/storage.md","ref":"concepts/storage.md","articles":[]},{"title":"配置定义","level":"1.3.7","depth":2,"path":"concepts/configuration.md","ref":"concepts/configuration.md","articles":[]},{"title":"安全策略","level":"1.3.8","depth":2,"path":"concepts/security.md","ref":"concepts/security.md","articles":[]},{"title":"资源策略","level":"1.3.9","depth":2,"path":"concepts/policy.md","ref":"concepts/policy.md","articles":[]},{"title":"调度驱逐","level":"1.3.10","depth":2,"path":"concepts/scheduling-eviction.md","ref":"concepts/scheduling-eviction.md","articles":[]},{"title":"集群管理","level":"1.3.11","depth":2,"path":"concepts/cluster-administration.md","ref":"concepts/cluster-administration.md","articles":[]},{"title":"功能扩展","level":"1.3.12","depth":2,"path":"concepts/extend-kubernetes.md","ref":"concepts/extend-kubernetes.md","articles":[]}]},"previous":{"title":"校验节点部署","level":"1.2.4.3","depth":3,"path":"setup/best-practices/node-conformance.md","ref":"setup/best-practices/node-conformance.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code","-lunr","search-pro","chapter-fold","github","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/linjinbao66"},"livereload":{},"search-pro":{},"search":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"setup/best-practices/certificates.md","mtime":"2021-03-12T07:45:29.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-12T07:24:22.036Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
