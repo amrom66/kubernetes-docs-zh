@@ -1,0 +1,1235 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>集群概览 · k8s中文翻译</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="linjinbao">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="what-is-kubernetes.html" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    本书介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../setup/">
+            
+                <a href="../../setup/">
+            
+                    
+                    起步文档
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../setup/release.html">
+            
+                <a href="../../setup/release.html">
+            
+                    
+                    发版概要
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../tasks/tools.html">
+            
+                <a href="../../tasks/tools.html">
+            
+                    
+                    学习环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../setup/production-environment.html">
+            
+                <a href="../../setup/production-environment.html">
+            
+                    
+                    生产环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../../setup/best-practices/">
+            
+                <a href="../../setup/best-practices/">
+            
+                    
+                    最佳实践
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../../setup/best-practices/cluster-large.html">
+            
+                <a href="../../setup/best-practices/cluster-large.html">
+            
+                    
+                    考虑大型集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.2" data-path="../../setup/best-practices/multiple-zones.html">
+            
+                <a href="../../setup/best-practices/multiple-zones.html">
+            
+                    
+                    多域环境运行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.3" data-path="../../setup/best-practices/node-conformance.html">
+            
+                <a href="../../setup/best-practices/node-conformance.html">
+            
+                    
+                    校验节点部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.4" data-path="../../setup/best-practices/certificates.html">
+            
+                <a href="../../setup/best-practices/certificates.html">
+            
+                    
+                    PKI证书问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    内容详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    集群概览
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="what-is-kubernetes.html">
+            
+                <a href="what-is-kubernetes.html">
+            
+                    
+                    什么是k8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="components.html">
+            
+                <a href="components.html">
+            
+                    
+                    k8s组件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="kubernetes-api.html">
+            
+                <a href="kubernetes-api.html">
+            
+                    
+                    k8s api
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4" data-path="working-with-objects/">
+            
+                <a href="working-with-objects/">
+            
+                    
+                    k8s 资源对象
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.4.1" data-path="working-with-objects/kubernetes-objects.html">
+            
+                <a href="working-with-objects/kubernetes-objects.html">
+            
+                    
+                    理解k8s对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4.2" data-path="working-with-objects/object-management.html">
+            
+                <a href="working-with-objects/object-management.html">
+            
+                    
+                    对象的管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4.3" data-path="../../overview/working-with-objects/names.html">
+            
+                <a href="../../overview/working-with-objects/names.html">
+            
+                    
+                    对象的名称和ID
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4.4" data-path="working-with-objects/namespaces.html">
+            
+                <a href="working-with-objects/namespaces.html">
+            
+                    
+                    名称空间
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4.5" data-path="working-with-objects/labels.html">
+            
+                <a href="working-with-objects/labels.html">
+            
+                    
+                    标签和标签选择器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4.6" data-path="working-with-objects/annotations.html">
+            
+                <a href="working-with-objects/annotations.html">
+            
+                    
+                    注解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4.7" data-path="working-with-objects/field-selectors.html">
+            
+                <a href="working-with-objects/field-selectors.html">
+            
+                    
+                    字段选择器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4.8" data-path="working-with-objects/common-labels.html">
+            
+                <a href="working-with-objects/common-labels.html">
+            
+                    
+                    推荐的标签
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../architecture/">
+            
+                <a href="../architecture/">
+            
+                    
+                    集群架构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../architecture/nodes.html">
+            
+                <a href="../architecture/nodes.html">
+            
+                    
+                    节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../architecture/control-plane-node-communication.html">
+            
+                <a href="../architecture/control-plane-node-communication.html">
+            
+                    
+                    控制平面与节点通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../architecture/controller.html">
+            
+                <a href="../architecture/controller.html">
+            
+                    
+                    控制器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="../architecture/cloud-controller.html">
+            
+                <a href="../architecture/cloud-controller.html">
+            
+                    
+                    云控制器管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../containers/">
+            
+                <a href="../containers/">
+            
+                    
+                    容器详解
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../containers/images.html">
+            
+                <a href="../containers/images.html">
+            
+                    
+                    镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../containers/container-environment.html">
+            
+                <a href="../containers/container-environment.html">
+            
+                    
+                    容器运行环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../containers/runtime-class.html">
+            
+                <a href="../containers/runtime-class.html">
+            
+                    
+                    运行时类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="../containers/container-lifecycle-hooks.html">
+            
+                <a href="../containers/container-lifecycle-hooks.html">
+            
+                    
+                    容器声明周期钩子
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../workloads/">
+            
+                <a href="../workloads/">
+            
+                    
+                    工作负载
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../workloads/pods/">
+            
+                <a href="../workloads/pods/">
+            
+                    
+                    容器组
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1.1" data-path="../workloads/pods/pod-lifecycle.html">
+            
+                <a href="../workloads/pods/pod-lifecycle.html">
+            
+                    
+                    容器组声明周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.1.2" data-path="../workloads/pods/init-containers.html">
+            
+                <a href="../workloads/pods/init-containers.html">
+            
+                    
+                    初始化容器
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.2" data-path="../workloads/controllers/">
+            
+                <a href="../workloads/controllers/">
+            
+                    
+                    负载资源
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.2.1" data-path="../workloads/controllers/deployment.html">
+            
+                <a href="../workloads/controllers/deployment.html">
+            
+                    
+                    部署器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.2.2" data-path="../workloads/controllers/replicaset.html">
+            
+                <a href="../workloads/controllers/replicaset.html">
+            
+                    
+                    副本集
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../services-networking.html">
+            
+                <a href="../services-networking.html">
+            
+                    
+                    代理、负载均衡与网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../storage.html">
+            
+                <a href="../storage.html">
+            
+                    
+                    后端存储
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../configuration.html">
+            
+                <a href="../configuration.html">
+            
+                    
+                    配置定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../security.html">
+            
+                <a href="../security.html">
+            
+                    
+                    安全策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../policy.html">
+            
+                <a href="../policy.html">
+            
+                    
+                    资源策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../scheduling-eviction.html">
+            
+                <a href="../scheduling-eviction.html">
+            
+                    
+                    调度驱逐
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../cluster-administration.html">
+            
+                <a href="../cluster-administration.html">
+            
+                    
+                    集群管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../extend-kubernetes.html">
+            
+                <a href="../extend-kubernetes.html">
+            
+                    
+                    功能扩展
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../tasks/">
+            
+                <a href="../../tasks/">
+            
+                    
+                    新手教程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../tasks/tools.html">
+            
+                <a href="../../tasks/tools.html">
+            
+                    
+                    安装工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../tasks/administer-cluste.html">
+            
+                <a href="../../tasks/administer-cluste.html">
+            
+                    
+                    管理集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../tasks/configure-pod-container.html">
+            
+                <a href="../../tasks/configure-pod-container.html">
+            
+                    
+                    配置容器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../tasks/manage-kubernetes-objects.html">
+            
+                <a href="../../tasks/manage-kubernetes-objects.html">
+            
+                    
+                    管理对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../tasks/configmap-secret.html">
+            
+                <a href="../../tasks/configmap-secret.html">
+            
+                    
+                    管理密钥
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../tasks/inject-data-application.html">
+            
+                <a href="../../tasks/inject-data-application.html">
+            
+                    
+                    容器交互
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../tasks/run-application.html">
+            
+                <a href="../../tasks/run-application.html">
+            
+                    
+                    部署服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../tasks/job.html">
+            
+                <a href="../../tasks/job.html">
+            
+                    
+                    部署任务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../../tasks/access-application-cluster.html">
+            
+                <a href="../../tasks/access-application-cluster.html">
+            
+                    
+                    访问服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../../tasks/debug-application-cluster.html">
+            
+                <a href="../../tasks/debug-application-cluster.html">
+            
+                    
+                    监控、审计与调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../../tasks/extend-kubernetes.html">
+            
+                <a href="../../tasks/extend-kubernetes.html">
+            
+                    
+                    扩展集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../../tasks/tls.html">
+            
+                <a href="../../tasks/tls.html">
+            
+                    
+                    证书加密
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="../../tasks/manage-daemon.html">
+            
+                <a href="../../tasks/manage-daemon.html">
+            
+                    
+                    守护服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="../../tasks/service-catalog.html">
+            
+                <a href="../../tasks/service-catalog.html">
+            
+                    
+                    服务管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="../../tasks/network.html">
+            
+                <a href="../../tasks/network.html">
+            
+                    
+                    网络实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="../../tasks/kubelet-credential-provider/kubelet-credential-provider.html">
+            
+                <a href="../../tasks/kubelet-credential-provider/kubelet-credential-provider.html">
+            
+                    
+                    配置一个客户端景象认证服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="../../tasks/extend-kubectl/kubectl-plugins.html">
+            
+                <a href="../../tasks/extend-kubectl/kubectl-plugins.html">
+            
+                    
+                    使用插件扩展集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="../../tasks/manage-hugepages/scheduling-hugepages.html">
+            
+                <a href="../../tasks/manage-hugepages/scheduling-hugepages.html">
+            
+                    
+                    管理大页码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="../../tasks/manage-gpus/scheduling-gpus.html">
+            
+                <a href="../../tasks/manage-gpus/scheduling-gpus.html">
+            
+                    
+                    调度GPU
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >集群概览</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x96C6;&#x7FA4;&#x6982;&#x89C8;">&#x96C6;&#x7FA4;&#x6982;&#x89C8;</h1>
+<p><a href="concepts/overview/what-is-kubernetes.md">&#x4EC0;&#x4E48;&#x65F6;k8s</a></p>
+<p>k8s&#x662F;&#x4E00;&#x4E2A;&#x4FBF;&#x643A;&#x7684;&#xFF0C;&#x53EF;&#x6269;&#x5C55;&#x7684;&#xFF0C;&#x4EE5;&#x53CA;&#x5F00;&#x6E90;&#x7684;&#x5E73;&#x53F0;&#xFF0C;&#x7528;&#x6765;&#x7BA1;&#x7406;&#x5BB9;&#x5668;&#x5316;&#x7684;&#x5DE5;&#x4F5C;&#x8D1F;&#x8F7D;&#x548C;&#x670D;&#x52A1;&#xFF0C;&#x8BE5;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x517C;&#x5177;&#x58F0;&#x660E;&#x5F0F;&#x914D;&#x7F6E;&#x548C;&#x81EA;&#x52A8;&#x5316;&#x7279;&#x6027;&#x3002;k8s&#x662F;&#x4E00;&#x4E2A;&#x5927;&#x578B;&#x7684;&#xFF0C;&#x5FEB;&#x901F;&#x6210;&#x957F;&#x7684;&#x751F;&#x6001;&#x7CFB;&#x7EDF;&#x3002;&#x4F7F;&#x7528;k8s&#x670D;&#x52A1;&#xFF0C;&#x652F;&#x6301;&#x4EE5;&#x53CA;&#x5DE5;&#x5177;&#xFF0C;&#x5177;&#x5907;&#x5E7F;&#x6CDB;&#x7684;&#x53EF;&#x884C;&#x6027;&#x3002;</p>
+<p><a href="concepts/overview/components.md">k8s&#x7EC4;&#x4EF6;</a></p>
+<p>k8s&#x96C6;&#x7FA4;&#x7531;&#x4EE3;&#x8868;&#x63A7;&#x5236;&#x5E73;&#x9762;&#x7684;&#x7EC4;&#x4EF6;&#x4EE5;&#x53CA;&#x673A;&#x5668;&#x96C6;&#x5408;&#x7EC4;&#x6210;&#x7684;node&#x8282;&#x70B9;&#x7EC4;&#x4EF6;&#x7EC4;&#x6210;&#x3002;</p>
+<p><a href="concepts/overview/kubernetes-api.md">k8s api</a></p>
+<p>k8s api&#x5141;&#x8BB8;&#x4F60;&#x67E5;&#x8BE2;&#x548C;&#x7BA1;&#x7406;&#x96C6;&#x7FA4;&#x5BF9;&#x8C61;&#x7684;&#x72B6;&#x6001;&#x3002;k8s&#x6838;&#x5FC3;&#x7684;&#x63A7;&#x5236;&#x5E73;&#x9762;&#x5305;&#x542B;&#x7531;api server&#x4EE5;&#x53CA;http api&#x66B4;&#x9732;&#x51FA;&#x6765;&#x7684;&#x63A5;&#x53E3;&#x3002;&#x7528;&#x6237;&#x4E4B;&#x95F4;&#xFF0C;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x90E8;&#x5206;&#xFF0C;&#x4EE5;&#x53CA;&#x5916;&#x90E8;&#x7EC4;&#x4EF6;&#x4E4B;&#x95F4;&#x7684;&#x6240;&#x6709;&#x901A;&#x4FE1;&#x90FD;&#x662F;&#x901A;&#x8FC7;api server&#x5B8C;&#x6210;&#x3002;</p>
+<p><a href="concepts/overview/working-with-objects/README.md">&#x7406;&#x89E3;k8s&#x5BF9;&#x8C61;</a></p>
+<p>k8s&#x5BF9;&#x8C61;&#x662F;k8s&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x6301;&#x4E45;&#x5316;&#x5185;&#x5BB9;&#x3002;k8s&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x4EE3;&#x8868;&#x96C6;&#x7FA4;&#x3002;&#x5B66;&#x4E60;k8s&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#xFF0C;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 内容详解">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="what-is-kubernetes.html" class="navigation navigation-next " aria-label="Next page: 什么是k8s">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"集群概览","level":"1.3.1","depth":2,"next":{"title":"什么是k8s","level":"1.3.1.1","depth":3,"path":"concepts/overview/what-is-kubernetes.md","ref":"concepts/overview/what-is-kubernetes.md","articles":[]},"previous":{"title":"内容详解","level":"1.3","depth":1,"path":"concepts/README.md","ref":"concepts/README.md","articles":[{"title":"集群概览","level":"1.3.1","depth":2,"path":"concepts/overview/README.md","ref":"concepts/overview/README.md","articles":[{"title":"什么是k8s","level":"1.3.1.1","depth":3,"path":"concepts/overview/what-is-kubernetes.md","ref":"concepts/overview/what-is-kubernetes.md","articles":[]},{"title":"k8s组件","level":"1.3.1.2","depth":3,"path":"concepts/overview/components.md","ref":"concepts/overview/components.md","articles":[]},{"title":"k8s api","level":"1.3.1.3","depth":3,"path":"concepts/overview/kubernetes-api.md","ref":"concepts/overview/kubernetes-api.md","articles":[]},{"title":"k8s 资源对象","level":"1.3.1.4","depth":3,"path":"concepts/overview/working-with-objects/README.md","ref":"concepts/overview/working-with-objects/README.md","articles":[{"title":"理解k8s对象","level":"1.3.1.4.1","depth":4,"path":"concepts/overview/working-with-objects/kubernetes-objects.md","ref":"concepts/overview/working-with-objects/kubernetes-objects.md","articles":[]},{"title":"对象的管理","level":"1.3.1.4.2","depth":4,"path":"concepts/overview/working-with-objects/object-management.md","ref":"concepts/overview/working-with-objects/object-management.md","articles":[]},{"title":"对象的名称和ID","level":"1.3.1.4.3","depth":4,"path":"overview/working-with-objects/names.md","ref":"overview/working-with-objects/names.md","articles":[]},{"title":"名称空间","level":"1.3.1.4.4","depth":4,"path":"concepts/overview/working-with-objects/namespaces.md","ref":"concepts/overview/working-with-objects/namespaces.md","articles":[]},{"title":"标签和标签选择器","level":"1.3.1.4.5","depth":4,"path":"concepts/overview/working-with-objects/labels.md","ref":"concepts/overview/working-with-objects/labels.md","articles":[]},{"title":"注解","level":"1.3.1.4.6","depth":4,"path":"concepts/overview/working-with-objects/annotations.md","ref":"concepts/overview/working-with-objects/annotations.md","articles":[]},{"title":"字段选择器","level":"1.3.1.4.7","depth":4,"path":"concepts/overview/working-with-objects/field-selectors.md","ref":"concepts/overview/working-with-objects/field-selectors.md","articles":[]},{"title":"推荐的标签","level":"1.3.1.4.8","depth":4,"path":"concepts/overview/working-with-objects/common-labels.md","ref":"concepts/overview/working-with-objects/common-labels.md","articles":[]}]}]},{"title":"集群架构","level":"1.3.2","depth":2,"path":"concepts/architecture/README.md","ref":"concepts/architecture/README.md","articles":[{"title":"节点","level":"1.3.2.1","depth":3,"path":"concepts/architecture/nodes.md","ref":"concepts/architecture/nodes.md","articles":[]},{"title":"控制平面与节点通信","level":"1.3.2.2","depth":3,"path":"concepts/architecture/control-plane-node-communication.md","ref":"concepts/architecture/control-plane-node-communication.md","articles":[]},{"title":"控制器","level":"1.3.2.3","depth":3,"path":"concepts/architecture/controller.md","ref":"concepts/architecture/controller.md","articles":[]},{"title":"云控制器管理","level":"1.3.2.4","depth":3,"path":"concepts/architecture/cloud-controller.md","ref":"concepts/architecture/cloud-controller.md","articles":[]}]},{"title":"容器详解","level":"1.3.3","depth":2,"path":"concepts/containers/README.md","ref":"concepts/containers/README.md","articles":[{"title":"镜像","level":"1.3.3.1","depth":3,"path":"concepts/containers/images.md","ref":"concepts/containers/images.md","articles":[]},{"title":"容器运行环境","level":"1.3.3.2","depth":3,"path":"concepts/containers/container-environment.md","ref":"concepts/containers/container-environment.md","articles":[]},{"title":"运行时类","level":"1.3.3.3","depth":3,"path":"concepts/containers/runtime-class.md","ref":"concepts/containers/runtime-class.md","articles":[]},{"title":"容器声明周期钩子","level":"1.3.3.4","depth":3,"path":"concepts/containers/container-lifecycle-hooks.md","ref":"concepts/containers/container-lifecycle-hooks.md","articles":[]}]},{"title":"工作负载","level":"1.3.4","depth":2,"path":"concepts/workloads/README.md","ref":"concepts/workloads/README.md","articles":[{"title":"容器组","level":"1.3.4.1","depth":3,"path":"concepts/workloads/pods/README.md","ref":"concepts/workloads/pods/README.md","articles":[{"title":"容器组声明周期","level":"1.3.4.1.1","depth":4,"path":"concepts/workloads/pods/pod-lifecycle.md","ref":"concepts/workloads/pods/pod-lifecycle.md","articles":[]},{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"path":"concepts/workloads/pods/init-containers.md","ref":"concepts/workloads/pods/init-containers.md","articles":[]}]},{"title":"负载资源","level":"1.3.4.2","depth":3,"path":"concepts/workloads/controllers/README.md","ref":"concepts/workloads/controllers/README.md","articles":[{"title":"部署器","level":"1.3.4.2.1","depth":4,"path":"concepts/workloads/controllers/deployment.md","ref":"concepts/workloads/controllers/deployment.md","articles":[]},{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]}]}]},{"title":"代理、负载均衡与网络","level":"1.3.5","depth":2,"path":"concepts/services-networking.md","ref":"concepts/services-networking.md","articles":[]},{"title":"后端存储","level":"1.3.6","depth":2,"path":"concepts/storage.md","ref":"concepts/storage.md","articles":[]},{"title":"配置定义","level":"1.3.7","depth":2,"path":"concepts/configuration.md","ref":"concepts/configuration.md","articles":[]},{"title":"安全策略","level":"1.3.8","depth":2,"path":"concepts/security.md","ref":"concepts/security.md","articles":[]},{"title":"资源策略","level":"1.3.9","depth":2,"path":"concepts/policy.md","ref":"concepts/policy.md","articles":[]},{"title":"调度驱逐","level":"1.3.10","depth":2,"path":"concepts/scheduling-eviction.md","ref":"concepts/scheduling-eviction.md","articles":[]},{"title":"集群管理","level":"1.3.11","depth":2,"path":"concepts/cluster-administration.md","ref":"concepts/cluster-administration.md","articles":[]},{"title":"功能扩展","level":"1.3.12","depth":2,"path":"concepts/extend-kubernetes.md","ref":"concepts/extend-kubernetes.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["code","-lunr","search-pro","chapter-fold","github","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/linjinbao"},"livereload":{},"search-pro":{},"search":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/overview/README.md","mtime":"2021-03-16T08:31:08.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-16T08:30:30.030Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
