@@ -18,7 +18,7 @@
         * [k8s 资源对象](concepts/overview/working-with-objects/README.md)
             * [理解k8s对象](concepts/overview/working-with-objects/kubernetes-objects.md)
             * [对象的管理](concepts/overview/working-with-objects/object-management.md)
-            * [对象的名称和ID](overview/working-with-objects/names.md)
+            * [对象的名称和ID](concepts/overview/working-with-objects/names.md)
             * [名称空间](concepts/overview/working-with-objects/namespaces.md)
             * [标签和标签选择器](concepts/overview/working-with-objects/labels.md)
             * [注解](concepts/overview/working-with-objects/annotations.md)
