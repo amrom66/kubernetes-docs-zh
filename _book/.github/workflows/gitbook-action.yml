@@ -13,4 +13,5 @@ jobs:
       uses: ZanderZhao/gitbook-action@v1.2.4 
       with:
         source_branch: main                                 
-        token: ${{ secrets.PERSONAL_TOKEN }}  
+        token: ${{ secrets.PERSONAL_TOKEN }} 
+        publish_cname: k8s.linjinbao.tk 

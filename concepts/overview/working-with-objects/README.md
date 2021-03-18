@@ -14,3 +14,5 @@
 
 [字段选择器](field-selectors.md)
 
+[推荐的字段](common-labels.md)
+
