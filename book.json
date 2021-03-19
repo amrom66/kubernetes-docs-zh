@@ -9,6 +9,7 @@
         "readme": "README.md"
     },
     "plugins": [
+        "-sharing",
         "code",
         "-lunr", 
         "search-pro",
