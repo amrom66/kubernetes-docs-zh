@@ -14,4 +14,4 @@ jobs:
       with:
         source_branch: main                                 
         token: ${{ secrets.PERSONAL_TOKEN }} 
-        publish_cname: k8s.linjinbao.tk 
+        publish_cname: k8s.amrom.tk 
