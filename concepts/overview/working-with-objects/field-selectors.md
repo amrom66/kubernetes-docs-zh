@@ -51,3 +51,5 @@ kubectl get statefulsets,services --all-namespaces --field-selector metadata.nam
 
 
 
+
+
