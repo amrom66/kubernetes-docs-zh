@@ -13,12 +13,6 @@
         "code",
         "-lunr", 
         "search-pro",
-        "chapter-fold",
-        "github"
-    ],
-    "pluginsConfig": {
-        "github": {
-            "url": "https://github.com/linjinbao"
-        }
-    }
+        "chapter-fold"
+    ]
 }
