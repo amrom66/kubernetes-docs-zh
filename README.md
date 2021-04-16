@@ -1,5 +1,10 @@
 # kubernetes翻译文档
 
+![](https://img.shields.io/github/issues/linjinbao/kubernetes-docs-zh)
+![](https://img.shields.io/github/forks/linjinbao/kubernetes-docs-zh)
+![](https://img.shields.io/github/stars/linjinbao/kubernetes-docs-zh)
+![](https://img.shields.io/github/license/linjinbao/kubernetes-docs-zh)
+
 包含以下内容：
 
 0. [k8s文档翻译](SUMMARY.md)
