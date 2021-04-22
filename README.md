@@ -13,3 +13,4 @@
 3. 部署实践教程
 4. 注解二次开发
 5. [操作实践示例](https://github.com/linjinbao/k8s-k8s-practice)
+6. [cka笔记](cka/README.md)
