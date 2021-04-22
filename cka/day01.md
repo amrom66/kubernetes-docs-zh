@@ -386,6 +386,83 @@ status: {}
 
 ```code
 
+kubectl create secret generic mysecret --from-literal=password=mypass
+
+echo -n admin > username
+kubectl create secret generic mysecret2 --from-file=username
+
+kubectl get secret mysecret2 -o yaml
+echo YWRtaW4K | base64 -d # on MAC it is -D, which decodes the value and shows 'admin'
+
+kubectl get secret mysecret2 -o jsonpath='{.data.username}{"\n"}' | base64 -d
+
+kubectl run nginx11 --image=nginx --restart=Never -o yaml --dry-run=client > pod11.yaml 
+
+```
+
+pod11.yaml
+
+```yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx11
+  name: nginx11
+spec:
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret2
+  containers:
+  - image: nginx
+    name: nginx11
+    resources: {}
+    volumeMounts:
+    - name: foo
+      mountPath: /etc/foo
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+
+```
+
+pod12.yaml
+
+```yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx12
+  name: nginx12
+spec:
+  containers:
+  - image: nginx
+    name: nginx12
+    resources: {}
+    env:
+    - name: USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: mysecret2
+          key: username
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+
+```
+
+22. sa
+
+```code
+
+kubectl create sa myuser
+
+kubectl run nginx --image=nginx --restart=Never --serviceaccount=myuser -o yaml --dry-run=client > pod.yaml
 
 
 ```
