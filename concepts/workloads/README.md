@@ -25,3 +25,4 @@ kubernetes提供几种内置的workload资源：
 
 * 使用CronJob运行自动化任务
 
+* 学习[pod](pods/README.md)知识
