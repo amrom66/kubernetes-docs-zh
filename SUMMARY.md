@@ -120,4 +120,3 @@
     * [使用插件扩展集群](tasks/extend-kubectl/kubectl-plugins.md)
     * [管理大页码](tasks/manage-hugepages/scheduling-hugepages.md)
     * [调度GPU](tasks/manage-gpus/scheduling-gpus.md)
-
