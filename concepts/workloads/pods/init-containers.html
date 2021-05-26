@@ -1846,8 +1846,8 @@
 </code></pre>
 </li>
 <li><p>pod&#x6CE8;&#x518C;&#x5230;&#x8FDC;&#x7A0B;API&#x4E0A;&#xFF0C;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;</p>
-<pre><code class="lang-code">  curl -X POST http://$MANAGEMENT_SERVICE_HOST:$MANAGEMENT_SERVICE_PORT/register -d &apos;instance=$(&lt;POD_NAME&gt;)&amp;ip=$(&lt;POD_IP&gt;)&apos;
-</code></pre>
+<pre><code class="lang-code">  curl -X POST http://$MANAGEMENT_SERVICE_HOST:$MANAGEMENT_SERVICE_PORT/register -d &apos;instance=$(<pod_name>)&amp;ip=$(<pod_ip>)&apos;
+</pod_ip></pod_name></code></pre>
 </li>
 <li><p>&#x542F;&#x52A8;&#x5BB9;&#x5668;&#x524D;&#x7B49;&#x5F85;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code class="lang-code">  sleep 60
@@ -1935,26 +1935,26 @@ kubectl logs myapp-pod -c init-mydb      # Inspect the second init container
 </code></pre>
 <p>&#x6B64;&#x65F6;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x5BB9;&#x5668;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x53D1;&#x73B0;&#x670D;&#x52A1;mydb&#x548C;myservice&#x3002;</p>
 <p>&#x4F7F;&#x7528;&#x4EE5;&#x4E0B;&#x914D;&#x7F6E;&#x4F7F;&#x8FD9;&#x4E24;&#x4E2A;&#x670D;&#x52A1;&#x663E;&#x793A;&#x51FA;&#x6765;&#xFF1A;</p>
-<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
-<span class="hljs-attr">apiVersion:</span> v1
-<span class="hljs-attr">kind:</span> Service
-<span class="hljs-attr">metadata:</span>
-<span class="hljs-attr">  name:</span> myservice
-<span class="hljs-attr">spec:</span>
-<span class="hljs-attr">  ports:</span>
-<span class="hljs-attr">  - protocol:</span> TCP
-<span class="hljs-attr">    port:</span> <span class="hljs-number">80</span>
-<span class="hljs-attr">    targetPort:</span> <span class="hljs-number">9376</span>
-<span class="hljs-meta">---</span>
-<span class="hljs-attr">apiVersion:</span> v1
-<span class="hljs-attr">kind:</span> Service
-<span class="hljs-attr">metadata:</span>
-<span class="hljs-attr">  name:</span> mydb
-<span class="hljs-attr">spec:</span>
-<span class="hljs-attr">  ports:</span>
-<span class="hljs-attr">  - protocol:</span> TCP
-<span class="hljs-attr">    port:</span> <span class="hljs-number">80</span>
-<span class="hljs-attr">    targetPort:</span> <span class="hljs-number">9377</span>
+<pre><code class="lang-yaml">---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9376
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mydb
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9377
 </code></pre>
 <pre><code class="lang-code">kubectl apply -f services.yaml
 </code></pre>
@@ -2049,7 +2049,7 @@ kubectl logs myapp-pod -c init-mydb      # Inspect the second init container
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"next":{"title":"Pod拓扑传播限制","level":"1.3.4.1.3","depth":4,"path":"concepts/workloads/pods/pod-topology-spread-constraints.md","ref":"concepts/workloads/pods/pod-topology-spread-constraints.md","articles":[]},"previous":{"title":"容器组声明周期","level":"1.3.4.1.1","depth":4,"path":"concepts/workloads/pods/pod-lifecycle.md","ref":"concepts/workloads/pods/pod-lifecycle.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"search-pro":{},"chapter-fold":{},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/init-containers.md","mtime":"2021-05-26T05:50:31.054Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-26T05:51:04.723Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"next":{"title":"Pod拓扑传播限制","level":"1.3.4.1.3","depth":4,"path":"concepts/workloads/pods/pod-topology-spread-constraints.md","ref":"concepts/workloads/pods/pod-topology-spread-constraints.md","articles":[]},"previous":{"title":"容器组声明周期","level":"1.3.4.1.1","depth":4,"path":"concepts/workloads/pods/pod-lifecycle.md","ref":"concepts/workloads/pods/pod-lifecycle.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold","mermaid-newface"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"search-pro":{},"chapter-fold":{},"mermaid-newface":{},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/init-containers.md","mtime":"2021-05-26T10:06:17.600Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-26T10:07:09.452Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

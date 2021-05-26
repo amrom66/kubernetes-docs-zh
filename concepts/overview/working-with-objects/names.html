@@ -1836,16 +1836,16 @@
 <h2 id="&#x8DEF;&#x5F84;&#x90E8;&#x5206;&#x540D;&#x79F0;">&#x8DEF;&#x5F84;&#x90E8;&#x5206;&#x540D;&#x79F0;</h2>
 <p>&#x67D0;&#x4E9B;&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x8981;&#x6C42;&#x5176;&#x540D;&#x79F0;&#x80FD;&#x591F;&#x88AB;&#x5B89;&#x5168;&#x5730;&#x7F16;&#x7801;&#x4E3A;&#x8DEF;&#x5F84;&#x6BB5;&#x3002; &#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x540D;&#x79F0;&#x4E0D;&#x80FD;&#x4E3A;&#x201C;&#x3002;&#x201D; &#x6216;&#x201C; ..&#x201D;&#xFF0C;&#x5E76;&#x4E14;&#x540D;&#x79F0;&#x4E2D;&#x4E0D;&#x80FD;&#x5305;&#x542B;&#x201C; /&#x201D;&#x6216;&#x201C;&#xFF05;&#x201D;&#x3002;</p>
 <p>&#x4EE5;&#x4E0B;&#x662F;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;nginx-demo&#x7684;Pod&#x7684;&#x793A;&#x4F8B;&#x6E05;&#x5355;&#xFF1A;</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">apiVersion:</span> v1
-<span class="hljs-attr">kind:</span> Pod
-<span class="hljs-attr">metadata:</span>
-<span class="hljs-attr">  name:</span> nginx-demo
-<span class="hljs-attr">spec:</span>
-<span class="hljs-attr">  containers:</span>
-<span class="hljs-attr">  - name:</span> nginx
-<span class="hljs-attr">    image:</span> nginx:<span class="hljs-number">1.14</span><span class="hljs-number">.2</span>
-<span class="hljs-attr">    ports:</span>
-<span class="hljs-attr">    - containerPort:</span> <span class="hljs-number">80</span>
+<pre><code class="lang-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
 </code></pre>
 <p>&#x6CE8;&#x610F;&#xFF1A; &#x67D0;&#x4E9B;&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x5BF9;&#x5176;&#x540D;&#x79F0;&#x6709;&#x5176;&#x4ED6;&#x9650;&#x5236;&#x3002;</p>
 <h2 id="uids">UIDs</h2>
@@ -1911,7 +1911,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"对象的名称和ID","level":"1.3.1.4.3","depth":4,"next":{"title":"名称空间","level":"1.3.1.4.4","depth":4,"path":"concepts/overview/working-with-objects/namespaces.md","ref":"concepts/overview/working-with-objects/namespaces.md","articles":[]},"previous":{"title":"对象的管理","level":"1.3.1.4.2","depth":4,"path":"concepts/overview/working-with-objects/object-management.md","ref":"concepts/overview/working-with-objects/object-management.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"search-pro":{},"chapter-fold":{},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/overview/working-with-objects/names.md","mtime":"2021-05-26T05:50:31.050Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-26T05:51:04.723Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"对象的名称和ID","level":"1.3.1.4.3","depth":4,"next":{"title":"名称空间","level":"1.3.1.4.4","depth":4,"path":"concepts/overview/working-with-objects/namespaces.md","ref":"concepts/overview/working-with-objects/namespaces.md","articles":[]},"previous":{"title":"对象的管理","level":"1.3.1.4.2","depth":4,"path":"concepts/overview/working-with-objects/object-management.md","ref":"concepts/overview/working-with-objects/object-management.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold","mermaid-newface"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"search-pro":{},"chapter-fold":{},"mermaid-newface":{},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/overview/working-with-objects/names.md","mtime":"2021-05-26T10:06:17.596Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-26T10:07:09.452Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
