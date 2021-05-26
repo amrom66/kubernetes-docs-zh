@@ -13,6 +13,7 @@
         "code",
         "-lunr", 
         "search-pro",
-        "chapter-fold"
+        "chapter-fold",
+        "mermaid-newface"
     ]
 }

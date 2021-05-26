@@ -1,5 +1,7 @@
-name: 'Gitbook Action Build'
+name: 'gitbook-publish'
 on:
+  schedule:
+    - cron:  '*/30 5,17 * * *'
   push:
     branches:
       - main
