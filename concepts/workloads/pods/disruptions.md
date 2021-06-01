@@ -53,3 +53,103 @@ pods不会主动消失，直到某人删除，或者存在不可避免的硬件�
 
 一个PDB指定了一个应用可以容忍副本的数量，相对于它打算拥有的数量。例如，一个deploymen定义`.spec.replicas: 5`表示在任意给定时间拥有5个副本。如果此处的PDB定义为4个同时，则驱逐API会允许同时发生自愿中断1个。
 
+
+组成应用程序的 pod 组是使用标签选择器指定的，与应用程序控制器（部署、状态集等）使用的标签选择器相同。
+
+Pod 的“预期”数量是根据管理这些 Pod 的工作负载资源的 .spec.replicas 计算得出的。 控制平面通过检查 Pod 的 .metadata.ownerReferences 来发现拥有的工作负载资源。
+
+PDB 无法防止发生非自愿中断，但它们确实会影响预算。
+
+由于对应用程序进行滚动升级而被删除或不可用的 Pod 确实会计入中断预算，但在进行滚动升级时，工作负载资源（例如 Deployment 和 StatefulSet）不受 PDB 的限制。 相反，应用程序更新期间的故障处理是在特定工作负载资源的规范中配置的。
+
+当使用 eviction API 驱逐 pod 时，它会优雅地终止，遵守其 PodSpec 中的 terminateGracePeriodSeconds 设置。
+
+PDB 无法防止发生非自愿中断，但它们确实会影响预算。
+
+由于对应用程序进行滚动升级而被删除或不可用的 Pod 确实会计入中断预算，但在进行滚动升级时，工作负载资源（例如 Deployment 和 StatefulSet）不受 PDB 的限制。 相反，应用程序更新期间的故障处理是在特定工作负载资源的规范中配置的。
+
+当使用 eviction API 驱逐 pod 时，它会优雅地终止，遵守其 PodSpec 中的 terminateGracePeriodSeconds 设置。
+
+## PodDisruptionBudget 示例
+
+考虑一个具有 3 个节点的集群，节点 1 到节点 3。 集群正在运行多个应用程序。 其中之一有 3 个副本，最初称为 pod-a、pod-b 和 pod-c。 还显示了另一个没有 PDB 的不相关 pod，称为 pod-x。 最初，Pod 的布局如下：
+
+
+|node-1 |	node-2|	node-3
+------------
+|pod-a available|	pod-b available|	pod-c available
+|pod-x available	| |
+
+所有 3 个 pod 都是部署的一部分，它们共同拥有一个 PDB，这要求 3 个 pod 中至少有 2 个始终可用。
+
+例如，假设集群管理员想要重新启动到新内核版本以修复内核中的错误。 集群管理员首先尝试使用 kubectl drain 命令排空 node-1。 该工具试图驱逐 pod-a 和 pod-x。 这立即成功。 两个 Pod 同时进入终止状态。 这会将集群置于此状态：
+
+
+|node-1 draining|	node-2|	node-3
+------------
+|pod-a terminating|	pod-b available|	pod-c available
+|pod-x terminating	| |
+
+部署注意到其中一个 pod 正在终止，因此它创建了一个名为 pod-d 的替代品。 由于节点 1 被封锁，它落在另一个节点上。 有些东西还创建了 pod-y 作为 pod-x 的替代品。
+（注意：对于 StatefulSet，pod-a 将被称为 pod-0 之类的东西，需要在它的替换（也称为 pod-0 但具有不同的 UID）被创建之前完全终止。否则， 示例也适用于 StatefulSet。）
+
+现在，集群处于如下状态：
+
+|node-1 draining |	node-2|	node-3
+------------
+|pod-a terminating|	pod-b available|pod-c available
+|pod-x terminating| pod-d starting | pod-y
+
+在某一时刻，pod销毁，集群变成如下：
+
+|node-1 |	node-2|	node-3
+------------
+| |	pod-b available|pod-c available
+| | pod-d starting | pod-y
+
+这时候，如果一个不耐烦的集群管理员尝试drain node-2或node-3，drain命令就会阻塞，因为部署只有2个可用的pod，而它的PDB至少需要2个。一段时间过去后， pod-d 可用。
+
+集群状态现在看起来像这样：
+
+|node-1 |	node-2|	node-3 | no node
+------------
+| |	pod-b terminating|pod-c available | pod-e pending
+| | pod-d available | pod-y | 
+
+此时，集群管理员需要将节点添加回集群以继续升级。
+
+您可以看到 Kubernetes 如何改变中断发生的速度，根据：
+
+* 应用程序需要多少副本
+* 正常关闭实例需要多长时间
+* 新实例启动需要多长时间
+* 控制器的类型
+* 集群的资源容量
+
+## 分离集群所有者和应用程序所有者角色
+
+通常，将集群管理器和应用程序所有者视为彼此了解有限的独立角色很有用。 在这些情况下，这种职责分离可能是有意义的：
+* 当多个应用团队共享一个Kubernetes集群，角色自然分工时
+* 当第三方工具或服务用于自动化集群管理时
+
+Pod 中断预算通过提供角色之间的接口来支持这种角色分离。
+如果您的组织中没有这样的职责分离，您可能不需要使用 Pod Disruption Budgets。
+
+## 如何对集群执行破坏性操作
+
+如果您是集群管理员，并且您需要对集群中的所有节点执行破坏性操作，例如节点或系统软件升级，这里有一些选项：
+
+* 接受升级期间的停机时间。
+* 故障转移到另一个完整的副本集群。
+    * 没有停机时间，但对于重复的节点和协调切换的人力来说可能代价高昂。
+* 编写容忍中断的应用程序并使用 PDB。
+    * 没有停机时间。
+    * 最少的资源重复
+    * 允许集群管理的更多自动化。
+    * 编写容忍中断的应用程序很棘手，但容忍自愿中断的工作在很大程度上与支持自动缩放和容忍非自愿中断的工作重叠。
+
+
+
+
+
+
