@@ -14,7 +14,7 @@
 
 容器运行时是一个负责运行容器的软件。
 
-kubernetes支持多种容器运行时：Docker, containerd, CRI-O，以及其他kubernetes CRI的任何实现。
+kubernetes支持多种容器运行时：Docker, containerd, CRI-O，以及其他[kubernetes CRI](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md)的任何实现。
 
 ## 接下来
 
