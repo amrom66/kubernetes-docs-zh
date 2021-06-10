@@ -1882,6 +1882,40 @@ spec:
 </code></pre>
 <p>topologyKey&#xFF1A;zone&#x8868;&#x793A;&#x5747;&#x5300;&#x5206;&#x5E03;&#x5C06;&#x4EC5;&#x5E94;&#x7528;&#x4E8E;&#x6807;&#x7B7E;&#x5BF9;&#x4E3A;&#x201C; zone&#xFF1A;<any value="">&#x201D;&#x7684;&#x8282;&#x70B9;&#x3002; whenUnsatisfiable&#xFF1A;&#x5982;&#x679C;&#x4F20;&#x5165;Pod&#x65E0;&#x6CD5;&#x6EE1;&#x8DB3;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#xFF0C;&#x5219;DoNotSchedule&#x901A;&#x77E5;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x4F7F;&#x5176;&#x5904;&#x4E8E;&#x5F85;&#x5904;&#x7406;&#x72B6;&#x6001;&#x3002;</any></p>
 <p>&#x5982;&#x679C;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x5C06;&#x6B64;&#x4F20;&#x5165;Pod&#x653E;&#x5165;&#x201C; zoneA&#x201D;&#xFF0C;&#x5219;Pods&#x5206;&#x5E03;&#x5C06;&#x53D8;&#x4E3A;[3&#xFF0C;1]&#xFF0C;&#x56E0;&#x6B64;&#x5B9E;&#x9645;&#x65F6;&#x6EDE;&#x4E3A;2&#xFF08;3-1&#xFF09;-&#x8FD9;&#x8FDD;&#x53CD;&#x4E86;maxSkew&#xFF1A;1.&#x5728;&#x6B64;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x4F20;&#x5165;Pod&#x4EC5;&#x80FD; &#x653E;&#x5728;&#x201C; zoneB&#x201D;&#x4E0A;&#xFF1A;</p>
+<p>&#x60A8;&#x53EF;&#x4EE5;&#x8C03;&#x6574;pod&#x89C4;&#x8303;&#xFF0C;&#x4EE5;&#x6EE1;&#x8DB3;&#x5404;&#x79CD;&#x8981;&#x6C42;&#xFF1A;</p>
+<ul>
+<li>&#x5C06;maxSkew&#x66F4;&#x6539;&#x4E3A;&#x66F4;&#x5927;&#x7684;&#x503C;&#xFF0C;&#x4F8B;&#x5982;&#x201C; 2&#x201D;&#xFF0C;&#x4EE5;&#x4FBF;&#x5C06;&#x4F20;&#x5165;&#x7684;Pod&#x4E5F;&#x53EF;&#x4EE5;&#x653E;&#x7F6E;&#x5728;&#x201C; zoneA&#x201D;&#x4E0A;&#x3002;</li>
+<li>&#x5C06;topologyKey&#x66F4;&#x6539;&#x4E3A;&#x201C; node&#x201D;&#xFF0C;&#x4EE5;&#x4FBF;&#x5728;&#x8282;&#x70B9;&#x800C;&#x4E0D;&#x662F;&#x533A;&#x57DF;&#x4E4B;&#x95F4;&#x5747;&#x5300;&#x5206;&#x5E03;Pod&#x3002; &#x5728;&#x4E0A;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x5982;&#x679C;maxSkew&#x4FDD;&#x6301;&#x4E3A;&#x201C; 1&#x201D;&#xFF0C;&#x5219;&#x4F20;&#x5165;&#x7684;Pod&#x53EA;&#x80FD;&#x653E;&#x7F6E;&#x5728;&#x201C; node4&#x201D;&#x4E0A;</li>
+<li>&#x5C06;whenUnsatisfiable&#xFF1A;DoNotSchedule&#x66F4;&#x6539;&#x4E3A;whenUnsatisfiable&#xFF1A;ScheduleAnyway&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x4F20;&#x5165;&#x7684;Pod&#x59CB;&#x7EC8;&#x662F;&#x53EF;&#x8C03;&#x5EA6;&#x7684;&#xFF08;&#x5047;&#x8BBE;&#x6EE1;&#x8DB3;&#x5176;&#x4ED6;&#x8C03;&#x5EA6;API&#xFF09;&#x3002; &#x4F46;&#x662F;&#xFF0C;&#x6700;&#x597D;&#x5C06;&#x5176;&#x653E;&#x7F6E;&#x5728;&#x5339;&#x914D;Pod&#x8F83;&#x5C11;&#x7684;&#x62D3;&#x6251;&#x57DF;&#x4E2D;&#x3002; &#xFF08;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x79CD;&#x53EF;&#x53D6;&#x6027;&#x5DF2;&#x4E0E;&#x5176;&#x4ED6;&#x5185;&#x90E8;&#x8C03;&#x5EA6;&#x4F18;&#x5148;&#x7EA7;&#xFF08;&#x5982;&#x8D44;&#x6E90;&#x4F7F;&#x7528;&#x7387;&#x7B49;&#xFF09;&#x5171;&#x540C;&#x6807;&#x51C6;&#x5316;&#x3002;&#xFF09;</li>
+</ul>
+<p>&#x793A;&#x4F8B;&#xFF1A;&#x591A;&#x4E2A;&#x62D3;&#x6251;&#x6269;&#x5C55;&#x7EA6;&#x675F;</p>
+<p>&#x8FD9;&#x662F;&#x5EFA;&#x7ACB;&#x5728;&#x524D;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x7684;&#x3002; &#x5047;&#x8BBE;&#x60A8;&#x6709;&#x4E00;&#x4E2A;4&#x8282;&#x70B9;&#x7FA4;&#x96C6;&#xFF0C;&#x5176;&#x4E2D;3&#x4E2A;&#x6807;&#x8BB0;&#x4E3A;foo&#xFF1A;bar&#x7684;Pod&#x5206;&#x522B;&#x4F4D;&#x4E8E;node1&#xFF0C;node2&#x548C;node3&#x4E2D;&#xFF1A;
+&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;2&#x4E2A;TopologySpreadConstraints&#x6765;&#x63A7;&#x5236;Pod&#x5728;&#x533A;&#x57DF;&#x548C;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6269;&#x6563;&#xFF1A;</p>
+<pre><code class="lang-yaml">kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+  labels:
+    foo: bar
+spec:
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        foo: bar
+  - maxSkew: 1
+    topologyKey: node
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        foo: bar
+  containers:
+  - name: pause
+    image: k8s.gcr.io/pause:3.1
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E3A;&#x4E86;&#x5339;&#x914D;&#x7B2C;&#x4E00;&#x4E2A;&#x7EA6;&#x675F;&#xFF0C;&#x53EA;&#x80FD;&#x5C06;&#x4F20;&#x5165;&#x7684;Pod&#x653E;&#x7F6E;&#x5728;&#x201C; zoneB&#x201D;&#x4E0A;&#xFF1B; &#x800C;&#x5C31;&#x7B2C;&#x4E8C;&#x4E2A;&#x7EA6;&#x675F;&#x800C;&#x8A00;&#xFF0C;&#x4F20;&#x5165;&#x7684;Pod&#x53EA;&#x80FD;&#x653E;&#x7F6E;&#x5728;&#x201C; node4&#x201D;&#x4E0A;&#x3002; &#x7136;&#x540E;&#x5C06;2&#x4E2A;&#x7EA6;&#x675F;&#x7684;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x201C;&#x4E0E;&#x201D;&#x8FD0;&#x7B97;&#xFF0C;&#x56E0;&#x6B64;&#x552F;&#x4E00;&#x53EF;&#x884C;&#x7684;&#x9009;&#x62E9;&#x662F;&#x5C06;&#x5176;&#x653E;&#x7F6E;&#x5728;&#x201C; node4&#x201D;&#x4E0A;&#x3002;</p>
 
                                 
                                 </section>
@@ -1941,7 +1975,7 @@ spec:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Pod拓扑传播限制","level":"1.3.4.1.3","depth":4,"next":{"title":"分布","level":"1.3.4.1.4","depth":4,"path":"concepts/workloads/pods/disruptions.md","ref":"concepts/workloads/pods/disruptions.md","articles":[]},"previous":{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"path":"concepts/workloads/pods/init-containers.md","ref":"concepts/workloads/pods/init-containers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold","mermaid-newface","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"livereload":{},"search-pro":{},"search":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"mermaid-newface":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/pod-topology-spread-constraints.md","mtime":"2021-05-19T07:57:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-19T06:01:28.271Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Pod拓扑传播限制","level":"1.3.4.1.3","depth":4,"next":{"title":"分布","level":"1.3.4.1.4","depth":4,"path":"concepts/workloads/pods/disruptions.md","ref":"concepts/workloads/pods/disruptions.md","articles":[]},"previous":{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"path":"concepts/workloads/pods/init-containers.md","ref":"concepts/workloads/pods/init-containers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold","mermaid-newface","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"livereload":{},"search-pro":{},"search":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"mermaid-newface":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/pod-topology-spread-constraints.md","mtime":"2021-05-26T07:49:02.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-10T12:52:40.098Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
