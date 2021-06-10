@@ -21,14 +21,6 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-pro/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -1806,9 +1798,6 @@
 <div id="book-search-results">
     <div class="search-noresults">
     
-<div id="book-search-results">
-    <div class="search-noresults">
-    
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x4E34;&#x65F6;&#x5BB9;&#x5668;">&#x4E34;&#x65F6;&#x5BB9;&#x5668;</h1>
@@ -1834,21 +1823,21 @@
 <p>&#x672C;&#x8282;&#x4E2D;&#x7684;&#x793A;&#x4F8B;&#x6F14;&#x793A;&#x4E86;&#x4E34;&#x65F6;&#x5BB9;&#x5668;&#x5728; API &#x4E2D;&#x7684;&#x663E;&#x793A;&#x65B9;&#x5F0F;&#x3002; &#x60A8;&#x901A;&#x5E38;&#x4F1A;&#x4F7F;&#x7528; kubectl debug &#x6216;&#x5176;&#x4ED6; kubectl &#x63D2;&#x4EF6;&#x6765;&#x81EA;&#x52A8;&#x5316;&#x8FD9;&#x4E9B;&#x6B65;&#x9AA4;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x8C03;&#x7528; API&#x3002;</p>
 <p>&#x4E34;&#x65F6;&#x5BB9;&#x5668;&#x662F;&#x4F7F;&#x7528; Pod &#x7684; ephemeralcontainers &#x5B50;&#x8D44;&#x6E90;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; kubectl --raw &#x8FDB;&#x884C;&#x6F14;&#x793A;&#x3002; &#x9996;&#x5148;&#x63CF;&#x8FF0;&#x8981;&#x6DFB;&#x52A0;&#x4E3A; EphemeralContainers &#x5217;&#x8868;&#x7684;&#x4E34;&#x65F6;&#x5BB9;&#x5668;&#xFF1A;</p>
 <pre><code class="lang-json">{
-    &quot;apiVersion&quot;: &quot;v1&quot;,
-    &quot;kind&quot;: &quot;EphemeralContainers&quot;,
-    &quot;metadata&quot;: {
-        &quot;name&quot;: &quot;example-pod&quot;
+    <span class="hljs-string">&quot;apiVersion&quot;</span>: <span class="hljs-string">&quot;v1&quot;</span>,
+    <span class="hljs-string">&quot;kind&quot;</span>: <span class="hljs-string">&quot;EphemeralContainers&quot;</span>,
+    <span class="hljs-string">&quot;metadata&quot;</span>: {
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;example-pod&quot;</span>
     },
-    &quot;ephemeralContainers&quot;: [{
-        &quot;command&quot;: [
-            &quot;sh&quot;
+    <span class="hljs-string">&quot;ephemeralContainers&quot;</span>: [{
+        <span class="hljs-string">&quot;command&quot;</span>: [
+            <span class="hljs-string">&quot;sh&quot;</span>
         ],
-        &quot;image&quot;: &quot;busybox&quot;,
-        &quot;imagePullPolicy&quot;: &quot;IfNotPresent&quot;,
-        &quot;name&quot;: &quot;debugger&quot;,
-        &quot;stdin&quot;: true,
-        &quot;tty&quot;: true,
-        &quot;terminationMessagePolicy&quot;: &quot;File&quot;
+        <span class="hljs-string">&quot;image&quot;</span>: <span class="hljs-string">&quot;busybox&quot;</span>,
+        <span class="hljs-string">&quot;imagePullPolicy&quot;</span>: <span class="hljs-string">&quot;IfNotPresent&quot;</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;debugger&quot;</span>,
+        <span class="hljs-string">&quot;stdin&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;tty&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;terminationMessagePolicy&quot;</span>: <span class="hljs-string">&quot;File&quot;</span>
     }]
 }
 </code></pre>
@@ -1857,30 +1846,30 @@
 </code></pre>
 <p>&#x8FD9;&#x5C06;&#x8FD4;&#x56DE;&#x4E34;&#x65F6;&#x5BB9;&#x5668;&#x7684;&#x65B0;&#x5217;&#x8868;&#xFF1A;</p>
 <pre><code class="lang-json">{
-   &quot;kind&quot;:&quot;EphemeralContainers&quot;,
-   &quot;apiVersion&quot;:&quot;v1&quot;,
-   &quot;metadata&quot;:{
-      &quot;name&quot;:&quot;example-pod&quot;,
-      &quot;namespace&quot;:&quot;default&quot;,
-      &quot;selfLink&quot;:&quot;/api/v1/namespaces/default/pods/example-pod/ephemeralcontainers&quot;,
-      &quot;uid&quot;:&quot;a14a6d9b-62f2-4119-9d8e-e2ed6bc3a47c&quot;,
-      &quot;resourceVersion&quot;:&quot;15886&quot;,
-      &quot;creationTimestamp&quot;:&quot;2019-08-29T06:41:42Z&quot;
+   <span class="hljs-string">&quot;kind&quot;</span>:<span class="hljs-string">&quot;EphemeralContainers&quot;</span>,
+   <span class="hljs-string">&quot;apiVersion&quot;</span>:<span class="hljs-string">&quot;v1&quot;</span>,
+   <span class="hljs-string">&quot;metadata&quot;</span>:{
+      <span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;example-pod&quot;</span>,
+      <span class="hljs-string">&quot;namespace&quot;</span>:<span class="hljs-string">&quot;default&quot;</span>,
+      <span class="hljs-string">&quot;selfLink&quot;</span>:<span class="hljs-string">&quot;/api/v1/namespaces/default/pods/example-pod/ephemeralcontainers&quot;</span>,
+      <span class="hljs-string">&quot;uid&quot;</span>:<span class="hljs-string">&quot;a14a6d9b-62f2-4119-9d8e-e2ed6bc3a47c&quot;</span>,
+      <span class="hljs-string">&quot;resourceVersion&quot;</span>:<span class="hljs-string">&quot;15886&quot;</span>,
+      <span class="hljs-string">&quot;creationTimestamp&quot;</span>:<span class="hljs-string">&quot;2019-08-29T06:41:42Z&quot;</span>
    },
-   &quot;ephemeralContainers&quot;:[
+   <span class="hljs-string">&quot;ephemeralContainers&quot;</span>:[
       {
-         &quot;name&quot;:&quot;debugger&quot;,
-         &quot;image&quot;:&quot;busybox&quot;,
-         &quot;command&quot;:[
-            &quot;sh&quot;
+         <span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;debugger&quot;</span>,
+         <span class="hljs-string">&quot;image&quot;</span>:<span class="hljs-string">&quot;busybox&quot;</span>,
+         <span class="hljs-string">&quot;command&quot;</span>:[
+            <span class="hljs-string">&quot;sh&quot;</span>
          ],
-         &quot;resources&quot;:{
+         <span class="hljs-string">&quot;resources&quot;</span>:{
 
          },
-         &quot;terminationMessagePolicy&quot;:&quot;File&quot;,
-         &quot;imagePullPolicy&quot;:&quot;IfNotPresent&quot;,
-         &quot;stdin&quot;:true,
-         &quot;tty&quot;:true
+         <span class="hljs-string">&quot;terminationMessagePolicy&quot;</span>:<span class="hljs-string">&quot;File&quot;</span>,
+         <span class="hljs-string">&quot;imagePullPolicy&quot;</span>:<span class="hljs-string">&quot;IfNotPresent&quot;</span>,
+         <span class="hljs-string">&quot;stdin&quot;</span>:<span class="hljs-literal">true</span>,
+         <span class="hljs-string">&quot;tty&quot;</span>:<span class="hljs-literal">true</span>
       }
    ]
 }
@@ -1894,18 +1883,18 @@ Ephemeral Containers:
     Container ID:  docker://cf81908f149e7e9213d3c3644eda55c72efaff67652a2685c1146f0ce151e80f
     Image:         busybox
     Image ID:      docker-pullable://busybox@sha256:9f1003c480699be56815db0f8146ad2e22efea85129b5b5983d0e0fb52d9ab70
-    Port:          <none>
-    Host Port:     <none>
+    Port:          &lt;none&gt;
+    Host Port:     &lt;none&gt;
     Command:
       sh
     State:          Running
       Started:      Thu, 29 Aug 2019 06:42:21 +0000
     Ready:          False
     Restart Count:  0
-    Environment:    <none>
-    Mounts:         <none>
+    Environment:    &lt;none&gt;
+    Mounts:         &lt;none&gt;
 ...
-</none></none></none></none></code></pre>
+</code></pre>
 <p>&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; kubectl attach&#x3001;kubectl exec &#x548C; kubectl &#x65E5;&#x5FD7;&#x4EE5;&#x4E0E;&#x5176;&#x4ED6;&#x5BB9;&#x5668;&#x76F8;&#x540C;&#x7684;&#x65B9;&#x5F0F;&#x4E0E;&#x65B0;&#x7684;&#x4E34;&#x65F6;&#x5BB9;&#x5668;&#x4EA4;&#x4E92;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
 <pre><code class="lang-code">kubectl attach -it example-pod -c debugger
 </code></pre>
@@ -1913,22 +1902,6 @@ Ephemeral Containers:
                                 
                                 </section>
                             
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
-
     </div>
     <div class="search-results">
         <div class="has-results">
@@ -1968,7 +1941,7 @@ Ephemeral Containers:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"临时容器","level":"1.3.4.1.5","depth":4,"next":{"title":"负载资源","level":"1.3.4.2","depth":3,"path":"concepts/workloads/controllers/README.md","ref":"concepts/workloads/controllers/README.md","articles":[{"title":"部署器","level":"1.3.4.2.1","depth":4,"path":"concepts/workloads/controllers/deployment.md","ref":"concepts/workloads/controllers/deployment.md","articles":[]},{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},{"title":"有状态集","level":"1.3.4.2.3","depth":4,"path":"concepts/workloads/controllers/statefulset.md","ref":"concepts/workloads/controllers/statefulset.md","articles":[]},{"title":"守护集","level":"1.3.4.2.4","depth":4,"path":"concepts/workloads/controllers/daemonset.md","ref":"concepts/workloads/controllers/daemonset.md","articles":[]},{"title":"任务","level":"1.3.4.2.5","depth":4,"path":"concepts/workloads/controllers/job.md","ref":"concepts/workloads/controllers/job.md","articles":[]},{"title":"垃圾回收","level":"1.3.4.2.6","depth":4,"path":"concepts/workloads/controllers/garbage-collection.md","ref":"concepts/workloads/controllers/garbage-collection.md","articles":[]},{"title":"失效资源的TTL控制器","level":"1.3.4.2.7","depth":4,"path":"concepts/workloads/controllers/ttlafterfinished.md","ref":"concepts/workloads/controllers/ttlafterfinished.md","articles":[]},{"title":"定时任务","level":"1.3.4.2.8","depth":4,"path":"concepts/workloads/controllers/cron-jobs.md","ref":"concepts/workloads/controllers/cron-jobs.md","articles":[]},{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]}]},"previous":{"title":"分布","level":"1.3.4.1.4","depth":4,"path":"concepts/workloads/pods/disruptions.md","ref":"concepts/workloads/pods/disruptions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold","mermaid-newface"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"search-pro":{},"chapter-fold":{},"mermaid-newface":{},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/ephemeral-containers.md","mtime":"2021-06-07T06:47:17.041Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-07T06:48:06.768Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"临时容器","level":"1.3.4.1.5","depth":4,"next":{"title":"负载资源","level":"1.3.4.2","depth":3,"path":"concepts/workloads/controllers/README.md","ref":"concepts/workloads/controllers/README.md","articles":[{"title":"部署器","level":"1.3.4.2.1","depth":4,"path":"concepts/workloads/controllers/deployment.md","ref":"concepts/workloads/controllers/deployment.md","articles":[]},{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},{"title":"有状态集","level":"1.3.4.2.3","depth":4,"path":"concepts/workloads/controllers/statefulset.md","ref":"concepts/workloads/controllers/statefulset.md","articles":[]},{"title":"守护集","level":"1.3.4.2.4","depth":4,"path":"concepts/workloads/controllers/daemonset.md","ref":"concepts/workloads/controllers/daemonset.md","articles":[]},{"title":"任务","level":"1.3.4.2.5","depth":4,"path":"concepts/workloads/controllers/job.md","ref":"concepts/workloads/controllers/job.md","articles":[]},{"title":"垃圾回收","level":"1.3.4.2.6","depth":4,"path":"concepts/workloads/controllers/garbage-collection.md","ref":"concepts/workloads/controllers/garbage-collection.md","articles":[]},{"title":"失效资源的TTL控制器","level":"1.3.4.2.7","depth":4,"path":"concepts/workloads/controllers/ttlafterfinished.md","ref":"concepts/workloads/controllers/ttlafterfinished.md","articles":[]},{"title":"定时任务","level":"1.3.4.2.8","depth":4,"path":"concepts/workloads/controllers/cron-jobs.md","ref":"concepts/workloads/controllers/cron-jobs.md","articles":[]},{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]}]},"previous":{"title":"分布","level":"1.3.4.1.4","depth":4,"path":"concepts/workloads/pods/disruptions.md","ref":"concepts/workloads/pods/disruptions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/ephemeral-containers.md","mtime":"2021-06-10T13:00:07.066Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-10T13:00:38.885Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -1979,18 +1952,6 @@ Ephemeral Containers:
     
         
         <script src="../../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
-        
-    
-        
-        <script src="../../../gitbook/gitbook-plugin-search-pro/search.js"></script>
-        
-    
-        
-        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
         
     
         

@@ -21,14 +21,6 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-pro/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -1806,9 +1798,6 @@
 <div id="book-search-results">
     <div class="search-noresults">
     
-<div id="book-search-results">
-    <div class="search-noresults">
-    
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x5BB9;&#x5668;&#x7EC4;&#x58F0;&#x660E;&#x5468;&#x671F;">&#x5BB9;&#x5668;&#x7EC4;&#x58F0;&#x660E;&#x5468;&#x671F;</h1>
@@ -1904,24 +1893,24 @@ Unknown|&#x7531;&#x4E8E;&#x67D0;&#x79CD;&#x539F;&#x56E0;&#xFF0C;&#x65E0;&#x6CD5;
 <p>&#x60A8;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x5411;PodStatus&#xFF1A;Pod&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#x4E2D;&#x6CE8;&#x5165;&#x989D;&#x5916;&#x7684;&#x53CD;&#x9988;&#x6216;&#x4FE1;&#x53F7;&#x3002; &#x8981;&#x4F7F;&#x7528;&#x6B64;&#x529F;&#x80FD;&#xFF0C;&#x8BF7;&#x5728;Pod&#x7684;&#x89C4;&#x8303;&#x4E2D;&#x8BBE;&#x7F6E;readinessGates&#xFF0C;&#x4EE5;&#x6307;&#x5B9A;kubelet&#x4E3A;Pod&#x51C6;&#x5907;&#x72B6;&#x6001;&#x8BC4;&#x4F30;&#x7684;&#x5176;&#x4ED6;&#x6761;&#x4EF6;&#x5217;&#x8868;&#x3002;</p>
 <p>&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#x53D6;&#x51B3;&#x4E8E;Pod&#x7684;status.condition&#x5B57;&#x6BB5;&#x7684;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x3002; &#x5982;&#x679C;Kubernetes&#x5728;Pod&#x7684;status.conditions&#x5B57;&#x6BB5;&#x4E2D;&#x627E;&#x4E0D;&#x5230;&#x8FD9;&#x6837;&#x7684;&#x6761;&#x4EF6;&#xFF0C;&#x5219;&#x8BE5;&#x6761;&#x4EF6;&#x7684;&#x72B6;&#x6001;&#x9ED8;&#x8BA4;&#x4E3A;&#x201C; False&#x201D;&#x3002;</p>
 <p>&#x4EE5;&#x4E0B;&#x793A;&#x4F8B;&#xFF1A;</p>
-<pre><code class="lang-yaml">kind: Pod
+<pre><code class="lang-yaml"><span class="hljs-attr">kind:</span> Pod
 ...
-spec:
-  readinessGates:
-    - conditionType: &quot;www.example.com/feature-1&quot;
-status:
-  conditions:
-    - type: Ready                              # a built in PodCondition
-      status: &quot;False&quot;
-      lastProbeTime: null
-      lastTransitionTime: 2018-01-01T00:00:00Z
-    - type: &quot;www.example.com/feature-1&quot;        # an extra PodCondition
-      status: &quot;False&quot;
-      lastProbeTime: null
-      lastTransitionTime: 2018-01-01T00:00:00Z
-  containerStatuses:
-    - containerID: docker://abcd...
-      ready: true
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  readinessGates:</span>
+<span class="hljs-attr">    - conditionType:</span> <span class="hljs-string">&quot;www.example.com/feature-1&quot;</span>
+<span class="hljs-attr">status:</span>
+<span class="hljs-attr">  conditions:</span>
+<span class="hljs-attr">    - type:</span> Ready                              <span class="hljs-comment"># a built in PodCondition</span>
+<span class="hljs-attr">      status:</span> <span class="hljs-string">&quot;False&quot;</span>
+<span class="hljs-attr">      lastProbeTime:</span> <span class="hljs-literal">null</span>
+<span class="hljs-attr">      lastTransitionTime:</span> <span class="hljs-number">2018</span><span class="hljs-bullet">-01</span><span class="hljs-bullet">-01</span>T00:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>Z
+<span class="hljs-attr">    - type:</span> <span class="hljs-string">&quot;www.example.com/feature-1&quot;</span>        <span class="hljs-comment"># an extra PodCondition</span>
+<span class="hljs-attr">      status:</span> <span class="hljs-string">&quot;False&quot;</span>
+<span class="hljs-attr">      lastProbeTime:</span> <span class="hljs-literal">null</span>
+<span class="hljs-attr">      lastTransitionTime:</span> <span class="hljs-number">2018</span><span class="hljs-bullet">-01</span><span class="hljs-bullet">-01</span>T00:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>Z
+<span class="hljs-attr">  containerStatuses:</span>
+<span class="hljs-attr">    - containerID:</span> docker://abcd...
+<span class="hljs-attr">      ready:</span> <span class="hljs-literal">true</span>
 ...
 </code></pre>
 <p>&#x60A8;&#x6DFB;&#x52A0;&#x7684;Pod&#x6761;&#x4EF6;&#x5FC5;&#x987B;&#x5177;&#x6709;&#x7B26;&#x5408;Kubernetes&#x6807;&#x7B7E;&#x5BC6;&#x94A5;&#x683C;&#x5F0F;&#x7684;&#x540D;&#x79F0;&#x3002;</p>
@@ -2010,22 +1999,6 @@ status:
     </div>
 </div>
 
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
-
                         </div>
                     </div>
                 
@@ -2049,7 +2022,7 @@ status:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"容器组声明周期","level":"1.3.4.1.1","depth":4,"next":{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"path":"concepts/workloads/pods/init-containers.md","ref":"concepts/workloads/pods/init-containers.md","articles":[]},"previous":{"title":"容器组","level":"1.3.4.1","depth":3,"path":"concepts/workloads/pods/README.md","ref":"concepts/workloads/pods/README.md","articles":[{"title":"容器组声明周期","level":"1.3.4.1.1","depth":4,"path":"concepts/workloads/pods/pod-lifecycle.md","ref":"concepts/workloads/pods/pod-lifecycle.md","articles":[]},{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"path":"concepts/workloads/pods/init-containers.md","ref":"concepts/workloads/pods/init-containers.md","articles":[]},{"title":"Pod拓扑传播限制","level":"1.3.4.1.3","depth":4,"path":"concepts/workloads/pods/pod-topology-spread-constraints.md","ref":"concepts/workloads/pods/pod-topology-spread-constraints.md","articles":[]},{"title":"分布","level":"1.3.4.1.4","depth":4,"path":"concepts/workloads/pods/disruptions.md","ref":"concepts/workloads/pods/disruptions.md","articles":[]},{"title":"临时容器","level":"1.3.4.1.5","depth":4,"path":"concepts/workloads/pods/ephemeral-containers.md","ref":"concepts/workloads/pods/ephemeral-containers.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr","search-pro","chapter-fold","mermaid-newface"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"search-pro":{},"chapter-fold":{},"mermaid-newface":{},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/pod-lifecycle.md","mtime":"2021-06-07T06:47:17.041Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-07T06:48:06.768Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"容器组声明周期","level":"1.3.4.1.1","depth":4,"next":{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"path":"concepts/workloads/pods/init-containers.md","ref":"concepts/workloads/pods/init-containers.md","articles":[]},"previous":{"title":"容器组","level":"1.3.4.1","depth":3,"path":"concepts/workloads/pods/README.md","ref":"concepts/workloads/pods/README.md","articles":[{"title":"容器组声明周期","level":"1.3.4.1.1","depth":4,"path":"concepts/workloads/pods/pod-lifecycle.md","ref":"concepts/workloads/pods/pod-lifecycle.md","articles":[]},{"title":"初始化容器","level":"1.3.4.1.2","depth":4,"path":"concepts/workloads/pods/init-containers.md","ref":"concepts/workloads/pods/init-containers.md","articles":[]},{"title":"Pod拓扑传播限制","level":"1.3.4.1.3","depth":4,"path":"concepts/workloads/pods/pod-topology-spread-constraints.md","ref":"concepts/workloads/pods/pod-topology-spread-constraints.md","articles":[]},{"title":"分布","level":"1.3.4.1.4","depth":4,"path":"concepts/workloads/pods/disruptions.md","ref":"concepts/workloads/pods/disruptions.md","articles":[]},{"title":"临时容器","level":"1.3.4.1.5","depth":4,"path":"concepts/workloads/pods/ephemeral-containers.md","ref":"concepts/workloads/pods/ephemeral-containers.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-sharing","code","-lunr"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/pods/pod-lifecycle.md","mtime":"2021-06-10T13:00:07.066Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-10T13:00:38.885Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -2060,18 +2033,6 @@ status:
     
         
         <script src="../../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
-        
-    
-        
-        <script src="../../../gitbook/gitbook-plugin-search-pro/search.js"></script>
-        
-    
-        
-        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
         
     
         
