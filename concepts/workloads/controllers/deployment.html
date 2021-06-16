@@ -1797,6 +1797,68 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x90E8;&#x7F72;&#x5668;">&#x90E8;&#x7F72;&#x5668;</h1>
+<p>&#x60A8;&#x5728; Deployment &#x4E2D;&#x63CF;&#x8FF0;&#x4E86;&#x6240;&#x9700;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5E76;&#x4E14; Deployment Controller &#x4EE5;&#x53D7;&#x63A7;&#x7684;&#x901F;&#x7387;&#x5C06;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#x66F4;&#x6539;&#x4E3A;&#x6240;&#x9700;&#x72B6;&#x6001;&#x3002; &#x60A8;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49; Deployment &#x6765;&#x521B;&#x5EFA;&#x65B0;&#x7684; ReplicaSet&#xFF0C;&#x6216;&#x8005;&#x5220;&#x9664;&#x73B0;&#x6709;&#x7684; Deployment &#x5E76;&#x901A;&#x8FC7;&#x65B0;&#x7684; Deployment &#x6765;&#x91C7;&#x7528;&#x5B83;&#x4EEC;&#x7684;&#x6240;&#x6709;&#x8D44;&#x6E90;&#x3002;
+&#x6CE8;&#x610F;&#xFF1A;&#x4E0D;&#x8981;&#x7BA1;&#x7406; Deployment &#x62E5;&#x6709;&#x7684; ReplicaSet&#x3002; &#x5982;&#x679C;&#x4E0B;&#x9762;&#x672A;&#x6DB5;&#x76D6;&#x60A8;&#x7684;&#x7528;&#x4F8B;&#xFF0C;&#x8BF7;&#x8003;&#x8651;&#x5728;&#x4E3B; Kubernetes&#x4ED3;&#x5E93;&#x4E2D;&#x63D0;&#x95EE;&#x3002;</p>
+<h2 id="&#x4F7F;&#x7528;&#x6848;&#x4F8B;">&#x4F7F;&#x7528;&#x6848;&#x4F8B;</h2>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x4E00;&#x4E2A;&#x4F7F;&#x7528;deployment&#x7684;&#x5178;&#x578B;&#x6848;&#x4F8B;&#xFF1A;</p>
+<ul>
+<li>&#x521B;&#x5EFA;&#x90E8;&#x7F72;&#x4EE5;&#x63A8;&#x51FA;&#x526F;&#x672C;&#x96C6;&#x3002; ReplicaSet &#x5728;&#x540E;&#x53F0;&#x521B;&#x5EFA; Pod&#x3002; &#x68C0;&#x67E5; rollout &#x7684;&#x72B6;&#x6001;&#x4EE5;&#x67E5;&#x770B;&#x5B83;&#x662F;&#x5426;&#x6210;&#x529F;&#x3002;</li>
+<li>&#x901A;&#x8FC7;&#x66F4;&#x65B0;&#x90E8;&#x7F72;&#x7684; PodTemplateSpec &#x6765;&#x58F0;&#x660E; Pod &#x7684;&#x65B0;&#x72B6;&#x6001;&#x3002; &#x4E00;&#x4E2A;&#x65B0;&#x7684; ReplicaSet &#x88AB;&#x521B;&#x5EFA;&#xFF0C;Deployment &#x7BA1;&#x7406;&#x4EE5;&#x53D7;&#x63A7;&#x901F;&#x7387;&#x5C06; Pod &#x4ECE;&#x65E7; ReplicaSet &#x79FB;&#x52A8;&#x5230;&#x65B0; ReplicaSet&#x3002; &#x6BCF;&#x4E2A;&#x65B0;&#x7684; ReplicaSet &#x90FD;&#x4F1A;&#x66F4;&#x65B0; Deployment &#x7684;&#x4FEE;&#x8BA2;&#x7248;&#x3002;</li>
+<li>&#x5982;&#x679C; Deployment &#x7684;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x4E0D;&#x7A33;&#x5B9A;&#xFF0C;&#x5219;&#x56DE;&#x6EDA;&#x5230;&#x8F83;&#x65E9;&#x7684; Deployment &#x7248;&#x672C;&#x3002; &#x6BCF;&#x6B21;&#x56DE;&#x6EDA;&#x90FD;&#x4F1A;&#x66F4;&#x65B0;&#x90E8;&#x7F72;&#x7684;&#x4FEE;&#x8BA2;&#x7248;&#x3002;</li>
+<li>&#x6269;&#x5927;&#x90E8;&#x7F72;&#x4EE5;&#x4FC3;&#x8FDB;&#x66F4;&#x591A;&#x8D1F;&#x8F7D;&#x3002;</li>
+<li>&#x6682;&#x505C;&#x90E8;&#x7F72;&#x4EE5;&#x5BF9;&#x5176; PodTemplateSpec &#x5E94;&#x7528;&#x591A;&#x4E2A;&#x4FEE;&#x590D;&#x7A0B;&#x5E8F;&#xFF0C;&#x7136;&#x540E;&#x6062;&#x590D;&#x5B83;&#x4EE5;&#x5F00;&#x59CB;&#x65B0;&#x7684;&#x90E8;&#x7F72;&#x3002;</li>
+<li>&#x4F7F;&#x7528;&#x90E8;&#x7F72;&#x7684;&#x72B6;&#x6001;&#x4F5C;&#x4E3A;&#x90E8;&#x7F72;&#x5DF2;&#x5361;&#x4F4F;&#x7684;&#x6307;&#x793A;&#x5668;&#x3002;</li>
+<li>&#x6E05;&#x7406;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x7684;&#x65E7; ReplicaSet&#x3002;</li>
+</ul>
+<h2 id="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;deployment">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;deployment</h2>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x4E00;&#x4E2A;&#x90E8;&#x7F72;&#x793A;&#x4F8B;&#x3002; &#x5B83;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A; ReplicaSet &#x6765;&#x542F;&#x52A8;&#x4E09;&#x4E2A; nginx Pod&#xFF1A;</p>
+<pre><code class="lang-yaml">
+<span class="hljs-attr">apiVersion:</span> apps/v1
+<span class="hljs-attr">kind:</span> Deployment
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> nginx-deployment
+<span class="hljs-attr">  labels:</span>
+<span class="hljs-attr">    app:</span> nginx
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  replicas:</span> <span class="hljs-number">3</span>
+<span class="hljs-attr">  selector:</span>
+<span class="hljs-attr">    matchLabels:</span>
+<span class="hljs-attr">      app:</span> nginx
+<span class="hljs-attr">  template:</span>
+<span class="hljs-attr">    metadata:</span>
+<span class="hljs-attr">      labels:</span>
+<span class="hljs-attr">        app:</span> nginx
+<span class="hljs-attr">    spec:</span>
+<span class="hljs-attr">      containers:</span>
+<span class="hljs-attr">      - name:</span> nginx
+<span class="hljs-attr">        image:</span> nginx:<span class="hljs-number">1.14</span><span class="hljs-number">.2</span>
+<span class="hljs-attr">        ports:</span>
+<span class="hljs-attr">        - containerPort:</span> <span class="hljs-number">80</span>
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x793A;&#x4F8B;&#x4E2D;&#xFF1A;</p>
+<ul>
+<li>&#x4E00;&#x4E2A;&#x53EB;&#x505A;<code>nginx-deployment</code>&#x7684;Deployment&#x521B;&#x5EFA;&#xFF0C;&#x901A;&#x8FC7;<code>.metadata.name</code>&#x5B57;&#x6BB5;&#x6307;&#x5B9A;</li>
+<li>Deployment&#x521B;&#x5EFA;&#x4E86;3&#x4E2A;&#x526F;&#x672C;Pods&#xFF0C;&#x901A;&#x8FC7;<code>.spec.replicas</code>&#x5B57;&#x6BB5;&#x58F0;&#x660E;</li>
+<li>&#x5B57;&#x6BB5;<code>.spec.selector</code>&#x5B57;&#x6BB5;&#x58F0;&#x660E;&#x4E86;Deployment&#x5982;&#x4F55;&#x67E5;&#x627E;&#x7BA1;&#x7406;&#x54EA;&#x4E2A;Pods&#x3002;&#x5728;&#x6B64;&#x4F8B;&#x4E2D;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x5B9A;&#x4E49;&#x5F97;Pod&#x6A21;&#x7248;&#x4E2D;&#x7684;&#x6807;&#x7B7E;&#xFF0C;<code>app: nginx</code>&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x66F4;&#x590D;&#x6742;&#x7684;&#x9009;&#x62E9;&#x89C4;&#x5219;&#x4E5F;&#x662F;&#x53EF;&#x80FD;&#x7684;&#xFF0C;&#x53EA;&#x8981;Pod&#x6A21;&#x7248;&#x81EA;&#x8EAB;&#x6EE1;&#x8DB3;&#x89C4;&#x5219;&#x3002;
+  &#x6CE8;&#x610F;&#xFF1A; .spec.selector.matchLabels &#x5B57;&#x6BB5;&#x662F; {key,value} &#x5BF9;&#x7684;&#x6620;&#x5C04;&#x3002; matchLabels &#x6620;&#x5C04;&#x4E2D;&#x7684;&#x5355;&#x4E2A; {key,value} &#x76F8;&#x5F53;&#x4E8E; matchExpressions &#x7684;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5176;&#x952E;&#x5B57;&#x6BB5;&#x4E3A;&#x201C;key&#x201D;&#xFF0C;&#x8FD0;&#x7B97;&#x7B26;&#x4E3A;&#x201C;In&#x201D;&#xFF0C;values &#x6570;&#x7EC4;&#x4EC5;&#x5305;&#x542B;&#x201C;value&#x201D;&#x3002; &#x5FC5;&#x987B;&#x6EE1;&#x8DB3; matchLabels &#x548C; matchExpressions &#x7684;&#x6240;&#x6709;&#x8981;&#x6C42;&#x624D;&#x80FD;&#x5339;&#x914D;&#x3002;</li>
+<li><code>template</code>&#x5B57;&#x6BB5;&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x5B50;&#x5B57;&#x6BB5;&#xFF1A;<ul>
+<li>Pods&#x6807;&#x7B7E;<code>app: nginx</code>&#x4F7F;&#x7528;<code>.metadata.labels</code>&#x5B57;&#x6BB5;</li>
+<li>pod&#x6A21;&#x677F;&#x5B9A;&#x4E49;&#xFF0C;&#x6216;&#x8005;<code>.template.spec</code>&#x5B57;&#x6BB5;&#xFF0C;&#x5B9A;&#x4E49;&#x4E86;pod&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x8FD0;&#x884C;&#x4E86;Docker Hub &#x955C;&#x50CF;nginx&#xFF0C;&#x7248;&#x672C;&#x53F7;1.14.2&#x7684;&#x5BB9;&#x5668;</li>
+<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#xFF0C;&#x5E76;&#x547D;&#x540D;&#x4E3A;nginx&#xFF0C;&#x4F7F;&#x7528;<code>.spec.template.spec.containers[0].name</code>&#x5B57;&#x6BB5;</li>
+</ul>
+</li>
+</ul>
+<p>&#x5728;&#x5F00;&#x59CB;&#x4E4B;&#x524D;&#xFF0C;&#x786E;&#x8BA4;&#x96C6;&#x7FA4;&#x542F;&#x52A8;&#x5E76;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x3002;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x7ED9;&#x51FA;&#x4E86;&#x521B;&#x5EFA;&#x4EE5;&#x4E0A;Deployment&#xFF1A;</p>
+<ol>
+<li>&#x901A;&#x8FC7;&#x8FD0;&#x884C;&#x4E00;&#x4E9B;&#x547D;&#x4EE4;&#x521B;&#x5EFA;Deployment
+```shell</li>
+</ol>
+<p>kubectl apply -f <a href="https://k8s.io/examples/controllers/nginx-deployment.yaml" target="_blank">https://k8s.io/examples/controllers/nginx-deployment.yaml</a></p>
+<p>```
+&#x6CE8;&#x610F;&#xFF1A;&#x60A8;&#x53EF;&#x4EE5;&#x6307;&#x5B9A; --record &#x6807;&#x5FD7;&#x5199;&#x5165;&#x8D44;&#x6E90;&#x6CE8;&#x89E3; kubernetes.io/change-cause &#x4E2D;&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x3002; &#x8BB0;&#x5F55;&#x7684;&#x66F4;&#x6539;&#x5BF9;&#x4E8E;&#x5C06;&#x6765;&#x7684;&#x81EA;&#x7701;&#x5F88;&#x6709;&#x7528;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x67E5;&#x770B;&#x5728;&#x6BCF;&#x4E2A;&#x90E8;&#x7F72;&#x7248;&#x672C;&#x4E2D;&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x3002;</p>
+<ol>
+<li>&#x8FD0;&#x884C;<code>kubectl get deployments</code> &#x68C0;&#x8F66;Deployment&#x88AB;&#x521B;&#x5EFA;</li>
+</ol>
 
                                 
                                 </section>
@@ -1840,7 +1902,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"部署器","level":"1.3.4.2.1","depth":4,"next":{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},"previous":{"title":"负载资源","level":"1.3.4.2","depth":3,"path":"concepts/workloads/controllers/README.md","ref":"concepts/workloads/controllers/README.md","articles":[{"title":"部署器","level":"1.3.4.2.1","depth":4,"path":"concepts/workloads/controllers/deployment.md","ref":"concepts/workloads/controllers/deployment.md","articles":[]},{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},{"title":"有状态集","level":"1.3.4.2.3","depth":4,"path":"concepts/workloads/controllers/statefulset.md","ref":"concepts/workloads/controllers/statefulset.md","articles":[]},{"title":"守护集","level":"1.3.4.2.4","depth":4,"path":"concepts/workloads/controllers/daemonset.md","ref":"concepts/workloads/controllers/daemonset.md","articles":[]},{"title":"任务","level":"1.3.4.2.5","depth":4,"path":"concepts/workloads/controllers/job.md","ref":"concepts/workloads/controllers/job.md","articles":[]},{"title":"垃圾回收","level":"1.3.4.2.6","depth":4,"path":"concepts/workloads/controllers/garbage-collection.md","ref":"concepts/workloads/controllers/garbage-collection.md","articles":[]},{"title":"失效资源的TTL控制器","level":"1.3.4.2.7","depth":4,"path":"concepts/workloads/controllers/ttlafterfinished.md","ref":"concepts/workloads/controllers/ttlafterfinished.md","articles":[]},{"title":"定时任务","level":"1.3.4.2.8","depth":4,"path":"concepts/workloads/controllers/cron-jobs.md","ref":"concepts/workloads/controllers/cron-jobs.md","articles":[]},{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/controllers/deployment.md","mtime":"2021-06-16T06:16:51.265Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-16T06:17:18.373Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"部署器","level":"1.3.4.2.1","depth":4,"next":{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},"previous":{"title":"负载资源","level":"1.3.4.2","depth":3,"path":"concepts/workloads/controllers/README.md","ref":"concepts/workloads/controllers/README.md","articles":[{"title":"部署器","level":"1.3.4.2.1","depth":4,"path":"concepts/workloads/controllers/deployment.md","ref":"concepts/workloads/controllers/deployment.md","articles":[]},{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},{"title":"有状态集","level":"1.3.4.2.3","depth":4,"path":"concepts/workloads/controllers/statefulset.md","ref":"concepts/workloads/controllers/statefulset.md","articles":[]},{"title":"守护集","level":"1.3.4.2.4","depth":4,"path":"concepts/workloads/controllers/daemonset.md","ref":"concepts/workloads/controllers/daemonset.md","articles":[]},{"title":"任务","level":"1.3.4.2.5","depth":4,"path":"concepts/workloads/controllers/job.md","ref":"concepts/workloads/controllers/job.md","articles":[]},{"title":"垃圾回收","level":"1.3.4.2.6","depth":4,"path":"concepts/workloads/controllers/garbage-collection.md","ref":"concepts/workloads/controllers/garbage-collection.md","articles":[]},{"title":"失效资源的TTL控制器","level":"1.3.4.2.7","depth":4,"path":"concepts/workloads/controllers/ttlafterfinished.md","ref":"concepts/workloads/controllers/ttlafterfinished.md","articles":[]},{"title":"定时任务","level":"1.3.4.2.8","depth":4,"path":"concepts/workloads/controllers/cron-jobs.md","ref":"concepts/workloads/controllers/cron-jobs.md","articles":[]},{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/controllers/deployment.md","mtime":"2021-06-16T08:23:57.445Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-16T08:24:27.100Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
