@@ -62,9 +62,149 @@ kubectl apply -f https://k8s.io/examples/controllers/nginx-deployment.yaml
 ```
 注意：您可以指定 --record 标志写入资源注解 kubernetes.io/change-cause 中执行的命令。 记录的更改对于将来的自省很有用。 例如，查看在每个部署版本中执行的命令。
 
-2. 运行`kubectl get deployments` 检车Deployment被创建
+2. 运行`kubectl get deployments` 检查Deployment被创建
 
+如果，Deployment仍然在创建中，则会输出如下：
+```code
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   0/3     0            0           1s
+```
+当你检查集群中的Deployments的时候，以下的字段会被显示：
+* `NAME`列出了名称空间中的Deployments
+* `READY`显示了用户可用的应用副本数量。它使用以下表达式：`ready/desired`
+* `UP-TO-DATE`展示为了达到需求的状态，有多少副本发生了更新
+* `AVAILABLE`展示了当前用户可用的应用副本数量
+* `AGE`表示应用运行的时间数值
+注意需求的副本数量为3，是根绝`.spec.replicas`字段确定的。
 
+3. 为了查看Deploymen推出状态，运行`kubectl rollout status deployment/nginx-deployment`.
+输出如下：
+```code
+Waiting for rollout to finish: 2 out of 3 new replicas have been updated...
+deployment "nginx-deployment" successfully rolled out
+```
+
+4. 再次运行`kubectl get deployments`，输出如下：
+```code
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           18s
+```
+注意到Deployment创建了3个副本，并且3个副本都处于最新状态，并且可用。
+
+5. 想要查看Deployment创建的ReplicaSet(rs)，可以运行`kubectl get rs`。输出如下：
+```code
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-75675f5897   3         3         3       18s
+```
+
+ReplicaSet的输出显示了以下字段：
+* `NAME`列出名称空间中的所有ReplicaSet名称
+* `DESIRED`显示了应用的副本数需求的数值，这个值在你创建Deployment的时候定义。这就是需求状态
+* `CURRENT`显示当前多少副本运行中
+* `READY`显示了当前用户可用的应用副本数
+* `AGW`显示了当前应用运行的时长
+
+请注意，ReplicaSet 的名称始终格式为 [DEPLOYMENT-NAME]-[RANDOM-STRING]。 随机字符串是随机生成的，并使用 pod-template-hash 作为种子。
+
+6. 要查看为每个 Pod 自动生成的标签，请运行`kubectl get pods --show-labels`。 输出类似于：
+
+```code
+NAME                                READY     STATUS    RESTARTS   AGE       LABELS
+nginx-deployment-75675f5897-7ci7o   1/1       Running   0          18s       app=nginx,pod-template-hash=3123191453
+nginx-deployment-75675f5897-kzszj   1/1       Running   0          18s       app=nginx,pod-template-hash=3123191453
+nginx-deployment-75675f5897-qqcnn   1/1       Running   0          18s       app=nginx,pod-template-hash=3123191453
+```
+
+注意：
+您必须在部署中指定适当的选择器和 Pod 模板标签（在本例中为 app: nginx）。
+不要将标签或选择器与其他控制器（包括其他部署和 StatefulSet）重叠。 Kubernetes 不会阻止您重叠，如果多个控制器具有重叠的选择器，这些控制器可能会发生冲突并出现意外行为。
+
+### Pod模板哈希标签
+
+**注意**：不要改变该标签
+
+`pod-template-hash`标签由`Deployment`控制器添加到`Deployment`创建或采用的每个`ReplicaSet`中。
+此标签可确保 Deployment 的子 ReplicaSet 不会重叠。 它是通过对 ReplicaSet 的 PodTemplate 进行散列并将结果散列用作添加到 ReplicaSet 选择器、Pod 模板标签以及 ReplicaSet 可能具有的任何现有 Pod 中的标签值来生成的。
+
+## 更新一个Deployment
+
+注意：当且仅当 Deployment 的 Pod 模板（即 .spec.template）发生更改时，才会触发 Deployment 的 rollout，例如，如果模板的标签或容器镜像被更新。 其他更新，例如扩展部署，不会触发推出。
+
+按照下面给出的步骤更新您的部署：
+
+1. 让我们更新nginx的pods以使用`nginx:1.16.1`镜像来代替`nginx:1.14.2`
+
+```shell
+kubectl --record deployment.apps/nginx-deployment set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1
+```
+
+或者运行以下命令：
+
+```shell
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record
+```
+
+输出类似于：
+```shell
+deployment.apps/nginx-deployment image updated
+```
+
+同样，你也可以编辑Deployment并且修改`.spec.template.spec.containers[0].image`，从`nginx:1.14.2`到`nginx:1.16.1`:
+
+```code
+kubectl edit deployment.v1.apps/nginx-deployment
+```
+
+输出类似于：
+```code
+deployment.apps/nginx-deployment edited
+```
+
+2. 查看rollout状态，运行：
+
+```code
+kubectl rollout status deployment/nginx-deployment
+```
+
+输出类似：
+```code
+Waiting for rollout to finish: 2 out of 3 new replicas have been updated...
+```
+或者
+```code
+deployment "nginx-deployment" successfully rolled out
+```
+
+获取你更新的Deployment的更多细节：
+* rollout成功后，你可以使用`kubectl get deployments`查看Deployment，输出如下：
+```code
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           36s
+```
+* 运行`kubectl get rs`查看Deployment通过创建一个新的ReplicaSet并且扩展到3个副本更新的Pods，同时还有缩小旧的ReplicaSet到0个副本的过程。
+```code
+kubectl get rs
+```
+输出类似如下：
+```code
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-1564180365   3         3         3       6s
+nginx-deployment-2035384211   0         0         0       36s
+```
+* 运行`get pods`现在应该能够展示新的pods
+```code
+kubectl get pods
+```
+输出类似如下：
+```code
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-1564180365-khku8   1/1       Running   0          14s
+nginx-deployment-1564180365-nacti   1/1       Running   0          14s
+nginx-deployment-1564180365-z9gth   1/1       Running   0          14s
+```
+
+下次想要更新这些pods，你只需要更新Deployment的Pod模版即可。
+Deployment保证了更新的过程中，只有一定数量的Pods处于下线状态。默认场景下，它确保至少75%的需求pod数量正常运行。
 
 
 
