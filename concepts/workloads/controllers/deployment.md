@@ -202,9 +202,54 @@ nginx-deployment-1564180365-khku8   1/1       Running   0          14s
 nginx-deployment-1564180365-nacti   1/1       Running   0          14s
 nginx-deployment-1564180365-z9gth   1/1       Running   0          14s
 ```
-
 下次想要更新这些pods，你只需要更新Deployment的Pod模版即可。
 Deployment保证了更新的过程中，只有一定数量的Pods处于下线状态。默认场景下，它确保至少75%的需求pod数量正常运行。
+Deployment同时保证了只会创建出来比需求的数量高出一定数量的pods。默认场景下，它确保最多pod数量为需求的125%。
+举例来说，如果你仔细观察以上的Deployment，你会发现他会先创建一个新的Pod，然后删除旧的Pod，再创建新的Pod。直到充足的新pod启动，它才会杀死旧的pod；直到充足的旧pod被杀死，它才会创建新的pod。它保证了至少有2个pod可用，并且最多有4个pod可用。
+* 查看Deployment的详细
+```code
+kubectl describe deployments
+```
+输出如下：
+```code
+Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 30 Nov 2017 10:56:25 +0000
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision=2
+Selector:               app=nginx
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+   Containers:
+    nginx:
+      Image:        nginx:1.16.1
+      Port:         80/TCP
+      Environment:  <none>
+      Mounts:       <none>
+    Volumes:        <none>
+  Conditions:
+    Type           Status  Reason
+    ----           ------  ------
+    Available      True    MinimumReplicasAvailable
+    Progressing    True    NewReplicaSetAvailable
+  OldReplicaSets:  <none>
+  NewReplicaSet:   nginx-deployment-1564180365 (3/3 replicas created)
+  Events:
+    Type    Reason             Age   From                   Message
+    ----    ------             ----  ----                   -------
+    Normal  ScalingReplicaSet  2m    deployment-controller  Scaled up replica set nginx-deployment-2035384211 to 3
+    Normal  ScalingReplicaSet  24s   deployment-controller  Scaled up replica set nginx-deployment-1564180365 to 1
+    Normal  ScalingReplicaSet  22s   deployment-controller  Scaled down replica set nginx-deployment-2035384211 to 2
+    Normal  ScalingReplicaSet  22s   deployment-controller  Scaled up replica set nginx-deployment-1564180365 to 2
+    Normal  ScalingReplicaSet  19s   deployment-controller  Scaled down replica set nginx-deployment-2035384211 to 1
+    Normal  ScalingReplicaSet  19s   deployment-controller  Scaled up replica set nginx-deployment-1564180365 to 3
+    Normal  ScalingReplicaSet  14s   deployment-controller  Scaled down replica set nginx-deployment-2035384211 to 0
+```
+此时，你可以看出：当你首次创建Deployment的时候，它会创建一个ReplicaSet（nginx-deployment-2035384211）,并且直接将副本数量扩展到3个。当你更新Deployment的时候，它会创建一个新的ReplicaSet（nginx-deployment-1564180365），并且数量扩展到1，然后缩小旧的ReplicaSet到2，所以整个过程最少有2个pod，最多有4个pods。随后，它会持续的根据滚动更新策略扩大新的ReplicaSet数量，以及缩小旧的ReplicaSet数量。最终，你会发现2个可用的副本在新的ReplicaSet中，并且旧的ReplicaSet缩小为0.
 
 
 
