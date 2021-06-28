@@ -17,11 +17,23 @@
     
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-pro/search.css">
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
@@ -2009,7 +2021,261 @@ Events:
 </code></pre>
 &#x6B64;&#x65F6;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF1A;&#x5F53;&#x4F60;&#x9996;&#x6B21;&#x521B;&#x5EFA;Deployment&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;ReplicaSet&#xFF08;nginx-deployment-2035384211&#xFF09;,&#x5E76;&#x4E14;&#x76F4;&#x63A5;&#x5C06;&#x526F;&#x672C;&#x6570;&#x91CF;&#x6269;&#x5C55;&#x5230;3&#x4E2A;&#x3002;&#x5F53;&#x4F60;&#x66F4;&#x65B0;Deployment&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;ReplicaSet&#xFF08;nginx-deployment-1564180365&#xFF09;&#xFF0C;&#x5E76;&#x4E14;&#x6570;&#x91CF;&#x6269;&#x5C55;&#x5230;1&#xFF0C;&#x7136;&#x540E;&#x7F29;&#x5C0F;&#x65E7;&#x7684;ReplicaSet&#x5230;2&#xFF0C;&#x6240;&#x4EE5;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x6700;&#x5C11;&#x6709;2&#x4E2A;pod&#xFF0C;&#x6700;&#x591A;&#x6709;4&#x4E2A;pods&#x3002;&#x968F;&#x540E;&#xFF0C;&#x5B83;&#x4F1A;&#x6301;&#x7EED;&#x7684;&#x6839;&#x636E;&#x6EDA;&#x52A8;&#x66F4;&#x65B0;&#x7B56;&#x7565;&#x6269;&#x5927;&#x65B0;&#x7684;ReplicaSet&#x6570;&#x91CF;&#xFF0C;&#x4EE5;&#x53CA;&#x7F29;&#x5C0F;&#x65E7;&#x7684;ReplicaSet&#x6570;&#x91CF;&#x3002;&#x6700;&#x7EC8;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;2&#x4E2A;&#x53EF;&#x7528;&#x7684;&#x526F;&#x672C;&#x5728;&#x65B0;&#x7684;ReplicaSet&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x65E7;&#x7684;ReplicaSet&#x7F29;&#x5C0F;&#x4E3A;0.</li>
 </ul>
-
+<p>&#x56DE;&#x6EDA;&#xFF08;&#x53C8;&#x540D;&#x98DE;&#x884C;&#x4E2D;&#x7684;&#x591A;&#x6B21;&#x66F4;&#x65B0;&#xFF09;</p>
+<p>&#x6BCF;&#x6B21; Deployment &#x63A7;&#x5236;&#x5668;&#x89C2;&#x5BDF;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Deployment &#x65F6;&#xFF0C;&#x90FD;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; ReplicaSet &#x6765;&#x542F;&#x52A8;&#x6240;&#x9700;&#x7684; Pod&#x3002; &#x5982;&#x679C; Deployment &#x88AB;&#x66F4;&#x65B0;&#xFF0C;&#x63A7;&#x5236;&#x6807;&#x7B7E;&#x5339;&#x914D; .spec.selector &#x4F46;&#x6A21;&#x677F;&#x4E0D;&#x5339;&#x914D; .spec.template &#x7684;&#x73B0;&#x6709; ReplicaSet &#x5C06;&#x88AB;&#x7F29;&#x51CF;&#x3002; &#x6700;&#x7EC8;&#xFF0C;&#x65B0;&#x7684; ReplicaSet &#x88AB;&#x7F29;&#x653E;&#x5230; .spec.replicas&#xFF0C;&#x6240;&#x6709;&#x65E7;&#x7684; ReplicaSet &#x88AB;&#x7F29;&#x653E;&#x5230; 0&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5728;&#x73B0;&#x6709;&#x90E8;&#x7F72;&#x6B63;&#x5728;&#x8FDB;&#x884C;&#x65F6;&#x66F4;&#x65B0;&#x90E8;&#x7F72;&#xFF0C;&#x90E8;&#x7F72;&#x4F1A;&#x6839;&#x636E;&#x66F4;&#x65B0;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; ReplicaSet &#x5E76;&#x5F00;&#x59CB;&#x5411;&#x4E0A;&#x6269;&#x5C55;&#xFF0C;&#x5E76;&#x6EDA;&#x52A8;&#x4E4B;&#x524D;&#x6269;&#x5C55;&#x7684; ReplicaSet&#x2014;&#x2014;&#x5B83;&#x5C06;&#x6DFB;&#x52A0;&#x5230;&#x5B83;&#x7684;&#x5217;&#x8868;&#x4E2D; &#x65E7;&#x7684; ReplicaSets &#x5E76;&#x5F00;&#x59CB;&#x7F29;&#x5C0F;&#x5B83;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x60A8;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x90E8;&#x7F72;&#x6765;&#x521B;&#x5EFA; nginx:1.14.2 &#x7684; 5 &#x4E2A;&#x526F;&#x672C;&#xFF0C;&#x4F46;&#x968F;&#x540E;&#x66F4;&#x65B0;&#x90E8;&#x7F72;&#x4EE5;&#x521B;&#x5EFA; nginx:1.16.1 &#x7684; 5 &#x4E2A;&#x526F;&#x672C;&#xFF0C;&#x800C;&#x6B64;&#x65F6;&#x4EC5;&#x521B;&#x5EFA;&#x4E86; nginx:1.14.2 &#x7684; 3 &#x4E2A;&#x526F;&#x672C;&#x3002; &#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;Deployment &#x7ACB;&#x5373;&#x5F00;&#x59CB;&#x6740;&#x6B7B;&#x5B83;&#x521B;&#x5EFA;&#x7684; 3 &#x4E2A; nginx:1.14.2 Pod&#xFF0C;&#x5E76;&#x5F00;&#x59CB;&#x521B;&#x5EFA; nginx:1.16.1 Pod&#x3002; &#x5728;&#x66F4;&#x6539;&#x4EFB;&#x52A1;&#x4E4B;&#x524D;&#xFF0C;&#x5B83;&#x4E0D;&#x4F1A;&#x7B49;&#x5F85; nginx:1.14.2 &#x7684; 5 &#x4E2A;&#x526F;&#x672C;&#x88AB;&#x521B;&#x5EFA;&#x3002;</p>
+<p>&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#x66F4;&#x65B0;</p>
+<p>&#x901A;&#x5E38;&#x4E0D;&#x9F13;&#x52B1;&#x66F4;&#x65B0;&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x5EFA;&#x8BAE;&#x9884;&#x5148;&#x8BA1;&#x5212;&#x60A8;&#x7684;&#x9009;&#x62E9;&#x5668;&#x3002; &#x5728;&#x4EFB;&#x4F55;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x60A8;&#x9700;&#x8981;&#x6267;&#x884C;&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#x66F4;&#x65B0;&#xFF0C;&#x8BF7;&#x52A1;&#x5FC5;&#x5C0F;&#x5FC3;&#x5E76;&#x786E;&#x4FDD;&#x60A8;&#x5DF2;&#x638C;&#x63E1;&#x6240;&#x6709;&#x542B;&#x4E49;&#x3002;
+&#x6CE8;&#x610F;&#xFF1A;&#x5728; API &#x7248;&#x672C; apps/v1 &#x4E2D;&#xFF0C;Deployment &#x7684;&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#x5728;&#x521B;&#x5EFA;&#x540E;&#x662F;&#x4E0D;&#x53EF;&#x53D8;&#x7684;&#x3002;</p>
+<ul>
+<li>&#x9009;&#x62E9;&#x5668;&#x6DFB;&#x52A0;&#x8981;&#x6C42;&#x90E8;&#x7F72;&#x89C4;&#x8303;&#x4E2D;&#x7684; Pod &#x6A21;&#x677F;&#x6807;&#x7B7E;&#x4E5F;&#x66F4;&#x65B0;&#x4E3A;&#x65B0;&#x6807;&#x7B7E;&#xFF0C;&#x5426;&#x5219;&#x5C06;&#x8FD4;&#x56DE;&#x9A8C;&#x8BC1;&#x9519;&#x8BEF;&#x3002; &#x8FD9;&#x79CD;&#x53D8;&#x5316;&#x662F;&#x975E;&#x91CD;&#x53E0;&#x7684;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x65B0;&#x7684;&#x9009;&#x62E9;&#x5668;&#x4E0D;&#x4F1A;&#x9009;&#x62E9;&#x4F7F;&#x7528;&#x65E7;&#x9009;&#x62E9;&#x5668;&#x521B;&#x5EFA;&#x7684; ReplicaSet &#x548C; Pod&#xFF0C;&#x5BFC;&#x81F4;&#x5B64;&#x7ACB;&#x6240;&#x6709;&#x65E7;&#x7684; ReplicaSet &#x5E76;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; ReplicaSet&#x3002;</li>
+<li>&#x9009;&#x62E9;&#x5668;&#x66F4;&#x65B0;&#x4F1A;&#x66F4;&#x6539;&#x9009;&#x62E9;&#x5668;&#x952E;&#x4E2D;&#x7684;&#x73B0;&#x6709;&#x503C;&#x2014;&#x2014;&#x5BFC;&#x81F4;&#x4E0E;&#x6DFB;&#x52A0;&#x76F8;&#x540C;&#x7684;&#x884C;&#x4E3A;&#x3002;</li>
+<li>&#x9009;&#x62E9;&#x5668;&#x5220;&#x9664;&#x4ECE;&#x90E8;&#x7F72;&#x9009;&#x62E9;&#x5668;&#x4E2D;&#x5220;&#x9664;&#x73B0;&#x6709;&#x7684;&#x952E;&#x2014;&#x2014;&#x4E0D;&#x9700;&#x8981;&#x5BF9; Pod &#x6A21;&#x677F;&#x6807;&#x7B7E;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x66F4;&#x6539;&#x3002; &#x73B0;&#x6709;&#x7684; ReplicaSet &#x4E0D;&#x662F;&#x5B64;&#x7ACB;&#x7684;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x521B;&#x5EFA;&#x65B0;&#x7684; ReplicaSet&#xFF0C;&#x4F46;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5220;&#x9664;&#x7684;&#x6807;&#x7B7E;&#x4ECD;&#x7136;&#x5B58;&#x5728;&#x4E8E;&#x4EFB;&#x4F55;&#x73B0;&#x6709;&#x7684; Pod &#x548C; ReplicaSet &#x4E2D;&#x3002;</li>
+</ul>
+<h3 id="&#x56DE;&#x6EDA;&#x4E00;&#x4E2A;deployment">&#x56DE;&#x6EDA;&#x4E00;&#x4E2A;Deployment</h3>
+<p>&#x6709;&#x65F6;&#xFF0C;&#x60A8;&#x53EF;&#x80FD;&#x60F3;&#x8981;&#x56DE;&#x6EDA;&#x90E8;&#x7F72;&#xFF1B; &#x4F8B;&#x5982;&#xFF0C;&#x5F53; Deployment &#x4E0D;&#x7A33;&#x5B9A;&#x65F6;&#xFF0C;&#x4F8B;&#x5982;&#x5D29;&#x6E83;&#x5FAA;&#x73AF;&#x3002; &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6240;&#x6709; Deployment &#x7684; rollout &#x5386;&#x53F2;&#x90FD;&#x4FDD;&#x5B58;&#x5728;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4EE5;&#x4FBF;&#x60A8;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x56DE;&#x6EDA;&#xFF08;&#x60A8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x4FEE;&#x8BA2;&#x5386;&#x53F2;&#x9650;&#x5236;&#x6765;&#x66F4;&#x6539;&#x5B83;&#xFF09;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5F53;&#x4E00;&#x4E2A;&#x90E8;&#x7F72;&#x7684;&#x63A8;&#x51FA;&#x88AB;&#x89E6;&#x53D1;&#x65F6;&#xFF0C;&#x4E00;&#x4E2A;&#x90E8;&#x7F72;&#x7684;&#x4FEE;&#x8BA2;&#x88AB;&#x521B;&#x5EFA;&#x3002; &#x8FD9;&#x610F;&#x5473;&#x7740;&#x5F53;&#x4E14;&#x4EC5;&#x5F53; Deployment &#x7684; Pod &#x6A21;&#x677F; (.spec.template) &#x53D1;&#x751F;&#x66F4;&#x6539;&#x65F6;&#xFF0C;&#x624D;&#x4F1A;&#x521B;&#x5EFA;&#x65B0;&#x4FEE;&#x8BA2;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x60A8;&#x66F4;&#x65B0;&#x6A21;&#x677F;&#x7684;&#x6807;&#x7B7E;&#x6216;&#x5BB9;&#x5668;&#x6620;&#x50CF;&#x3002; &#x5176;&#x4ED6;&#x66F4;&#x65B0;&#xFF0C;&#x4F8B;&#x5982;&#x6269;&#x5C55;&#x90E8;&#x7F72;&#xFF0C;&#x4E0D;&#x4F1A;&#x521B;&#x5EFA;&#x90E8;&#x7F72;&#x4FEE;&#x8BA2;&#xFF0C;&#x56E0;&#x6B64;&#x60A8;&#x53EF;&#x4EE5;&#x4FC3;&#x8FDB;&#x540C;&#x65F6;&#x624B;&#x52A8;&#x6216;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#x3002; &#x8FD9;&#x610F;&#x5473;&#x7740;&#x5F53;&#x60A8;&#x56DE;&#x6EDA;&#x5230;&#x8F83;&#x65E9;&#x7684;&#x7248;&#x672C;&#x65F6;&#xFF0C;&#x53EA;&#x4F1A;&#x56DE;&#x6EDA;&#x90E8;&#x7F72;&#x7684; Pod &#x6A21;&#x677F;&#x90E8;&#x5206;&#x3002;</p>
+<ul>
+<li><p>&#x5047;&#x8BBE;&#x60A8;&#x5728;&#x66F4;&#x65B0; Deployment &#x65F6;&#x72AF;&#x4E86;&#x4E00;&#x4E2A;&#x9519;&#x5B57;&#xFF0C;&#x5C06;&#x955C;&#x50CF;&#x540D;&#x79F0;&#x8BBE;&#x4E3A; nginx:1.161 &#x800C;&#x4E0D;&#x662F; nginx:1.16.1&#xFF1A;</p>
+<pre><code class="lang-code">kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.161 --record=true
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">deployment.apps/nginx-deployment image updated
+</code></pre>
+</li>
+<li><p>&#x53D1;&#x5E03;&#x5361;&#x4F4F;&#x4E86;&#x3002; &#x60A8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x68C0;&#x67E5;&#x63A8;&#x51FA;&#x72B6;&#x6001;&#x6765;&#x9A8C;&#x8BC1;&#x5B83;&#xFF1A;</p>
+<pre><code class="lang-code">kubectl rollout status deployment/nginx-deployment
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7C7B;&#x4F3C;&#xFF1A;</p>
+<pre><code class="lang-code">Waiting for rollout to finish: 1 out of 3 new replicas have been updated...
+</code></pre>
+</li>
+<li><p>&#x6309; Ctrl-C &#x505C;&#x6B62;&#x4E0A;&#x8FF0; rollout &#x72B6;&#x6001;&#x76D1;&#x89C6;&#x3002; &#x6709;&#x5173;&#x5361;&#x4F4F;&#x90E8;&#x7F72;&#x7684;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x5728;&#x6B64;&#x5904;&#x9605;&#x8BFB;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x3002;</p>
+</li>
+<li><p>&#x4F60;&#x770B;&#x5230;&#x65E7;&#x526F;&#x672C;&#x7684;&#x6570;&#x91CF;&#xFF08;nginx-deployment-1564180365&#x548C;nginx-deployment-2035384211&#xFF09;&#x662F;2&#xFF0C;&#x65B0;&#x526F;&#x672C;&#xFF08;nginx-deployment-3066724191&#xFF09;&#x662F;1&#x3002;</p>
+<pre><code class="lang-code">kubectl get rs
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-1564180365   3         3         3       25s
+nginx-deployment-2035384211   0         0         0       36s
+nginx-deployment-3066724191   1         1         0       6s
+</code></pre>
+</li>
+<li><p>&#x67E5;&#x770B;&#x521B;&#x5EFA;&#x7684; Pod&#xFF0C;&#x60A8;&#x4F1A;&#x770B;&#x5230;&#x65B0; ReplicaSet &#x521B;&#x5EFA;&#x7684; 1 &#x4E2A; Pod &#x5361;&#x5728;&#x955C;&#x50CF;&#x62C9;&#x53D6;&#x5FAA;&#x73AF;&#x4E2D;</p>
+<pre><code class="lang-code">kubectl get pods
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">NAME                                READY     STATUS             RESTARTS   AGE
+nginx-deployment-1564180365-70iae   1/1       Running            0          25s
+nginx-deployment-1564180365-jbqqo   1/1       Running            0          25s
+nginx-deployment-1564180365-hysrc   1/1       Running            0          25s
+nginx-deployment-3066724191-08mng   0/1       ImagePullBackOff   0          6s
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x90E8;&#x7F72;&#x63A7;&#x5236;&#x5668;&#x4F1A;&#x81EA;&#x52A8;&#x505C;&#x6B62;&#x9519;&#x8BEF;&#x7684;&#x90E8;&#x7F72;&#xFF0C;&#x5E76;&#x505C;&#x6B62;&#x6269;&#x5C55;&#x65B0;&#x7684; ReplicaSet&#x3002; &#x8FD9;&#x53D6;&#x51B3;&#x4E8E;&#x60A8;&#x6307;&#x5B9A;&#x7684;&#x6EDA;&#x52A8;&#x66F4;&#x65B0;&#x53C2;&#x6570;&#xFF08;&#x7279;&#x522B;&#x662F; maxUnavailable&#xFF09;&#x3002; &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;Kubernetes &#x5C06;&#x8BE5;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A; 25%&#x3002;</p>
+</li>
+<li><p>&#x83B7;&#x53D6;Deployment&#x7684;&#x63CF;&#x8FF0;</p>
+<pre><code class="lang-code">kubectl describe deployment
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">Name:           nginx-deployment
+Namespace:      default
+CreationTimestamp:  Tue, 15 Mar 2016 14:48:04 -0700
+Labels:         app=nginx
+Selector:       app=nginx
+Replicas:       3 desired | 1 updated | 4 total | 3 available | 1 unavailable
+StrategyType:       RollingUpdate
+MinReadySeconds:    0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+Labels:  app=nginx
+Containers:
+ nginx:
+  Image:        nginx:1.161
+  Port:         80/TCP
+  Host Port:    0/TCP
+  Environment:  &lt;none&gt;
+  Mounts:       &lt;none&gt;
+Volumes:        &lt;none&gt;
+Conditions:
+Type           Status  Reason
+----           ------  ------
+Available      True    MinimumReplicasAvailable
+Progressing    True    ReplicaSetUpdated
+OldReplicaSets:     nginx-deployment-1564180365 (3/3 replicas created)
+NewReplicaSet:      nginx-deployment-3066724191 (1/1 replicas created)
+Events:
+FirstSeen LastSeen    Count   From                    SubObjectPath   Type        Reason              Message
+--------- --------    -----   ----                    -------------   --------    ------              -------
+1m        1m          1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled up replica set nginx-deployment-2035384211 to 3
+22s       22s         1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled up replica set nginx-deployment-1564180365 to 1
+22s       22s         1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled down replica set nginx-deployment-2035384211 to 2
+22s       22s         1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled up replica set nginx-deployment-1564180365 to 2
+21s       21s         1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled down replica set nginx-deployment-2035384211 to 1
+21s       21s         1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled up replica set nginx-deployment-1564180365 to 3
+13s       13s         1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled down replica set nginx-deployment-2035384211 to 0
+13s       13s         1       {deployment-controller }                Normal      ScalingReplicaSet   Scaled up replica set nginx-deployment-3066724191 to 1
+</code></pre>
+<p>&#x8981;&#x89E3;&#x51B3;&#x6B64;&#x95EE;&#x9898;&#xFF0C;&#x60A8;&#x9700;&#x8981;&#x56DE;&#x6EDA;&#x5230;&#x7A33;&#x5B9A;&#x7684;&#x90E8;&#x7F72;&#x7684;&#x5148;&#x524D;&#x7248;&#x672C;&#x3002;</p>
+</li>
+</ul>
+<h3 id="&#x68C0;&#x67E5;deployment&#x7684;&#x53D1;&#x5E03;&#x5386;&#x53F2;">&#x68C0;&#x67E5;Deployment&#x7684;&#x53D1;&#x5E03;&#x5386;&#x53F2;</h3>
+<p>&#x6309;&#x7167;&#x4E0B;&#x9762;&#x7ED9;&#x51FA;&#x7684;&#x6B65;&#x9AA4;&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x5386;&#x53F2;&#xFF1A;</p>
+<ol>
+<li>&#x9996;&#x5148;&#xFF0C;&#x68C0;&#x67E5;Deployment&#x7684;&#x7248;&#x672C;&#xFF1A;<pre><code class="lang-code">kubectl rollout history deployment nginx-deployment
+</code></pre>
+&#x8F93;&#x51FA;&#x7C7B;&#x4F3C;&#xFF1A;<pre><code class="lang-code">deployments &quot;nginx-deployment&quot;
+REVISION    CHANGE-CAUSE
+1           kubectl apply --filename=https://k8s.io/examples/controllers/nginx-deployment.yaml --record=true
+2           kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1 --record=true
+3           kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.161 --record=true
+</code></pre>
+CHANGE-CAUSE &#x5728;&#x521B;&#x5EFA;&#x65F6;&#x4ECE;&#x90E8;&#x7F72;&#x6CE8;&#x91CA; kubernetes.io/change-cause &#x590D;&#x5236;&#x5230;&#x5176;&#x4FEE;&#x8BA2;&#x7248;&#x3002; &#x60A8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x65B9;&#x5F0F;&#x6307;&#x5B9A; CHANGE-CAUSE &#x6D88;&#x606F;&#xFF1A;</li>
+<li>&#x4F7F;&#x7528; kubectl annotate deployment.v1.apps/nginx-deployment kubernetes.io/change-cause=&quot;image updated to 1.16.1&quot; &#x6CE8;&#x91CA;&#x90E8;&#x7F72;</li>
+<li>&#x9644;&#x52A0; --record &#x6807;&#x5FD7;&#x4EE5;&#x4FDD;&#x5B58;&#x5BF9;&#x8D44;&#x6E90;&#x8FDB;&#x884C;&#x66F4;&#x6539;&#x7684; kubectl &#x547D;&#x4EE4;&#x3002;</li>
+<li><p>&#x624B;&#x52A8;&#x7F16;&#x8F91;&#x8D44;&#x6E90;&#x7684;&#x6E05;&#x5355;&#x3002;</p>
+</li>
+<li><p>&#x67E5;&#x770B;&#x6BCF;&#x4E2A;&#x4FEE;&#x8BA2;&#x7684;&#x7EC6;&#x8282;&#xFF0C;&#x8FD0;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-code">kubectl rollout history deployment.v1.apps/nginx-deployment --revision=2
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7C7B;&#x4F3C;&#xFF1A;</p>
+<pre><code class="lang-code">deployments &quot;nginx-deployment&quot; revision 2
+Labels:       app=nginx
+       pod-template-hash=1159050644
+Annotations:  kubernetes.io/change-cause=kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1 --record=true
+Containers:
+nginx:
+ Image:      nginx:1.16.1
+ Port:       80/TCP
+  QoS Tier:
+     cpu:      BestEffort
+     memory:   BestEffort
+ Environment Variables:      &lt;none&gt;
+No volumes.
+</code></pre>
+</li>
+</ol>
+<h3 id="&#x56DE;&#x6EDA;&#x5230;&#x4E4B;&#x524D;&#x7684;&#x4FEE;&#x8BA2;">&#x56DE;&#x6EDA;&#x5230;&#x4E4B;&#x524D;&#x7684;&#x4FEE;&#x8BA2;</h3>
+<p>&#x6309;&#x7167;&#x4E0B;&#x9762;&#x7ED9;&#x51FA;&#x7684;&#x6B65;&#x9AA4;&#x5C06;&#x90E8;&#x7F72;&#x4ECE;&#x5F53;&#x524D;&#x7248;&#x672C;&#x56DE;&#x6EDA;&#x5230;&#x4EE5;&#x524D;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x5373;&#x7248;&#x672C; 2&#x3002;</p>
+<ol>
+<li><p>&#x73B0;&#x5728;&#x60A8;&#x5DF2;&#x51B3;&#x5B9A;&#x64A4;&#x6D88;&#x5F53;&#x524D;&#x7684;&#x90E8;&#x7F72;&#x5E76;&#x56DE;&#x6EDA;&#x5230;&#x4EE5;&#x524D;&#x7684;&#x7248;&#x672C;&#xFF1A;</p>
+<pre><code class="lang-code">kubectl rollout undo deployment.v1.apps/nginx-deployment
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">deployment.apps/nginx-deployment rolled back
+</code></pre>
+<p>&#x6216;&#x8005;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F7F;&#x7528; --to-revision &#x6307;&#x5B9A;&#x5B83;&#x6765;&#x56DE;&#x6EDA;&#x5230;&#x7279;&#x5B9A;&#x7248;&#x672C;&#xFF1A;</p>
+<pre><code class="lang-code">kubectl rollout undo deployment.v1.apps/nginx-deployment --to-revision=2
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7C7B;&#x4F3C;&#xFF1A;</p>
+<pre><code class="lang-code">deployment.apps/nginx-deployment rolled back
+</code></pre>
+<p>&#x90E8;&#x7F72;&#x73B0;&#x5728;&#x56DE;&#x6EDA;&#x5230;&#x4EE5;&#x524D;&#x7684;&#x7A33;&#x5B9A;&#x7248;&#x672C;&#x3002; &#x5982;&#x60A8;&#x6240;&#x89C1;&#xFF0C;&#x7528;&#x4E8E;&#x56DE;&#x6EDA;&#x5230;&#x4FEE;&#x8BA2;&#x7248; 2 &#x7684; DeploymentRollback &#x4E8B;&#x4EF6;&#x662F;&#x4ECE;&#x90E8;&#x7F72;&#x63A7;&#x5236;&#x5668;&#x751F;&#x6210;&#x7684;&#x3002;</p>
+</li>
+<li><p>&#x68C0;&#x67E5;&#x56DE;&#x6EDA;&#x662F;&#x5426;&#x6210;&#x529F;&#x5E76;&#x4E14;&#x90E8;&#x7F72;&#x662F;&#x5426;&#x6309;&#x9884;&#x671F;&#x8FD0;&#x884C;&#xFF0C;&#x8FD0;&#x884C;&#xFF1A;</p>
+</li>
+</ol>
+<pre><code class="lang-code">kubectl get deployment nginx-deployment
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           30m
+</code></pre>
+<ol>
+<li>&#x83B7;&#x53D6;Deployment&#x7684;&#x63CF;&#x8FF0;</li>
+</ol>
+<pre><code class="lang-code">kubectl describe deployment nginx-deployment
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Sun, 02 Sep 2018 18:17:55 -0500
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision=4
+                        kubernetes.io/change-cause=kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1 --record=true
+Selector:               app=nginx
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx:1.16.1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  &lt;none&gt;
+    Mounts:       &lt;none&gt;
+  Volumes:        &lt;none&gt;
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  &lt;none&gt;
+NewReplicaSet:   nginx-deployment-c4747d96c (3/3 replicas created)
+Events:
+  Type    Reason              Age   From                   Message
+  ----    ------              ----  ----                   -------
+  Normal  ScalingReplicaSet   12m   deployment-controller  Scaled up replica set nginx-deployment-75675f5897 to 3
+  Normal  ScalingReplicaSet   11m   deployment-controller  Scaled up replica set nginx-deployment-c4747d96c to 1
+  Normal  ScalingReplicaSet   11m   deployment-controller  Scaled down replica set nginx-deployment-75675f5897 to 2
+  Normal  ScalingReplicaSet   11m   deployment-controller  Scaled up replica set nginx-deployment-c4747d96c to 2
+  Normal  ScalingReplicaSet   11m   deployment-controller  Scaled down replica set nginx-deployment-75675f5897 to 1
+  Normal  ScalingReplicaSet   11m   deployment-controller  Scaled up replica set nginx-deployment-c4747d96c to 3
+  Normal  ScalingReplicaSet   11m   deployment-controller  Scaled down replica set nginx-deployment-75675f5897 to 0
+  Normal  ScalingReplicaSet   11m   deployment-controller  Scaled up replica set nginx-deployment-595696685f to 1
+  Normal  DeploymentRollback  15s   deployment-controller  Rolled back deployment &quot;nginx-deployment&quot; to revision 2
+  Normal  ScalingReplicaSet   15s   deployment-controller  Scaled down replica set nginx-deployment-595696685f to 0
+</code></pre>
+<h2 id="&#x6269;&#x5BB9;&#x4E00;&#x4E2A;deployment">&#x6269;&#x5BB9;&#x4E00;&#x4E2A;Deployment</h2>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EE5;&#x4E0B;&#x7684;&#x547D;&#x4EE4;&#x6269;&#x5BB9;&#x4E00;&#x4E2A;Deployment&#xFF1A;</p>
+<pre><code class="lang-code">kubectl scale deployment nginx-deployment --replica=10
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x7C7B;&#x4F3C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">deployment.apps/nginx-deployment scaled
+</code></pre>
+<p>&#x5047;&#x8BBE;&#x96C6;&#x7FA4;&#x4E2D;&#x542F;&#x7528;&#x4E86;&#x6C34;&#x5E73; Pod &#x81EA;&#x52A8;&#x7F29;&#x653E;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x4E3A;&#x90E8;&#x7F72;&#x8BBE;&#x7F6E;&#x81EA;&#x52A8;&#x7F29;&#x653E;&#x5668;&#xFF0C;&#x5E76;&#x6839;&#x636E;&#x73B0;&#x6709; Pod &#x7684; CPU &#x5229;&#x7528;&#x7387;&#x9009;&#x62E9;&#x8981;&#x8FD0;&#x884C;&#x7684;&#x6700;&#x5C0F;&#x548C;&#x6700;&#x5927; Pod &#x6570;&#x91CF;&#x3002;</p>
+<pre><code class="lang-code">kubectl autoscale deployment nginx-deployment --min=10 --max=15 --cpu-percent=80
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">deployment.apps/nginx-deployment scaled
+</code></pre>
+<h3 id="&#x6BD4;&#x4F8B;&#x7F29;&#x653E;">&#x6BD4;&#x4F8B;&#x7F29;&#x653E;</h3>
+<p>RollingUpdate &#x90E8;&#x7F72;&#x652F;&#x6301;&#x540C;&#x65F6;&#x8FD0;&#x884C;&#x591A;&#x4E2A;&#x7248;&#x672C;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002; &#x5F53;&#x60A8;&#x6216;&#x81EA;&#x52A8;&#x7F29;&#x653E;&#x5668;&#x6269;&#x5C55;&#x5904;&#x4E8E;&#x63A8;&#x51FA;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF08;&#x6B63;&#x5728;&#x8FDB;&#x884C;&#x6216;&#x6682;&#x505C;&#xFF09;&#x7684; RollingUpdate &#x90E8;&#x7F72;&#x65F6;&#xFF0C;&#x90E8;&#x7F72;&#x63A7;&#x5236;&#x5668;&#x4F1A;&#x5E73;&#x8861;&#x73B0;&#x6709;&#x6D3B;&#x52A8; ReplicaSet&#xFF08;&#x5E26;&#x6709; Pod &#x7684; ReplicaSet&#xFF09;&#x4E2D;&#x7684;&#x989D;&#x5916;&#x526F;&#x672C;&#x4EE5;&#x964D;&#x4F4E;&#x98CE;&#x9669;&#x3002; &#x8FD9;&#x79F0;&#x4E3A;&#x6BD4;&#x4F8B;&#x7F29;&#x653E;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x60A8;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x5177;&#x6709; 10 &#x4E2A;&#x526F;&#x672C;&#x3001;maxSurge=3 &#x548C; maxUnavailable=2 &#x7684;&#x90E8;&#x7F72;&#x3002;</p>
+<ul>
+<li>&#x786E;&#x4FDD;Deployment&#x6709;10&#x4E2A;&#x526F;&#x672C;&#x6B63;&#x5728;&#x8FD0;&#x884C;<pre><code class="lang-code">kubectl get deploy
+</code></pre>
+&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;<pre><code class="lang-code">NAME                 DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment     10        10        10           10          50s
+</code></pre>
+</li>
+<li><p>&#x60A8;&#x66F4;&#x65B0;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x955C;&#x50CF;&#xFF0C;&#x8BE5;&#x6620;&#x50CF;&#x6070;&#x597D;&#x65E0;&#x6CD5;&#x4ECE;&#x96C6;&#x7FA4;&#x5185;&#x90E8;&#x89E3;&#x6790;&#x3002;</p>
+<pre><code class="lang-code">kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:sometag
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">deployment.apps/nginx-deployment image updated
+</code></pre>
+</li>
+<li><p>&#x955C;&#x50CF;&#x66F4;&#x65B0;&#x5F00;&#x59CB;&#x4F7F;&#x7528; ReplicaSet nginx-deployment-1989198191 &#x8FDB;&#x884C;&#x65B0;&#x7684;&#x90E8;&#x7F72;&#xFF0C;&#x4F46;&#x7531;&#x4E8E;&#x60A8;&#x4E0A;&#x9762;&#x63D0;&#x5230;&#x7684; maxUnavailable &#x8981;&#x6C42;&#xFF0C;&#x5B83;&#x88AB;&#x963B;&#x6B62;&#x4E86;&#x3002; &#x67E5;&#x770B;&#x53D1;&#x5E03;&#x72B6;&#x6001;&#xFF1A;</p>
+</li>
+</ul>
+<pre><code class="lang-code">kubectl get rs
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-code">NAME                          DESIRED   CURRENT   READY     AGE
+nginx-deployment-1989198191   5         5         0         9s
+nginx-deployment-618515232    8         8         8         1m
+</code></pre>
+<ul>
+<li>&#x7136;&#x540E;&#x51FA;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Deployment &#x6269;&#x5C55;&#x8BF7;&#x6C42;&#x3002; &#x81EA;&#x52A8;&#x7F29;&#x653E;&#x5668;&#x5C06;&#x90E8;&#x7F72;&#x526F;&#x672C;&#x589E;&#x52A0;&#x5230; 15&#x3002;&#x90E8;&#x7F72;&#x63A7;&#x5236;&#x5668;&#x9700;&#x8981;&#x51B3;&#x5B9A;&#x5728;&#x54EA;&#x91CC;&#x6DFB;&#x52A0;&#x8FD9; 5 &#x4E2A;&#x65B0;&#x526F;&#x672C;&#x3002; &#x5982;&#x679C;&#x60A8;&#x4E0D;&#x4F7F;&#x7528;&#x6BD4;&#x4F8B;&#x7F29;&#x653E;&#xFF0C;&#x5219;&#x6240;&#x6709; 5 &#x4E2A;&#x90FD;&#x5C06;&#x6DFB;&#x52A0;&#x5230;&#x65B0;&#x7684; ReplicaSet &#x4E2D;&#x3002; &#x901A;&#x8FC7;&#x6309;&#x6BD4;&#x4F8B;&#x7F29;&#x653E;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x5C06;&#x989D;&#x5916;&#x7684;&#x526F;&#x672C;&#x5206;&#x5E03;&#x5728;&#x6240;&#x6709; ReplicaSet &#x4E2D;&#x3002; &#x8F83;&#x5927;&#x7684;&#x6BD4;&#x4F8B;&#x5206;&#x914D;&#x7ED9;&#x5177;&#x6709;&#x6700;&#x591A;&#x526F;&#x672C;&#x7684; ReplicaSet&#xFF0C;&#x800C;&#x8F83;&#x4F4E;&#x7684;&#x6BD4;&#x4F8B;&#x5206;&#x914D;&#x7ED9;&#x5177;&#x6709;&#x8F83;&#x5C11;&#x526F;&#x672C;&#x7684; ReplicaSet&#x3002; &#x4EFB;&#x4F55;&#x5269;&#x4F59;&#x7684;&#x90FD;&#x88AB;&#x6DFB;&#x52A0;&#x5230;&#x5177;&#x6709;&#x6700;&#x591A;&#x526F;&#x672C;&#x7684; ReplicaSet &#x4E2D;&#x3002; &#x5177;&#x6709;&#x96F6;&#x526F;&#x672C;&#x7684; ReplicaSet &#x4E0D;&#x4F1A;&#x6269;&#x5C55;&#x3002;</li>
+</ul>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2021-06-28 07:59:29
+</span></footer>
                                 
                                 </section>
                             
@@ -2052,7 +2318,7 @@ Events:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"部署器","level":"1.3.4.2.1","depth":4,"next":{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},"previous":{"title":"负载资源","level":"1.3.4.2","depth":3,"path":"concepts/workloads/controllers/README.md","ref":"concepts/workloads/controllers/README.md","articles":[{"title":"部署器","level":"1.3.4.2.1","depth":4,"path":"concepts/workloads/controllers/deployment.md","ref":"concepts/workloads/controllers/deployment.md","articles":[]},{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},{"title":"有状态集","level":"1.3.4.2.3","depth":4,"path":"concepts/workloads/controllers/statefulset.md","ref":"concepts/workloads/controllers/statefulset.md","articles":[]},{"title":"守护集","level":"1.3.4.2.4","depth":4,"path":"concepts/workloads/controllers/daemonset.md","ref":"concepts/workloads/controllers/daemonset.md","articles":[]},{"title":"任务","level":"1.3.4.2.5","depth":4,"path":"concepts/workloads/controllers/job.md","ref":"concepts/workloads/controllers/job.md","articles":[]},{"title":"垃圾回收","level":"1.3.4.2.6","depth":4,"path":"concepts/workloads/controllers/garbage-collection.md","ref":"concepts/workloads/controllers/garbage-collection.md","articles":[]},{"title":"失效资源的TTL控制器","level":"1.3.4.2.7","depth":4,"path":"concepts/workloads/controllers/ttlafterfinished.md","ref":"concepts/workloads/controllers/ttlafterfinished.md","articles":[]},{"title":"定时任务","level":"1.3.4.2.8","depth":4,"path":"concepts/workloads/controllers/cron-jobs.md","ref":"concepts/workloads/controllers/cron-jobs.md","articles":[]},{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/controllers/deployment.md","mtime":"2021-06-28T05:36:53.052Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-28T05:37:37.539Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"部署器","level":"1.3.4.2.1","depth":4,"next":{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},"previous":{"title":"负载资源","level":"1.3.4.2","depth":3,"path":"concepts/workloads/controllers/README.md","ref":"concepts/workloads/controllers/README.md","articles":[{"title":"部署器","level":"1.3.4.2.1","depth":4,"path":"concepts/workloads/controllers/deployment.md","ref":"concepts/workloads/controllers/deployment.md","articles":[]},{"title":"副本集","level":"1.3.4.2.2","depth":4,"path":"concepts/workloads/controllers/replicaset.md","ref":"concepts/workloads/controllers/replicaset.md","articles":[]},{"title":"有状态集","level":"1.3.4.2.3","depth":4,"path":"concepts/workloads/controllers/statefulset.md","ref":"concepts/workloads/controllers/statefulset.md","articles":[]},{"title":"守护集","level":"1.3.4.2.4","depth":4,"path":"concepts/workloads/controllers/daemonset.md","ref":"concepts/workloads/controllers/daemonset.md","articles":[]},{"title":"任务","level":"1.3.4.2.5","depth":4,"path":"concepts/workloads/controllers/job.md","ref":"concepts/workloads/controllers/job.md","articles":[]},{"title":"垃圾回收","level":"1.3.4.2.6","depth":4,"path":"concepts/workloads/controllers/garbage-collection.md","ref":"concepts/workloads/controllers/garbage-collection.md","articles":[]},{"title":"失效资源的TTL控制器","level":"1.3.4.2.7","depth":4,"path":"concepts/workloads/controllers/ttlafterfinished.md","ref":"concepts/workloads/controllers/ttlafterfinished.md","articles":[]},{"title":"定时任务","level":"1.3.4.2.8","depth":4,"path":"concepts/workloads/controllers/cron-jobs.md","ref":"concepts/workloads/controllers/cron-jobs.md","articles":[]},{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","chapter-fold","expandable-chapters","tbfed-pagefooter"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"search-pro":{},"chapter-fold":{},"expandable-chapters":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/workloads/controllers/deployment.md","mtime":"2021-06-28T07:59:29.678Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-28T08:00:17.449Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -2062,11 +2328,23 @@ Events:
     <script src="../../../gitbook/theme.js"></script>
     
         
-        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        <script src="../../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
         
     
         
-        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        <script src="../../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
         
     
         
