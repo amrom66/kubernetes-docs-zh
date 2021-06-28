@@ -9,13 +9,6 @@
         "readme": "README.md"
     },
     "plugins": [
-        "-lunr", "-search", "search-pro","chapter-fold","expandable-chapters","tbfed-pagefooter"
-    ],
-    "pluginsConfig": {
-        "tbfed-pagefooter": {
-            "copyright":"",
-            "modify_label": "该文件最后修改时间：",
-            "modify_format": "YYYY-MM-DD HH:mm:ss"
-        }
-    }
+        "-lunr", "-search", "search-pro","chapter-fold","expandable-chapters"
+    ]
 }
