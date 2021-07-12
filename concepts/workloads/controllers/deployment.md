@@ -550,6 +550,106 @@ nginx-deployment-618515232    8         8         8         1m
 ```
 * 然后出现了一个新的 Deployment 扩展请求。 自动缩放器将部署副本增加到 15。部署控制器需要决定在哪里添加这 5 个新副本。 如果您不使用比例缩放，则所有 5 个都将添加到新的 ReplicaSet 中。 通过按比例缩放，您可以将额外的副本分布在所有 ReplicaSet 中。 较大的比例分配给具有最多副本的 ReplicaSet，而较低的比例分配给具有较少副本的 ReplicaSet。 任何剩余的都被添加到具有最多副本的 ReplicaSet 中。 具有零副本的 ReplicaSet 不会扩展。
 
+在我们上面的例子中，3 个副本被添加到旧的 ReplicaSet，2 个副本被添加到新的 ReplicaSet。 推出过程最终应该将所有副本移动到新的 ReplicaSet，假设新副本变得健康。 要确认这一点，请运行：
+
+```code
+kubectl get deploy
+```
+
+输出如下：
+```code
+NAME                 DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment     15        18        7            8           7m
+```
+
+发布状态确认副本如何添加到每个 ReplicaSet。
+```code
+kubectl get rs
+```
+
+输出类似如下：
+```code
+NAME                          DESIRED   CURRENT   READY     AGE
+nginx-deployment-1989198191   7         7         0         7m
+nginx-deployment-618515232    11        11        11        7m
+```
+
+### 暂停和恢复部署
+
+您可以在触发一个或多个更新之前暂停部署，然后再恢复它。 这允许您在暂停和恢复之间应用多个修复程序，而不会触发不必要的发布。
+
+* 例如，使用已创建的部署：获取部署详细信息：
+```code
+kubectl get deploy
+```
+输出如下：
+```code
+NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx     3         3         3            3           1m
+```
+获取发布状态：
+```code
+kubectl get rs
+```
+输出如下：
+```code
+NAME               DESIRED   CURRENT   READY     AGE
+nginx-2142116321   3         3         3         1m
+```
+* 通过以下命令暂停发布
+```code
+kubectl rollout pause deployment nginx-deployment
+```
+输出如下：
+```code
+deployment.apps/nginx-deployment paused
+```
+* 然后更新Deployment的镜像
+```code
+kubectl set image deployment nginx-deployment nginx:nginx:1.16.1
+```
+输出如下：
+```code
+deployment.apps/nginx-deployment image updated
+```
+
+* 注意新的发布开始了:
+```code
+kubectl rollout history deployment nginx-deployment
+```
+输出如下：
+```code
+deployments "nginx"
+REVISION  CHANGE-CAUSE
+1   <none>
+```
+
+* 获取发布状态，以确保Deployment成功更新
+```code 
+kubectl get rs 
+```
+输出如下：
+```code
+NAME               DESIRED   CURRENT   READY     AGE
+nginx-2142116321   3         3         3         2m
+```
+* 您可以根据需要进行任意数量的更新，例如，更新将要使用的资源：
+```code
+kubectl set resources deployment.v1.apps/nginx-deployment -c=nginx --limits=cpu=200m,memory=512Mi
+```
+输出如下：
+```code
+deployment.apps/nginx-deployment resource requirements updated
+```
+暂停之前 Deployment 的初始状态将继续其功能，但只要 Deployment 暂停，对 Deployment 的新更新就不会产生任何影响。
+* 最后，恢复Deployment并且观察新的额ReplicaSet以新的更新启动
+```code
+kubectl rollout resume deployment nginx-deployment
+```
+输出如下：
+```code
+deployment.apps/nginx-deployment resumed
+```
 
 
 
