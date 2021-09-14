@@ -9,6 +9,6 @@
         "readme": "README.md"
     },
     "plugins": [
-        "-lunr", "-search", "search-pro","chapter-fold","expandable-chapters"
+        "-lunr", "-search", "search-pro","chapter-fold","expandable-chapters","back-to-top-button"
     ]
 }
