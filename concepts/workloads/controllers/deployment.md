@@ -689,3 +689,25 @@ nginx-3926361531   3         3         3         28s
 
 在一个Deployment的生命周期中，会遇到各种状态。当推出新的ReplicaSet的时候，它是处于进行中，它也可以处于完成或者进行失败状态。
 
+#### 进行中的Deployment
+
+当一下的任务执行的时候，kubernetes会标记Deployment为进行中的状态
+* Deployment创建了一个新的ReplicaSet
+* Deployment正在扩充其最新的ReplicaSet
+* Deployment正在缩减旧版本的ReplicaSet
+* 新的Pod变成就绪或者可用状态
+
+您可以检测Deployment的过程，通过使用`kubectl rollout status`
+
+#### 完成的Deployment
+
+当有一下特征的时候，kubernetes标记Deployment为完成状态：
+* 与Deployment相关的所有副本数更新至您指定的最新版本，意味着你的任何更新请求都已经完成
+* 与Deployment相关的所有副本都变成可用
+* 没有该Deployment的旧副本在运行中
+
+您可以使用命令`kubectl rollout status`来检查Deployment是否完成。如果滚出成功完成，`kubectl rollout status`返回一个退出代码0
+```shell
+kubectl rollout status deployment/nginx-deployment
+```
+输出如下：
