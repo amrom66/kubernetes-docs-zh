@@ -650,17 +650,42 @@ kubectl rollout resume deployment nginx-deployment
 ```code
 deployment.apps/nginx-deployment resumed
 ```
+* 观察滚动输出，知道结束
+```code
+kubectl get rs -w 
+```
+输出类似如下：
+```code
+NAME               DESIRED   CURRENT   READY     AGE
+nginx-2142116321   2         2         2         2m
+nginx-3926361531   2         2         0         6s
+nginx-3926361531   2         2         1         18s
+nginx-2142116321   1         2         2         2m
+nginx-2142116321   1         2         2         2m
+nginx-3926361531   3         2         1         18s
+nginx-3926361531   3         2         1         18s
+nginx-2142116321   1         1         1         2m
+nginx-3926361531   3         3         1         18s
+nginx-3926361531   3         3         2         19s
+nginx-2142116321   0         1         1         2m
+nginx-2142116321   0         1         1         2m
+nginx-2142116321   0         0         0         2m
+nginx-3926361531   3         3         3         20s
+```
+* 获取最新的滚动日志状态
+```code
+kubectl get rs
+```
+输出如下：
+```code
+NAME               DESIRED   CURRENT   READY     AGE
+nginx-2142116321   0         0         0         2m
+nginx-3926361531   3         3         3         28s
+```
 
+**小贴士:** 暂停状态的deployment无法回滚，除非你恢复它
 
+### Deployment状态
 
-
-
-
-
-
-
-
-
-
-
+在一个Deployment的生命周期中，会遇到各种状态。当推出新的ReplicaSet的时候，它是处于进行中，它也可以处于完成或者进行失败状态。
 
