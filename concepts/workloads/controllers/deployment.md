@@ -711,3 +711,30 @@ nginx-3926361531   3         3         3         28s
 kubectl rollout status deployment/nginx-deployment
 ```
 输出如下：
+```code
+Waiting for rollout to finish: 2 of 3 updated replicas are available...
+deployment "nginx-deployment" successfully rolled out
+```
+并且`kubectl rollout`的推出状态是0(success)
+```code
+echo $?
+```
+```code
+0
+```
+
+#### 失败的Deployment
+
+您的`Deployment`可能会在尝试部署其最新的`ReplicaSet`而从未完成时卡住。这可能是由于以下一些因素造成的：
+* 不足的配额
+* 就绪探针故障
+* 镜像拉取错误
+* 不足的权限
+* 限制范围
+* 应用程序运行时配置错误
+
+
+
+
+
+
