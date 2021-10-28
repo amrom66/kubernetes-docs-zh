@@ -18,7 +18,6 @@
 
 以下是一个部署示例。 它创建了一个 ReplicaSet 来启动三个 nginx Pod：
 ```yaml
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,7 +39,6 @@ spec:
         image: nginx:1.14.2
         ports:
         - containerPort: 80
-
 ```
 
 在这个示例中：
@@ -55,10 +53,9 @@ spec:
 
 在开始之前，确认集群启动并正常运行。以下步骤给出了创建以上Deployment：
 1. 通过运行一些命令创建Deployment
+
 ```shell
-
 kubectl apply -f https://k8s.io/examples/controllers/nginx-deployment.yaml
-
 ```
 注意：您可以指定 --record 标志写入资源注解 kubernetes.io/change-cause 中执行的命令。 记录的更改对于将来的自省很有用。 例如，查看在每个部署版本中执行的命令。
 
@@ -733,8 +730,209 @@ echo $?
 * 限制范围
 * 应用程序运行时配置错误
 
+发现这种状态的一种可行方案是：在Deployment的spec中定义一个截止日期字段:`.spec.progressDeadlineSeconds`。.spec.progressDeadlineSeconds字段表示Deployment控制器在部署进度已经停止之前等待的秒数。
+以下 kubectl 命令使用 progressDeadlineSeconds 设置规范，以使控制器在 10 分钟后报告部署缺乏进度：
+```shell
+kubectl patch deployment/nginx-deployment -p '{"spec":{"progressDeadlineSeconds":600}}'
+```
+输出如下：
+```code
+deployment.apps/nginx-deployment patched
+```
+一旦超过最后期限，Deployment 控制器就会向 Deployment 的 .status.conditions 添加一个具有以下属性的 DeploymentCondition：
+* Type=Progressing
+* Status=False
+* Reason=ProgressDeadlineExceeded
 
+有关状态条件的更多信息，请参阅 Kubernetes API 约定。
 
+**注意**：除了报告 Reason=ProgressDeadlineExceeded 的状态条件外，Kubernetes 不会对停滞的 Deployment 采取任何措施。 更高级别的编排器可以利用它并采取相应的行动，例如，将部署回滚到其以前的版本。
 
+**注意**：如果您暂停部署，Kubernetes 不会根据您指定的截止日期检查进度。 您可以在部署过程中安全地暂停部署并恢复，而不会触发超过截止日期的条件。
 
+您的部署可能会遇到暂时性错误，原因可能是您设置的超时时间过短，或者是任何其他类型的可被视为暂时性的错误。 例如，假设您的配额不足。 如果您描述部署，您会注意到以下部分：
 
+```shell
+kubectl describe deployment nginx-deployment
+```
+
+输出如下：
+
+```code
+<...>
+Conditions:
+  Type            Status  Reason
+  ----            ------  ------
+  Available       True    MinimumReplicasAvailable
+  Progressing     True    ReplicaSetUpdated
+  ReplicaFailure  True    FailedCreate
+<...>
+```
+
+如果运行 `kubectl get deployment nginx-deployment -o yaml`，Deployment 状态类似于：
+
+```code
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: 2016-10-04T12:25:39Z
+    lastUpdateTime: 2016-10-04T12:25:39Z
+    message: Replica set "nginx-deployment-4262182780" is progressing.
+    reason: ReplicaSetUpdated
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: 2016-10-04T12:25:42Z
+    lastUpdateTime: 2016-10-04T12:25:42Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: 2016-10-04T12:25:39Z
+    lastUpdateTime: 2016-10-04T12:25:39Z
+    message: 'Error creating: pods "nginx-deployment-4262182780-" is forbidden: exceeded quota:
+      object-counts, requested: pods=1, used: pods=3, limited: pods=2'
+    reason: FailedCreate
+    status: "True"
+    type: ReplicaFailure
+  observedGeneration: 3
+  replicas: 2
+  unavailableReplicas: 2
+```
+
+最终，一旦超过部署进度截止日期，Kubernetes 会更新状态和 Progressing 条件的原因：
+
+```code
+Conditions:
+Type            Status  Reason
+----            ------  ------
+Available       True    MinimumReplicasAvailable
+Progressing     False   ProgressDeadlineExceeded
+ReplicaFailure  True    FailedCreate
+```
+
+您可以通过缩减部署、缩减可能正在运行的其他控制器或增加命名空间中的配额来解决配额不足的问题。 如果您满足配额条件并且部署控制器随后完成部署部署，您将看到部署的状态更新为成功条件（Status=True 和 Reason=NewReplicaSetAvailable）。
+
+```code
+Conditions:
+Type          Status  Reason
+----          ------  ------
+Available     True    MinimumReplicasAvailable
+Progressing   True    NewReplicaSetAvailable
+```
+
+Type=Available 和 Status=True 意味着您的 Deployment 具有最低可用性。 最低可用性由部署策略中指定的参数决定。 Type=Progressing with Status=True 意味着您的 Deployment 要么处于推出的中间并且正在进行中，要么已成功完成其进度并且所需的最少新副本可用（有关详细信息，请参阅条件原因 - 在我们的例子中 Reason=NewReplicaSetAvailable 意味着部署已经完成）。
+
+您可以使用 `kubectl rollout status` 检查部署是否未能进行。 如果部署已超过进度截止日期，则 `kubectl rollout status` 将返回非零退出代码。
+
+```shell
+kubectl rollout status deployment/nginx-deployment
+```
+
+输出如下：
+```code
+Waiting for rollout to finish: 2 out of 3 new replicas have been updated...
+error: deployment "nginx" exceeded its progress deadline
+```
+
+并且 `kubectl rollout` 的退出状态为 1（表示错误）：
+
+```code
+echo $?
+```
+
+#### 操作失败的Deployment
+
+适用于完整部署的所有操作也适用于失败的部署。 如果您需要在 `Deployment Pod` 模板中应用多个调整，您可以放大/缩小它，回滚到以前的版本，甚至可以暂停它。
+
+### 回收策略
+
+您可以在 Deployment 中设置 `.spec.revisionHistoryLimit` 字段，以指定要保留此 Deployment 的旧 ReplicaSet 数量。 其余的将在后台进行垃圾收集。 默认情况下，它是 10。
+
+**注意**：将此字段显式设置为 0，将导致清理您的 Deployment 的所有历史记录，因此 Deployment 将无法回滚。
+
+## 金丝雀部署
+
+如果您想使用 Deployment 向一部分用户或服务器推出版本，您可以创建多个 Deployment，每个版本一个，遵循管理资源中描述的金丝雀模式。
+
+## 编辑一个Deployment的spec
+
+与所有其他 Kubernetes 配置一样，部署需要 `.apiVersion`、`.kind` 和 `.metadata` 字段。 有关使用配置文件的一般信息，请参阅部署应用程序、配置容器和使用 kubectl 管理资源文档。 Deployment 对象的名称必须是有效的 DNS 子域名。Deployment 还需要一个 `.spec` 部分。
+
+### Pod模版
+
+`.spec.template` 和 `.spec.selector` 是 `.spec` 的唯一必填字段。
+
+`.spec.template` 是一个 Pod 模板。 它具有与 Pod 完全相同的架构，除了它是嵌套的并且没有 apiVersion 或种类。
+
+除了 Pod 的必填字段外，Deployment 中的 Pod 模板必须指定适当的标签和适当的重启策略。 对于标签，请确保不要与其他控制器重叠。 见选择器。
+
+仅允许 `.spec.template.spec.restartPolicy` 等于 Always ，如果未指定，则为默认值。
+
+### 副本数量
+
+`.spec.replicas` 是一个可选字段，用于指定所需 Pod 的数量。 它默认为 1。
+
+### 选择器
+
+`.spec.selector` 是必填字段，用于指定此 Deployment 所针对的 Pod 的标签选择器。
+
+`.spec.selector` 必须匹配 `.spec.template.metadata.labels`，否则会被 API 拒绝。
+
+在 API 版本 apps/v1 中，如果未设置，`.spec.selector` 和 `.metadata.labels` 不会默认为 `.spec.template.metadata.labels`。 因此必须明确设置它们。 另请注意，在 apps/v1 中创建部署后 `.spec.selector` 是不可变的。
+
+如果模板与 `.spec.template` 不同，或者此类 Pod 的总数超过 `.spec.replicas`，Deployment 可能会终止标签与选择器匹配的 Pod。 如果 Pod 的数量少于所需的数量，它会使用 `.spec.template` 调出新的 Pod。
+
+**注意**：您不应直接通过创建另一个 Deployment 或创建另一个控制器（例如 ReplicaSet 或 ReplicationController）来创建标签与此选择器匹配的其他 Pod。 如果这样做，第一个 Deployment 会认为它创建了这些其他 Pod。 Kubernetes 不会阻止您这样做。
+
+如果您有多个具有重叠选择器的控制器，则这些控制器将相互冲突并且无法正常运行。
+
+### 策略
+
+`.spec.strategy` 指定用于用新 Pod 替换旧 Pod 的策略。 `.spec.strategy.type` 可以是“Recreate”或“RollingUpdate”。 “RollingUpdate”是默认值。
+
+### 重新创建Deployment
+
+当 `.spec.strategy.type==Recreate` 时，所有现有 Pod 在创建新 Pod 之前都会被杀死。
+
+**注意**：这只会保证在创建升级之前终止 Pod。 如果升级 Deployment，旧版本的所有 Pod 将立即终止。 在创建新修订的任何 Pod 之前，等待成功删除。 如果手动删除一个 Pod，生命周期由 ReplicaSet 控制，并且会立即创建替换（即使旧 Pod 仍处于 Termination 状态）。 如果您的 Pod 需要“最多”保证，您应该考虑使用 StatefulSet。
+
+### 滚动升级Deployment
+
+当 `.spec.strategy.type==RollingUpdate` 时，部署以滚动更新方式更新 Pod。 您可以指定 maxUnavailable 和 maxSurge 来控制滚动更新过程。
+
+#### 最大不可用
+
+`.spec.strategy.rollingUpdate.maxUnavailable` 是一个可选字段，用于指定在更新过程中不可用的最大 Pod 数。 该值可以是绝对数（例如 5）或所需 Pod 的百分比（例如 10%）。 绝对数是通过四舍五入的百分比计算的。 如果 `.spec.strategy.rollingUpdate.maxSurge` 为 0，则该值不能为 0。默认值为 25%。
+
+例如，当这个值设置为 30% 时，旧的 ReplicaSet 可以在滚动更新开始时立即缩小到所需 Pod 的 70%。 一旦新的 Pod 准备好，旧的 ReplicaSet 可以进一步缩小，然后扩大新的 ReplicaSet，确保更新期间始终可用的 Pod 总数至少是所需 Pod 的 70%。
+
+#### 最大数量
+
+`.spec.strategy.rollingUpdate.maxSurge` 是一个可选字段，用于指定可以在所需 Pod 数量上创建的最大 Pod 数量。 该值可以是绝对数（例如 5）或所需 Pod 的百分比（例如 10%）。 如果 MaxUnavailable 为 0，则该值不能为 0。绝对数由百分比四舍五入计算得出。 默认值为 25%。
+
+例如，当这个值设置为 30% 时，可以在滚动更新开始时立即扩容新的 ReplicaSet，使得新旧 Pod 的总数不超过所需 Pod 的 130%。 一旦旧的 Pod 被杀死，新的 ReplicaSet 可以进一步扩展，确保更新期间任何时间运行的 Pod 总数最多为所需 Pod 的 130%。
+
+### 过程中止秒数
+
+`.spec.progressDeadlineSeconds` 是一个可选字段，用于指定在系统报告部署已失败进展之前您希望等待部署进展的秒数 - 作为 Type=Progressing, Status=False 的条件浮出水面。 和 Reason=ProgressDeadlineExceeded 在资源的状态中。 部署控制器将不断重试部署。 默认为 600。以后，一旦实现自动回滚，Deployment 控制器会在观察到这种情况后立即回滚一个 Deployment。如果指定，此字段需要大于 `.spec.minReadySeconds`。
+
+### 最小可用秒数
+
+`.spec.minReadySeconds` 是一个可选字段，用于指定新创建的 Pod 应准备就绪且其任何容器不会崩溃的最小秒数，以便将其视为可用。 这默认为 0（Pod 一准备好就被认为是可用的）。 要了解有关 Pod 何时被视为就绪的更多信息，请参阅容器探测。
+
+### 历史版本限制
+
+Deployment 的修订历史存储在它控制的 ReplicaSet 中。
+
+`.spec.revisionHistoryLimit` 是一个可选字段，指定要保留以允许回滚的旧 ReplicaSet 的数量。 这些旧的 ReplicaSet 消耗了 etcd 中的资源并挤占了 kubectl get rs 的输出。 每个 Deployment 版本的配置都存储在它的 ReplicaSet 中； 因此，一旦旧的 ReplicaSet 被删除，您将无法回滚到该版本的 Deployment。 默认情况下，将保留 10 个旧 ReplicaSet，但其理想值取决于新部署的频率和稳定性。更具体地说，将此字段设置为零意味着将清除所有具有 0 个副本的旧 ReplicaSet。 在这种情况下，新的部署部署无法撤消，因为它的修订历史已被清除。
+
+### 暂停
+
+`.spec.paused` 是一个可选的布尔字段，用于暂停和恢复部署。 暂停部署和未暂停部署之间的唯一区别是，只要暂停部署，对暂停部署的 PodTemplateSpec 的任何更改都不会触发新的部署。 部署在创建时默认不会暂停。
+
+## 接下来阅读
+
+* [深入了解Pods](https://kubernetes.io/docs/concepts/workloads/pods)
+* [使用Deployment运行一个无状态应用](https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
+* Deployment是一个kubernetes restful api的一个顶级资源。阅读[Deployment](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/)对象的定义并理解api
+* 阅读有关 [PodDisruptionBudget](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) 以及如何在中断期间使用它来管理应用程序可用性的信息。
