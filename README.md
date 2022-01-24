@@ -5,6 +5,9 @@
 ![](https://img.shields.io/github/stars/linjinbao/kubernetes-docs-zh)
 ![](https://img.shields.io/github/license/linjinbao/kubernetes-docs-zh)
 
+
+[![gitbook-publish](https://github.com/amrom66/kubernetes-docs-zh/actions/workflows/gitbook-action.yml/badge.svg?branch=main)](https://github.com/amrom66/kubernetes-docs-zh/actions/workflows/gitbook-action.yml)
+
 包含以下内容：
 
 0. [k8s文档翻译](/SUMMARY.md)
