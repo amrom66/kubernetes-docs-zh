@@ -1,10 +1,9 @@
 # kubernetes翻译文档
 
-![](https://img.shields.io/github/issues/linjinbao/kubernetes-docs-zh)
-![](https://img.shields.io/github/forks/linjinbao/kubernetes-docs-zh)
-![](https://img.shields.io/github/stars/linjinbao/kubernetes-docs-zh)
-![](https://img.shields.io/github/license/linjinbao/kubernetes-docs-zh)
-
+![issues](https://img.shields.io/github/issues/linjinbao/kubernetes-docs-zh)
+![forks](https://img.shields.io/github/forks/linjinbao/kubernetes-docs-zh)
+![stars](https://img.shields.io/github/stars/linjinbao/kubernetes-docs-zh)
+![lecense](https://img.shields.io/github/license/linjinbao/kubernetes-docs-zh)
 
 [![gitbook-publish](https://github.com/amrom66/kubernetes-docs-zh/actions/workflows/gitbook-action.yml/badge.svg?branch=main)](https://github.com/amrom66/kubernetes-docs-zh/actions/workflows/gitbook-action.yml)
 
