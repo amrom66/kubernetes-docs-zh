@@ -60,6 +60,8 @@
     * [端点切片](concepts/services-networking/endpoint-slices.md)
     * [入口](concepts/services-networking/ingress.md)
     * [入口控制器](concepts/services-networking/ingress-controllers.md)
+    * [内部服务流量策略](concepts/services-networking/service-traffic-policy.md)
+    * [拓扑感知提示](concepts/services-networking/topology-aware-hints.md)
     * [网络策略](concepts/services-networking/network-policies.md)
     * [为pod指定域名解析](concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases.md)
     * [IPv4/IPv6双栈](concepts/services-networking/dual-stack.md)
