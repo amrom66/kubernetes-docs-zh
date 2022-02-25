@@ -937,7 +937,33 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5.8" data-path="network-policies.html">
+        <li class="chapter " data-level="1.3.5.8" data-path="service-traffic-policy.html">
+            
+                <a href="service-traffic-policy.html">
+            
+                    
+                    内部服务流量策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.9" data-path="topology-aware-hints.html">
+            
+                <a href="topology-aware-hints.html">
+            
+                    
+                    拓扑感知提示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5.10" data-path="network-policies.html">
             
                 <a href="network-policies.html">
             
@@ -950,7 +976,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5.9" data-path="add-entries-to-pod-etc-hosts-with-host-aliases.html">
+        <li class="chapter " data-level="1.3.5.11" data-path="add-entries-to-pod-etc-hosts-with-host-aliases.html">
             
                 <a href="add-entries-to-pod-etc-hosts-with-host-aliases.html">
             
@@ -963,7 +989,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5.10" data-path="dual-stack.html">
+        <li class="chapter " data-level="1.3.5.12" data-path="dual-stack.html">
             
                 <a href="dual-stack.html">
             
@@ -1822,6 +1848,39 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x4EE3;&#x7406;&#x3001;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x4E0E;&#x7F51;&#x7EDC;">&#x4EE3;&#x7406;&#x3001;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x4E0E;&#x7F51;&#x7EDC;</h1>
+<h2 id="kubernetes&#x7F51;&#x7EDC;&#x6A21;&#x578B;">kubernetes&#x7F51;&#x7EDC;&#x6A21;&#x578B;</h2>
+<p>&#x6BCF;&#x4E00;&#x4E2A;Pod&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x7684;IP&#x5730;&#x5740;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x660E;&#x786E;&#x7684;&#x53BB;&#x521B;&#x5EFA;Pod&#x4E0E;Pod&#x4E4B;&#x95F4;&#x7684;&#x94FE;&#x63A5;&#xFF0C;&#x5E76;&#x4E14;&#x4F60;&#x51E0;&#x4E4E;&#x4ECE;&#x6765;&#x4E0D;&#x9700;&#x8981;&#x5904;&#x7406;&#x5BB9;&#x5668;&#x7AEF;&#x53E3;&#x4E0E;&#x5BBF;&#x4E3B;&#x673A;&#x7AEF;&#x53E3;&#x7684;&#x8DEF;&#x7531;&#x5173;&#x7CFB;&#x3002;&#x4ECE;&#x7AEF;&#x53E3;&#x5206;&#x914D;&#xFF0C;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#xFF0C;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#xFF0C;&#x5E94;&#x7528;&#x914D;&#x7F6E;&#x4E0E;&#x8FC1;&#x79FB;&#x65B9;&#x9762;&#x6765;&#x770B;&#xFF0C;&#x8FD9;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5E72;&#x51C0;&#x7684;&#xFF0C;&#x5411;&#x540E;&#x517C;&#x5BB9;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x8BE5;&#x6A21;&#x578B;&#x4E0B;Pod&#x66F4;&#x591A;&#x7684;&#x88AB;&#x5F53;&#x4F5C;&#x865A;&#x62DF;&#x673A;&#x6216;&#x8005;&#x7269;&#x7406;&#x673A;&#x3002;</p>
+<p>kubernetes&#x5C06;&#x4E0B;&#x5C5E;&#x57FA;&#x7840;&#x6027;&#x7684;&#x8981;&#x6C42;&#x5F3A;&#x52A0;&#x5230;&#x4EFB;&#x4F55;&#x7F51;&#x7EDC;&#x5B9E;&#x73B0;&#x4E0A;&#xFF1A;</p>
+<ul>
+<li>&#x5404;&#x8282;&#x70B9;&#x7684;pod&#x53EF;&#x4EE5;&#x4E0D;&#x901A;&#x8FC7;NAT&#x4E92;&#x76F8;&#x8BBF;&#x95EE;</li>
+<li>&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x4EE3;&#x7406;&#xFF08;&#x4F8B;&#x5982;kubelet&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0E;&#x8BE5;&#x8282;&#x70B9;&#x7684;&#x6240;&#x6709;pod&#x901A;&#x4FE1;</li>
+</ul>
+<p><strong>&#x6CE8;&#x610F;</strong> &#x5BF9;&#x4E8E;&#x90A3;&#x4E9B;&#x4F7F;&#x7528;&#x5BBF;&#x4E3B;&#x673A;&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;&#x8FD0;&#x884C;pod&#x7684;&#x5E73;&#x53F0;&#xFF08;&#x4F8B;&#x5982;linux&#xFF09;&#xFF1A;</p>
+<ul>
+<li>&#x4EE5;&#x5BBF;&#x4E3B;&#x673A;&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;&#x8FD0;&#x884C;&#x7684;pod&#x53EF;&#x4EE5;&#x4E0D;&#x501F;&#x52A9;NAT&#x8BBF;&#x95EE;&#x6240;&#x6709;&#x8282;&#x70B9;&#x7684;&#x6240;&#x6709;pod</li>
+</ul>
+<p>&#x8FD9;&#x4E2A;&#x6A21;&#x578B;&#x4E0D;&#x4EC5;&#x6574;&#x4F53;&#x4E0A;&#x51CF;&#x5C11;&#x590D;&#x6742;&#x5EA6;&#xFF0C;&#x800C;&#x4E14;&#x7279;&#x522B;&#x9002;&#x5408;kubernetes&#x5F00;&#x542F;&#x4ECE;&#x865A;&#x62DF;&#x673A;&#x5230;&#x5BB9;&#x5668;&#x7684;&#x4F4E;&#x6469;&#x64E6;&#x5E94;&#x7528;&#x7AEF;&#x53E3;&#x8F6C;&#x53D1;&#x9700;&#x6C42;&#x3002;&#x5982;&#x679C;&#x4F60;&#x7684;&#x4EFB;&#x52A1;&#x4EE5;&#x524D;&#x5DE5;&#x4F5C;&#x5728;&#x865A;&#x62DF;&#x673A;&#x4E0A;&#xFF0C;&#x4F60;&#x7684;&#x865A;&#x62DF;&#x673A;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;IP&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x548C;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x5176;&#x4ED6;&#x865A;&#x62DF;&#x673A;&#x901A;&#x4FE1;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x5957;&#x76F8;&#x540C;&#x7684;&#x57FA;&#x7840;&#x6A21;&#x578B;&#x3002;</p>
+<p>kubernetes&#x7684;IP&#x5730;&#x5740;&#x5B58;&#x5728;&#x4E8E;pod&#x9886;&#x57DF;-pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x5171;&#x4EAB;&#x7F51;&#x7EDC;&#x540D;&#x79F0;&#x7A7A;&#x95F4;,&#x5305;&#x6269;&#x4ED6;&#x4EEC;&#x7684;IP&#x5730;&#x5740;&#x548C;MAC&#x5730;&#x5740;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x540C;&#x4E00;pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;localhost&#x8BBF;&#x95EE;&#x5176;&#x4ED6;&#x5BB9;&#x5668;&#x7684;&#x7AEF;&#x53E3;&#xFF0C;&#x540C;&#x65F6;&#x610F;&#x5473;&#x7740;&#x540C;&#x4E00;pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x5171;&#x4EAB;&#x7AEF;&#x53E3;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x4E8E;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;&#x8FDB;&#x7A0B;&#x6BEB;&#x65E0;&#x533A;&#x522B;&#x3002;&#x8FD9;&#x79CD;&#x6A21;&#x5F0F;&#x88AB;&#x53EB;&#x505A;<code>IP-per-pod</code>&#x6A21;&#x5F0F;&#x3002;</p>
+<p>&#x8FD9;&#x4E9B;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x8BE6;&#x7EC6;&#x5728;&#x4E8E;&#x4F7F;&#x7528;&#x7684;&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x65F6;&#x3002;</p>
+<p>&#x53EF;&#x884C;&#x7684;&#x65B9;&#x6848;&#x65F6;&#x901A;&#x8FC7;&#x7533;&#x8BF7;&#x8282;&#x70B9;&#x81EA;&#x8EAB;&#x7684;&#x7AEF;&#x53E3;&#xFF0C;&#x8F6C;&#x53D1;&#x5230;pod&#xFF08;&#x53EB;&#x505A;&#x5BBF;&#x4E3B;&#x673A;&#x6A21;&#x5F0F;&#xFF09;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x5C0F;&#x4F17;&#x7684;&#x505A;&#x6CD5;&#x3002;&#x8F6C;&#x53D1;&#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x540C;&#x6837;&#x662F;&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x65F6;&#x7684;&#x7EC6;&#x8282;&#x5B9E;&#x73B0;&#x3002;pod&#x81EA;&#x8EAB;&#x5BF9;&#x5BBF;&#x4E3B;&#x673A;&#x7684;&#x7AEF;&#x53E3;&#x662F;&#x65E0;&#x611F;&#x77E5;&#x7684;&#x3002;</p>
+<p>kubernetes&#x7F51;&#x7EDC;&#x6709;4&#x5904;&#x6838;&#x5FC3;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x540C;&#x4E00;&#x4E2A;pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x4F7F;&#x7528;&#x56DE;&#x73AF;&#x5730;&#x5740;&#x901A;&#x4FE1;</li>
+<li>&#x96C6;&#x7FA4;&#x7F51;&#x7EDC;&#x4E3A;&#x4E0D;&#x540C;pod&#x63D0;&#x4F9B;&#x901A;&#x4FE1;</li>
+<li>&#x4EE3;&#x7406;&#x8D44;&#x6E90;&#x5141;&#x8BB8;&#x4F60;&#x66B4;&#x9732;pod&#x4E2D;&#x7684;&#x5E94;&#x7528;&#xFF0C;&#x4F7F;&#x5F97;&#x53EF;&#x4EE5;&#x4ECE;&#x96C6;&#x7FA4;&#x5916;&#x8BBF;&#x95EE;&#x5230;</li>
+<li>&#x4F60;&#x4E5F;&#x540C;&#x6837;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EE3;&#x7406;&#x8D44;&#x6E90;&#x4EC5;&#x5728;&#x96C6;&#x7FA4;&#x5185;&#x90E8;&#x516C;&#x5F00;&#x670D;&#x52A1;</li>
+</ul>
+<p><a href="service.html">&#x4EE3;&#x7406;</a>
+<a href="service-topology.html">&#x4EE3;&#x7406;&#x62D3;&#x6251;</a>
+<a href="dns-pod-service.html">&#x4EE3;&#x7406;&#x548C;Pod&#x7684;DNS</a>
+<a href="connect-applications-service.html">&#x901A;&#x8FC7;&#x4EE3;&#x7406;&#x8BBF;&#x95EE;&#x5E94;&#x7528;</a>
+<a href="ingress.html">&#x5165;&#x53E3;</a>
+<a href="ingress-controllers.html">&#x5165;&#x53E3;&#x63A7;&#x5236;&#x5668;</a>
+<a href="endpoint-slices.html">&#x7AEF;&#x70B9;&#x5207;&#x7247;</a>
+<a href="service-traffic-policy.html">&#x5185;&#x90E8;&#x670D;&#x52A1;&#x6D41;&#x91CF;&#x7B56;&#x7565;</a>
+<a href="topology-aware-hints.html">&#x62D3;&#x6251;&#x611F;&#x77E5;&#x63D0;&#x793A;</a>
+<a href="network-policies.html">&#x7F51;&#x7EDC;&#x7B56;&#x7565;</a>
+<a href="dual-stack.html">IPv4/Ipv6&#x53CC;&#x6808;</a></p>
 
                                 
                                 </section>
@@ -1865,7 +1924,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"代理、负载均衡与网络","level":"1.3.5","depth":2,"next":{"title":"代理","level":"1.3.5.1","depth":3,"path":"concepts/services-networking/service.md","ref":"concepts/services-networking/service.md","articles":[]},"previous":{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","chapter-fold","expandable-chapters","back-to-top-button"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search-pro":{},"chapter-fold":{},"expandable-chapters":{},"back-to-top-button":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/services-networking/README.md","mtime":"2022-02-25T05:33:12.653Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-02-25T05:33:51.872Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"代理、负载均衡与网络","level":"1.3.5","depth":2,"next":{"title":"代理","level":"1.3.5.1","depth":3,"path":"concepts/services-networking/service.md","ref":"concepts/services-networking/service.md","articles":[]},"previous":{"title":"副本控制器","level":"1.3.4.2.9","depth":4,"path":"concepts/workloads/controllers/replicationcontroller.md","ref":"concepts/workloads/controllers/replicationcontroller.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","chapter-fold","expandable-chapters","back-to-top-button"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search-pro":{},"chapter-fold":{},"expandable-chapters":{},"back-to-top-button":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"linjinbao","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"k8s中文翻译","language":"zh-hans","output.name":"site","gitbook":"*","description":"k8s中文翻译"},"file":{"path":"concepts/services-networking/README.md","mtime":"2022-02-25T09:07:01.897Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-02-25T09:07:47.571Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
