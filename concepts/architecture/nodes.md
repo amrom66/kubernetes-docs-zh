@@ -6,7 +6,6 @@ Kubernetes通过将容器放入Pods中以在Nodes上运行来运行您的工作�
 
 节点上的组件包括kubelet，容器运行时和kube-proxy。
 
-
 ## 管理
 
 将节点添加到API服务器的主要方法有两种：
@@ -42,7 +41,6 @@ Node对象的名称必须是有效的DNS子域名。
 
 该名称标识一个节点。 两个节点不能同时具有相同的名称。 Kubernetes还假定具有相同名称的资源是同一对象。 如果是节点，则隐式假定使用相同名称的实例将具有相同的状态（例如，网络设置，根磁盘内容）。 如果在不更改实例名称的情况下对其进行了修改，则可能导致不一致。 如果需要大量替换或更新Node，则需要先从API服务器中删除现有的Node对象，并在更新后重新添加。
 
-
 ### 节点自行注册
 
 当kubelet标志--register-node为true（默认设置）时，kubelet将尝试向API服务器注册自身。 这是大多数发行版使用的首选模式。
@@ -52,13 +50,12 @@ Node对象的名称必须是有效的DNS子域名。
 * `--kubeconfig`: 用于向API服务器进行身份验证的凭据的路径
 * `--cloud-provider`: 如何与云提供商交谈以读取有关其自身的元数据。
 * `--register-node`: 自动向API服务器注册。
-* `--register-with-taints`: 用给定的污点列表（用逗号分隔的<key> = <value>：<effect>）注册该节点。
+* `--register-with-taints`: 用给定的污点列表（用逗号分隔的`key= value:effect`）注册该节点。
 * `--node-ip`: 节点的IP地址。
 * `--node-labels`: 在集群中注册节点时要添加的标签（请参阅由NodeRestriction允许插件实施的标签限制）。
 * `--node-status-update-frequency`: 指定kubelet多久将一次节点状态发布到主节点。
 
 启用节点授权模式和NodeRestriction允许插件时，仅授权kubelet创建/修改其自己的Node资源。
-
 
 ### 手动节点管理
 
@@ -80,7 +77,6 @@ kubectl cordon $NODENAME
 ```
 
 注意：作为DaemonSet一部分的Pod允许在无法调度的节点上运行。 守护程序集通常提供应在节点上运行的节点本地服务，即使正在耗尽工作负载应用程序也是如此。
-
 
 ## 节点状态
 
@@ -152,8 +148,6 @@ kubectl cordon $NODENAME
 
 描述有关节点的常规信息，例如内核版本，Kubernetes版本（kubelet和kube-proxy版本），Docker版本（如果使用）和操作系统名称。 该信息由Kubelet从节点收集。
 
-
-
 ### 节点控制器
 
 节点控制器是Kubernetes控制平面组件，用于管理节点的各个方面。
@@ -169,8 +163,6 @@ kubectl cordon $NODENAME
 
 节点控制器每隔--node-monitor-period秒检查一次每个节点的状态。
 
-
-
 ### 心跳
 
 Kubernetes节点发送的心跳有助于确定节点的可用性。
@@ -181,8 +173,6 @@ kubelet负责创建和更新NodeStatus和Lease对象。
 
 * 当状态发生变化或在配置的时间间隔内没有更新时，kubelet会更新NodeStatus。 NodeStatus更新的默认间隔为5分钟，比无法访问的节点的40秒默认超时长得多。
 * Kubelet会每10秒（默认更新间隔）创建并更新其Lease对象。 租赁更新独立于NodeStatus更新发生。 如果“租约”更新失败，则kubelet将从200毫秒开始以指数退避重试，并以7秒为上限。
-
-
 
 ### 可靠性
 
@@ -202,21 +192,15 @@ kubelet负责创建和更新NodeStatus和Lease对象。
 
 警告：kubectl警戒线将一个节点标记为“不可调度”，这具有服务控制器从先前符合资格的任何LoadBalancer节点目标列表中删除该节点的副作用，从而有效地从警戒节点中删除了传入的负载均衡器流量。
 
-
-
 ### 节点容量
 
 节点对象跟踪有关节点资源容量的信息：例如，可用内存量和CPU数量。 自行注册的节点会在注册过程中报告其容量。 如果手动添加节点，则在添加节点时需要设置其容量信息。
 
 Kubernetes调度程序确保节点上所有Pod都有足够的资源。 调度程序检查节点上容器请求的总和不大于节点的容量。 该请求总数包括由kubelet管理的所有容器，但不包括由容器运行时直接启动的任何容器，也排除了在kubelet控件之外运行的任何进程。
 
-
-
 ## 节点拓扑结构
 
 如果启用了TopologyManager功能门，则kubelet可以在做出资源分配决策时使用拓扑提示。 有关更多信息，请参见控制节点上的拓扑管理策略。
-
-
 
 ### 优雅的节点关机
 
@@ -227,8 +211,6 @@ Kubernetes调度程序确保节点上所有Pod都有足够的资源。 调度程
 * 终止在节点上运行的常规Pod。
 * 终止在节点上运行的关键Pod。
 
-
-
 优美的节点关闭功能配置了两个KubeletConfiguration选项：
 
 * ShutdownGracePeriod：
@@ -237,6 +219,3 @@ Kubernetes调度程序确保节点上所有Pod都有足够的资源。 调度程
   * 指定在节点关闭期间用于终止关键Pod的持续时间。 这应该小于ShutdownGracePeriod。
 
 例如，如果ShutdownGracePeriod = 30s，而ShutdownGracePeriodCriticalPods = 10s，则kubelet将使节点关闭延迟30秒。 在关闭期间，将保留前20（30-10）秒以正常终止正常Pod，而保留最后10秒以终止关键Pod。
-
-
-

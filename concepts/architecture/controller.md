@@ -69,4 +69,3 @@ Kubernetes带有一组在kube-controller-manager内部运行的内置控制器�
 Deployment控制器和Job控制器是Kubernetes本身的一部分（“内置”控制器）控制器的示例。 Kubernetes允许您运行弹性控制平面，这样，如果任何内置控制器发生故障，控制平面的另一部分将接管工作。
 
 您可以找到在控制平面之外运行的控制器来扩展Kubernetes。 或者，如果需要，您可以自己编写一个新的控制器。 您可以将自己的控制器作为一组Pod运行，也可以在Kubernetes外部运行。 最合适的选择取决于特定控制器的功能。
-

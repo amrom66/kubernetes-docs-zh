@@ -12,7 +12,6 @@
 
 注意：您也可以将Kubernetes插件作为云控制器管理器而不是作为控制平面的一部分来运行。
 
-
 ## 云控制管理器功能
 
 云控制管理器包含以下功能：
@@ -42,7 +41,7 @@
 
 本节将分解云控制器管理器对各种API对象进行执行操作所需的访问权限。
 
-### 节点控制器
+### 鉴权-节点控制器
 
 Node控制器仅适用于Node对象。 它需要完全访问权限才能读取和修改Node对象。
 
@@ -56,7 +55,7 @@ v1/Node:
 * Watch
 * Delete
 
-### 路由控制器
+### 鉴权-路由控制器
 
 路由控制器侦听Node对象的创建并适当地配置路由。 它需要获得对Node对象的访问权限。
 
@@ -64,7 +63,7 @@ v1/Node:
 
 * Get
 
-### 代理控制器
+### 鉴权-代理控制器
 
 服务控制器侦听服务对象的Create，Update和Delete事件，然后为这些服务适当配置端点。
 
@@ -94,7 +93,8 @@ v1/ServiceAccount:
 
 * Create
 
-用于云控制器管理器的RBAC ClusterRole如下所示：
+用于云控制器管理器的RBAC ClusterRole如下所示:
+
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -156,7 +156,6 @@ rules:
   - watch
   - update
 ```
-
 
 ## 下一步
 

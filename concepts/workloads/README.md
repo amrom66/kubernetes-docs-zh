@@ -9,11 +9,11 @@ kubernetes的pod具有定义好的生命周期。例如，一旦pod在集群中�
 kubernetes提供几种内置的workload资源：
 
 * Deployment和ReplicaSet。Deployment是一个管理无状态程序的很好尝试，在Deployment中，任何pod都是可以被随时替换的。
-* StatefulSet使您可以运行一个或多个以某种方式跟踪状态的相关Pod。 例如，如果您的工作负载持续记录数据，则可以运行将每个Pod与一个PersistentVolume匹配的StatefulSet。 在该StatefulSet的Pod中运行的代码可以将数据复制到同一StatefulSet中的其他Pod，以提高总体弹性。
-* DaemonSet定义提供节点本地功能的Pod。 这些可能是群集操作的基础（例如，网络插件），或者是附加组件的一部分。每次向集群中添加一个与DaemonSet中的规范匹配的节点时，控制平面都会将该DaemonSet的Pod调度到新节点上。
-* Job和CronJob定义了运行到完成然后停止的任务。 作业代表一次性任务，而CronJobs则根据计划重复执行。
+* StatefulSet使您可以运行一个或多个以某种方式跟踪状态的相关Pod。例如，如果您的工作负载持续记录数据，则可以运行将每个Pod与一个PersistentVolume匹配的StatefulSet。在该StatefulSet的Pod中运行的代码可以将数据复制到同一StatefulSet中的其他Pod，以提高总体弹性。
+* DaemonSet定义提供节点本地功能的Pod。这些可能是群集操作的基础（例如，网络插件），或者是附加组件的一部分。每次向集群中添加一个与DaemonSet中的规范匹配的节点时，控制平面都会将该DaemonSet的Pod调度到新节点上。
+* Job和CronJob定义了运行到完成然后停止的任务。作业代表一次性任务，而CronJobs则根据计划重复执行。
 
-在更广泛的Kubernetes生态系统中，您可以找到提供其他行为的第三方工作负载资源。 使用自定义资源定义，如果您想要一种不属于Kubernetes核心的特定行为，则可以添加第三方工作负载资源。 例如，如果您想为应用程序运行一组Pod，但是除非所有Pod都可用（否则可能用于某些高吞吐量的分布式任务），否则要停止工作，则可以实现或安装确实提供该功能的扩展。
+在更广泛的Kubernetes生态系统中，您可以找到提供其他行为的第三方工作负载资源。使用自定义资源定义，如果您想要一种不属于Kubernetes核心的特定行为，则可以添加第三方工作负载资源。例如，如果您想为应用程序运行一组Pod，但是除非所有Pod都可用（否则可能用于某些高吞吐量的分布式任务），否则要停止工作，则可以实现或安装确实提供该功能的扩展。
 
 ## 下一步
 

@@ -49,5 +49,3 @@ SSH隧道目前已被弃用，因此除非您知道自己在做什么，否则�
 作为SSH隧道的替代，Konnectivity服务为控制平面提供群集通信的TCP级别代理。 Konnectivity服务由两部分组成：控制平面网络中的Konnectivity服务器和节点网络中的Konnectivity代理。 Konnectivity代理启动与Konnectivity服务器的连接并维护网络连接。 启用Konnectivity服务后，所有控制平面到节点的流量都将通过这些连接进行。
 
 访问Konnectivity服务任务以在您的集群中设置Konnectivity服务。
-
-
