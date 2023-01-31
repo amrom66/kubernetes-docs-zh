@@ -7,7 +7,7 @@ on:
       - main
 jobs:
   build:
-    runs-on: [self-hosted, linux]
+    runs-on: [linux]
     steps:
     - name: Checkout action
       uses: actions/checkout@v2
